@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MBIS广告管理系统&middot;数据同步&middot;广告同步</title>
+    <!--jquery ui css-->
+    <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Ads/css/site.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Ads/css/sync.css" />
+</head>
+<body>
+
+<input type="hidden" id="js_baseurl" value="__ROOT__/index.php/Ads/Sync/">
+
+<div id="center" class="main-wrapper">
+    <include file="Public/header" />
+    <div id="bottom">
+        <div id="left">
+            <ul>
+                <li class="a"><a href="{:U('Ads/Index/index')}"><img src="__PUBLIC__/Ads/img/up_a.gif" /></a></li>
+                <li class="b"><a href="{:U('Ads/Put/index')}"><img src="__PUBLIC__/Ads/img/up_b.gif" /></a></li>
+                <li class="c"><a href="{:U('Ads/Report/index')}"><img src="__PUBLIC__/Ads/img/up_c.gif" /></a></li>
+                <li class="d active"><a href="{:U('Ads/Sync/index')}"><img src="__PUBLIC__/Ads/img/down_d.gif" /></a></li>
+                <li class="e"><a href="{:U('Ads/Set/index')}"><img src="__PUBLIC__/Ads/img/up_e.gif" /></a></li>
+            </ul>
+        </div>
+        <div id="right">
+            <div id="childCenter">
+                <div id="TbContext">
+                    <!--tab title * 2-->
+                    <ul id="PlayTabs">
+                        <li class="Playtab1 active" id="Playtab1"><a href="{:U('Ads/Sync/index')}">广告同步</a></li>
+                        <li class="Playtab3" id="Playtab3"><a href="{:U('Ads/Sync/log')}">查看同步日志</a></li>
+                    </ul>
+                    <!--tab content-->
+                    <!--广告同步-->
+                    <div id="Playtab1Context">
+                        <div id="txtcontent">
+                            <!--ajax fail feedback-->
+                        </div>
+                        <!--广告同步 状态 thead -->
+                        <table class="table_title putad_title">
+                            <thead>
+                            <tr>
+                                <th width="5%">序号</th>
+                                <th width="15%">广告名称</th>
+                                <th width="15%">文件名称</th>
+                                <th width="15%">广告类型</th>
+                                <th width="10%">业务包名</th>
+                                <th width="10%">投放开始时间</th>
+                                <th width="10%">投放截止时间</th>
+                                <th width="15%">广告同步状态</th>
+                                <th width="5%"><input type="checkbox" onchange="checkAll(this, 'SyncState[]')" title="全选"></th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <div class="tbody_wrapper">
+                            <!--片头广告内容 {:U('Ads/Sync/listPush')}-->
+                            <table id="PreRollPlayTable" class="tbody table_body">
+                                <tbody class="grid"></tbody>
+                            </table>
+                        </div>
+                        <div class="operate">
+                            <div id="js_fb_failed" class="ui-state-error ui-corner-all">
+                                <p><span class="ui-icon ui-icon-alert"></span>
+                                    <strong>ERROR:</strong>同步业务信息失败</p>
+                            </div>
+                            <div id="js_fb_success" class="ui-state-success ui-corner-all">
+                                <p><span class="ui-icon ui-icon-check"></span>
+                                    <strong>DONE: </strong>同步业务信息成功</p>
+                            </div>
+                            <input id="js_sync" type="button" value="同步业务信息" class="but_out">
+                        </div>
+                    </div>
+                    <!--END tab content-->
+                </div>
+            </div>
+            <!--END #childCenter-->
+        </div>
+        <!--END #right-->
+    </div>
+</div>
+<div id="dialog-1" title="广告同步业务信息发送成功">
+    <div class="dialog-body">
+        <span class="ui-icon ui-icon-info"></span><div>广告同步业务信息发送成功, 正在同步...</div>
+    </div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Ads/js/common.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Ads/js/sync.js"></script>
+</body>
+</html>

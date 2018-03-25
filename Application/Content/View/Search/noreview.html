@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cms,MBIS内容管理系统">
+    <title>MBIS内容管理 &middot; 内容查询(不审核)</title>
+    <!--jquery-ui css-->
+    <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+    <include file="Public/style" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Content/css/index.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Content/css/edit.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Content/css/series.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Content/css/search.css" />
+    <style>
+        .SeriesEpisodesList > .scrollHead > tr > .th-3 {
+            width: 100px;
+        }
+        table[id^="SeriesEpisodesList"] > thead > tr > .th-3 {
+            width: 100px;
+        }
+        table[id^="SeriesEpisodesList"] > thead > tr > th {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<input id="js-baseurl" type="hidden" value="__ROOT__/index.php/Content/Search" />
+<input id="js-editcontroller" type="hidden" value="{:U('Content/Edit/index')}" />
+<input id="js-searchcontroller" type="hidden" value="{:U('Content/Search/index')}" />
+
+<div id="content-wrapper">
+    <!--logo datetime home header-->
+    <include file="Public/header" />
+    <div class="main-wrapper">
+        <!--sidebar-->
+        <div class="sidebar">
+            <ul class="nav nav-stacked">
+                <li role="presentation"><a href="{:U('Index/index')}"><img src="__PUBLIC__/Content/img/down_import.gif" /></a></li>
+                <li role="presentation"><a href="{:U('Edit/index')}"><img src="__PUBLIC__/Content/img/down_edit.gif" /></a></li>
+                <!--内容查询-->
+                <li role="presentation" class="active"><a href="{:U('Search/index')}"><img src="__PUBLIC__/Content/img/up_search.gif" /></a></li>
+                <li role="presentation"><a href="{:U('Settings/index')}"><img src="__PUBLIC__/Content/img/down_system.gif" /></a></li>
+            </ul>
+        </div>
+        <!--主体内容-->
+        <div id="childCenter">
+            <!--中间已提交文件列表-->
+            <div id="searchLeft">
+                <!--查找视频-->
+                <form id="ContentSearch" method="GET" action="{:U('Search/index')}">
+                    <div class="form-group">
+                        <label for="search-title">片名:</label>
+                        <input id="search-title" type="text" name="title" tabindex="1" />
+                    </div>
+                    <div class="form-group">
+                        <label for="search-category">分类:</label>
+                        <select id="search-category" name="mediatypeid" tabindex="2">
+                            <option value="0">全部</option>
+                            <option value="1">电影</option>
+                            <option value="4">热点视频</option>
+                            <option value="5">电视剧总集</option>
+                            <option value="6">电视节目总集</option>
+                            <option value="7">戏曲</option>
+                            <option value="8">专题节目总集</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <a id="js-search" class="ui-button" href="javascript:;" tabindex="3"><span class="ui-icon ui-icon-search"></span>查找</a>
+                    </div>
+                </form>
+                <!--视频列表-->
+                <div class="searchTable clearfix">
+                    <table>
+                        <thead class="searchTableTitle">
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>NO.</th>
+                            <th>文件名称</th>
+                            <th>类型</th>
+                            <th>备播状态</th>
+                            <th>删除</th>
+                            <th>选择</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tablelsw">
+                        <if condition="count($medialist) neq 0">
+                            <volist name="medialist" id="vo" key="k" empty="$empty">
+                                <tr data-oid="{$vo.oid}" data-mediatypeid="{$vo.mediatypeid}">
+                                    <td title="arrow"><div class="tr_arrow"></div></td>
+                                    <td title="{$firstRow +$k}">{$firstRow +$k}</td>
+                                    <td title="{$vo.title}">{$vo.title|mb_substr=0,12,'utf-8'}</td>
+                                    <td title="{$vo.mediatypeid}">{$vo.mediatype}</td>
+                                    <!--<td data-slicestatus="{$vo.slicestatus}">{$vo.slice}</td>-->
+                                    <td data-slicestatus="{$vo.slicestatus}">
+                                        <if condition="($vo.slicestatus neq 0)">已备播<else />未备播</if>
+                                    </td>
+                                    <td><a href="javascript:;" title="删除" onclick="deleteMedia(this)"><span class="ui-icon ui-icon-trash"></span>删除</a></td>
+                                    <td><input type="radio" name="oid" title="选择" /></td>
+                                </tr>
+                            </volist>
+                            <else />
+                            <tr class="empty"><td colspan="9">没有数据</td></tr>
+                        </if>
+                        </tbody>
+                    </table>
+                </div>
+                <!--分页 + 查看详情 -->
+                <div id="cont_ft">
+                    <div class="center">
+                        {$page}
+                        <button id="js-modal" class="ui-button" data-url="{:U('Content/Search/mediaInfo')}"><span class="ui-icon ui-icon-document"></span>查看详情/编辑</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--右侧文件详情-->
+            <div id="searchRight">
+                <aside id="js-mediapreview" data-url="{:U('Search/mediaPreview')}">
+                    <!-- xhr load html snippet @file: SearchController.class.php @func: mediaPreview -->
+                    <!--
+                  <div><label>片名:</label><span>非诚勿扰</span></div>
+                  <div><label>导演:</label><span>孟非</span></div>
+                  <div><label>类型:</label><span>电视节目总集</span></div>
+                  <div><label>主持人:</label><span></span></div>
+                  <div><label>缩略图:</label><div class="thumb"><img src=""></div></div>
+                  <div><label>简　介:</label><div><span>非诚勿扰</span></div></div>
+                  -->
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--电影 dialog-->
+<div id="dlg_movie" title="电影--编辑" style="display: none">
+    <form id="form-1" method="POST" action="{:U('Content/Search/saveMedia')}">
+        <!--电影详情列表-->
+        <input type="hidden" name="mediatypeid" value="1" />
+        <table class="tab-info" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <!--1st row-->
+            <tr>
+                <td><label for="movie-title">片名:</label></td>
+                <td><input id="movie-title" type="text" name="title" /></td>
+                <td><label for="movie-name">系统命名:</label></td>
+                <td><input id="movie-name" type="text" name="oid" readonly /></td>
+                <td><label for="movie-length">片长:</label></td>
+                <td><input id="movie-length" type="number" name="runtime" />分钟</td>
+            </tr>
+            <!--2nd row-->
+            <tr>
+                <td><label for="movie-director">导演:</label></td>
+                <td><input id="movie-director" type="text" name="director"></td>
+                </td>
+                <td><label for="movie-actors">主要演员: </label></td>
+                <td><input id="movie-actors" type="text" name="actor"></td>
+                <td><label for="movie-rate">评分:</label></td>
+                <td><input id="movie-rate" type="number" name="rating"></td>
+            </tr>
+            <!--3rd row-->
+            <tr>
+                <td><label for="movie-type">类型: </label></td>
+                <td>
+                    <select id="movie-type" name="genreid" title="genre">
+                        <option value="0">请选择</option>
+                        <foreach name="genres" item="vo">
+                            <option value="{$vo['id']}">{$vo['genre']}</option>
+                        </foreach>
+                    </select>
+                </td>
+                <td><label for="movie-year">年份: </label></td>
+                <td>
+                    <select id="movie-year" name="yearid">
+                        <option value="0">请选择</option>
+                        <foreach name="years" item="vo" title="year">
+                            <option value="{$vo['id']}">{$vo['year']}</option>
+                        </foreach>
+                    </select>
+                </td>
+                <td><label for="movie-lang">语言: </label></td>
+                <td>
+                    <select id="movie-lang" name="languageid">
+                        <option value="0">请选择</option>
+                        <foreach name="langs" item="vo" title="language">
+                            <option value="{$vo['id']}">{$vo['language']}</option>
+                        </foreach>
+                    </select>
+                </td>
+            </tr>
+            <!--4th row-->
+            <tr>
+                <td><label for="movie-tag">标签: </label></td>
+                <td>
+                    <select id="movie-tag" name="tagid">
+                        <option value="0">请选择</option>
+                        <foreach name="tags" item="vo" title="tags">
+                            <option value="{$vo['id']}">{$vo['tagname']}</option>
+                        </foreach>
+                    </select>
+                </td>
+                <td><label for="movie-chan">播出频道: </label></td>
+                <td>
+                    <select id="movie-chan" name="channelid">
+                        <option value="0">请选择</option>
+                        <foreach name="channels" item="vo">
+                            <option value="{$vo['channelid']}">{$vo['name']}</option>
+                        </foreach>
+                    </select>
+                </td>
+                <td><label for="movie-country">国家/地区</label></td>
+                <td>
+                    <select id="movie-country" name="countryid">
+                        <option value="0">请选择</option>
+                        <foreach name="countries" item="vo">
+                            <option value="{$vo['id']}">{$vo['country']}</option>
+                        </foreach>
+                    </select>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <hr />
+        <!--电影简介 缩略图 海报-->
+        <ul class="hlist">
+            <li>
+                <label for="movie-info">简介</label>
+                <textarea id="movie-info" name="introduction" rows="5" cols="50" placeholder="电影简介">无</textarea>
+            </li>
+            <li>
+                <label for="js-thumb-1">缩略图</label>
+                <div class="img-wrapper"><img id="js-thumb-1" src="" class="thumb"></div>
+            </li>
+            <li>
+                <label for="js-poster-1">海报</label>
+                <div class="img-wrapper"><img id="js-poster-1" src="" class="poster"></div>
+            </li>
+            <li>
+                <label for="js-qrcode-1">海报</label>
+                <div class="img-wrapper"><img id="js-qrcode-1" src="" class="qrcode"></div>
+            </li>
+        </ul>
+    </form>
+
+    <!--附件列表 添加附件-->
+    <table class="attachment" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <!--caption-->
+        <tr><td>附件</td><td></td></tr>
+        <!--海报 + 缩略图-->
+        <tr>
+            <td>
+                <!--海报 缩略图 文件列表 thead-->
+                <table class="appendix-table" border="0" cellspacing="0" cellpadding="0">
+                    <tbody>
+                    <tr class="importTableTitle">
+                        <td colspan="4">
+                            <ul class="filelisttitle">
+                                <li class="li-0">&nbsp;</li>
+                                <li class="li-1">NO.</li>
+                                <li class="li-2">文件名</li>
+                                <li class="li-3">大小</li>
+                                <li class="li-4">类型</li>
+                                <li class="li-5">操作</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--海报 缩略图 文件列表 tbody-->
+                <div class="AppendixListWrapper">
+                    <table id="AppendixList-1" class="table">
+                        <tbody id="js-appendix-1">
+                        <!--xhr load movie.js function getAppendixList()-->
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+            <td align="center" colspan="2">
+                <form id="appendix_upload-1" method="POST" enctype="multipart/form-data" action="{:U('Content/Edit/xhrupload')}">
+                    <input id="js-attachoid-1" type="hidden" name="attachoid" />
+                    <ul class="attach-operate">
+                        <!--上传文件之前先存草稿-->
+                        <li><input type="file" name="filename" required /></li>
+                        <li>
+                            <label for="attach-type-1">附件类型: </label>
+                            <select id="attach-type-1" name="appendixtypeid">
+                                <foreach name="appendixtypes" item="vo">
+                                    <option value="{$vo['id']}">{$vo['appendixtype']}</option>
+                                </foreach>
+                            </select>
+                        </li>
+                        <li><button id="add-appendix-1" class="ui-button">添加附件</button></li>
+                    </ul>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!--END #dlg_movie-->
+
+<!-- 电视剧总集 dialog-->
+<div id="dlg_tvplayseries" title="电视剧总集--编辑" style="display: none">
+    <!--电视剧总集详情-->
+    <div id="SeriesRight">
+        <!--电视剧总集 详情-->
+        <form method="post" id="EditSeriesInfo" action="{:U('Content/Search/saveMedia')}">
+            <input type="hidden" name="oid" id="EditSeriesOID" value="">
+            <!--电视剧总集 基本信息-->
+            <table id="TVSeriesInfo" class="series-info">
+                <tbody>
+                <!--片名 总集数 评分-->
+                <tr>
+                    <td><label for="EditSeriesTitle">片名：</label></td>
+                    <td><input type="text" name="title" id="EditSeriesTitle"></td>
+                    <td><label for="EditSeriesEpisodes">总集数: </label></td>
+                    <td><input type="number" name="episodes" id="EditSeriesEpisodes"></td>
+                    <td><label for="EditSeriesRating">评分：</label></td>
+                    <td><input type="number" name="rating" id="EditSeriesRating"></td>
+                </tr>
+                <!--导演 演员-->
+                <tr>
+                    <td><label for="EditSeriesDirector">导演：</label></td>
+                    <td><input type="text" name="director" id="EditSeriesDirector"></td>
+                    <td><label for="EditSeriesActor">演员：</label></td>
+                    <td colspan="3"><input type="text" name="actor" id="EditSeriesActor"></td>
+                </tr>
+                <!--年份 剧情 国家-->
+                <tr>
+                    <td><label for="EditSeriesYear">年份：</label></td>
+                    <td>
+                        <select name="yearid" id="EditSeriesYear">
+                            <option value="0">请选择</option>
+                            <foreach name="years" item="vo" title="year">
+                                <option value="{$vo['id']}">{$vo['year']}</option>
+                            </foreach>
+                        </select>
+                    </td>
+                    <td><label for="EditSeriesGenre">剧情：</label></td>
+                    <td>
+                        <select name="genreid" id="EditSeriesGenre">
+                            <option value="0">请选择</option>
+                            <foreach name="genres" item="vo">
+                                <option value="{$vo['id']}">{$vo['genre']}</option>
+                            </foreach>
+                        </select>
+                    </td>
+                    <td><label for="EditSeriesCountry">国家/地区：</label></td>
+                    <td>
+                        <select name="countryid" id="EditSeriesCountry">
+                            <option value="0">请选择</option>
+                            <foreach name="countries" item="vo">
+                                <option value="{$vo['id']}">{$vo['country']}</option>
+                            </foreach>
+                        </select>
+                    </td>
+                </tr>
+                <!--语言 标签-->
+                <tr>
+                    <td><label for="EditSeriesLanguage">语言：</label></td>
+                    <td>
+                        <select name="languageid" id="EditSeriesLanguage">
+                            <option value="0">请选择</option>
+                            <foreach name="langs" item="vo" title="language">
+                                <option value="{$vo['id']}">{$vo['language']}</option>
+                            </foreach>
+                        </select>
+                    </td>
+                    <td><label for="EditSeriesTag">标签：</label></td>
+                    <td colspan="3">
+                        <select name="tagid" id="EditSeriesTag">
+                            <option value="0">请选择</option>
+                            <foreach name="tags" item="vo" title="tags">
+                                <option value="{$vo['id']}">{$vo['tagname']}</option>
+                            </foreach>
+                        </select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!--电视剧总集简介 + 缩略图/海报 show-->
+            <table class="series-info">
+                <tbody>
+                <tr>
+                    <td><label for="EditSeriesIntroduction">全片简介：</label></td>
+                    <td><label class="p-l-20" for="js-thumb-5">缩略图</label></td>
+                    <td><label for="js-poster-5">海报</label></td>
+                    <td><label for="js-qrcode-5">二维码</label></td>
+                </tr>
+                <tr>
+                    <td><textarea name="introduction" id="EditSeriesIntroduction" rows="4" cols="60"></textarea></td>
+                    <td><div id="EditSeriesThumb"><img id="js-thumb-5" class="thumb" src="" title="电视剧总集缩略图"></div></td>
+                    <td><div id="EditSeriesBackground"><img id="js-poster-5" class="poster" src="" title="电视剧总集海报"></div></td>
+                    <td><div><img id="js-qrcode-5" class="qrcode" src="" title="电视剧总集二维码"></div></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+        <div class="tables-wrapper">
+            <!-- 全集内容列表：-->
+            <div class="tablewrap">
+                <div class="caption">全集内容列表：</div>
+                <table id="SeriesEpisodesList_5" class="table table-fixed">
+                    <thead class="scrollHead importTableTitle">
+                    <tr>
+                        <th class="th-0">&nbsp;</th>
+                        <th class="th-1">NO.</th>
+                        <th class="th-2">文件名</th>
+                        <th class="th-3">时长</th>
+                        <th class="th-5">操作</th></tr>
+                    </thead>
+                    <!--分集列表 xhr load @file: tvplayseries.js @func renderSeriesEpisodes()-->
+                    <tbody class="scrollBody" id="js-episodes-5">
+                    <!--
+                    <tr data-oid="xxxxx">
+                      <td class="col-0"><div class="tr_arrow"></div></td>
+                      <td class="col-1">1</td>
+                      <td class="col-2">来自星星的你(第1集)</td>
+                      <td class="col-3">45分钟</td>
+                      <td class="col-5"><input type="radio" name="EpisodeOID" title="radio" /></td>
+                    </tr>
+                    -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- 附件内容列表：-->
+            <div class="tablewrap">
+                <div class="caption">附件内容列表：</div>
+                <table class="EditSeriesAppendixList table">
+                    <thead class="importTableTitle">
+                    <tr>
+                        <th class="th-0">&nbsp;</th>
+                        <th class="th-1">NO.</th>
+                        <th class="th-2">文件名</th>
+                        <th class="th-3">大小</th>
+                        <th class="th-4">类型</th>
+                        <th class="th-5">操作</th></tr>
+                    </thead>
+                    </thead>
+                    <tbody id="js-appendix-5"></tbody>
+                </table>
+            </div>
+        </div>   <!--/ .tables-wrapper-->
+    </div>
+    <!--END 电视剧总集标签页-->
+</div>
+<!--END #dlg_tvplayseries-->
+
+<div id="dlg_tvplayepisode" title="电视剧分集 -- 编辑" style="display: none">
+    <div id="SeriesEpisodeRight">
+        <!--电视剧详情列表-->
+        <form id="form-2" method="POST" action="{:U('Content/Search/saveMedia')}">
+            <input type="hidden" name="mediatypeid" value="2" />
+            <table class="tab-info">
+                <tr>
+                    <td><label for="title-2">所选分集: </label><input id="title-2" type="text" name="title" /></td>
+                    <td><label for="oid-2">系统命名:</label><input id="oid-2" type="text" name="oid" readonly/></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="episodeindex-2">当前集数: </label>
+                        <input id="episodeindex-2" type="number" name="episodeindex" />
+                    </td>
+                    <td>
+                        <label for="episodes-2">总 集 数: </label>
+                        <input id="episodes-2" type="number" name="episodes">
+                    </td>
+                    <td>
+                        <label for="runtime-2">分集时长: </label>
+                        <input id="runtime-2" type="number" name="runtime">分钟
+                    </td>
+                </tr>
+            </table>
+            <hr />
+            <!--电视剧简介 缩略图 海报-->
+            <ul class="hlist">
+                <li>
+                    <label for="introduction-2">简介</label>
+                    <textarea id="introduction-2" name="introduction" rows="5" cols="50" placeholder="电视剧总集简介">无</textarea>
+                </li>
+                <li>
+                    <label for="js-thumb-2">缩略图</label> <!--2 电视剧分集-->
+                    <div class="img-wrapper"><img id="js-thumb-2" src="" class="thumb"></div>
+                </li>
+                <li>
+                    <label for="js-poster-2">海报</label>
+                    <div class="img-wrapper"><img id="js-poster-2" src="" class="poster"></div>
+                </li>
+                <li>
+                    <label for="js-qrcode-2">二维码</label>
+                    <div class="img-wrapper"><img id="js-qrcode-2" src="" class="qrcode"></div>
+                </li>
+            </ul>
+        </form>
+
+        <table class="attachment">
+            <tbody>
+            <!--caption-->
+            <tr><td>附件</td><td></td></tr>
+            <!--海报 + 缩略图-->
+            <tr>
+                <td>
+                    <!--海报 缩略图 文件列表 tbody-->
+                    <table id="AppendixList-2" class="AppendixList table">
+                        <thead class="importTableTitle">
+                        <tr class="filelisttitle center">
+                            <th class="th-0">&nbsp;</th>
+                            <th class="th-1">NO.</th>
+                            <th class="th-2">文件名</th>
+                            <th class="th-3">大小</th>
+                            <th class="th-4">类型</th>
+                            <th class="th-5">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="js-appendix-2"></tbody>
+                    </table>
+                </td>
+                <td align="center" colspan="2">
+                    <form id="appendix_upload-2" method="POST" enctype="multipart/form-data" action="{:U('Content/Edit/xhrupload')}">
+                        <input id="js-attachoid-2" type="hidden" name="attachoid" />
+                        <ul class="attach-operate">
+                            <!--上传文件之前先存草稿-->
+                            <li><input type="file" name="filename" required /></li>
+                            <li>
+                                <label for="attach-type-2">附件类型: </label>
+                                <select id="attach-type-2" name="appendixtypeid">
+                                    <foreach name="appendixtypes" item="vo">
+                                        <option value="{$vo['id']}">{$vo['appendixtype']}</option>
+                                    </foreach>
+                                </select>
+                            </li>
+                            <li><button id="add-appendix-2" class="ui-button">添加附件</button></li>
+                        </ul>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--电视节目总集 dialog-->
+<div id="dlg_tvshows" title="电视节目总集--编辑" style="display: none">
+    <!--6	电视节目总集-->
+    <form method="POST" id="EditSeriesInfo_6" action="{:U('Content/Search/saveMedia')}">
+        <input type="hidden" name="oid" id="EditSeriesOID_6" value="">
+        <input type="hidden" name="mediatypeid" id="mediatypeid_6" value="6">
+        <!--电视节目总集 基本信息-->
+        <table id="TVShowsInfo" class="series-info">
+            <tbody>
+            <!--节目名 主持人 评分-->
+            <tr>
+                <td><label for="EditSeriesTitle">节目名：</label></td>
+                <td><input type="text" name="title" id="EditSeriesTitle_6"></td>
+                <td><label for="EditSeriesHost_6">主 持 人：	</label></td>
+                <td><input type="text" name="host" id="EditSeriesHost_6"></td>
+                <td><label for="EditSeriesRating_6">评分：</label></td>
+                <td><input type="number" name="rating" id="EditSeriesRating_6"></td>
+            </tr>
+            <!--播出电视台 节目类型-->
+            <tr>
+                <td><label for="EditSeriesSourceFrom_6">播出电视台：</label></td>
+                <td><input type="text" name="sourcefrom" id="EditSeriesSourceFrom_6"></td>
+                <td><label for="EditSeriesType_6">节目类型：	</label></td>
+                <td colspan="3"><input type="text" name="tvshowtype" id="EditSeriesType_6" /></td>
+            </tr>
+            <!--语言 国家/地区-->
+            <tr>
+                <td><label for="EditSeriesLanguage_6">语言：</label></td>
+                <td>
+                    <select name="languageid" id="EditSeriesLanguage_6">
+                        <option value="0">请选择</option>
+                        <foreach name="langs" item="vo" title="language">
+                            <option value="{$vo['id']}">{$vo['language']}</option>
+                        </foreach>
+                    </select>
+                </td>
+                <td><label for="EditSeriesCountry_6">国家/地区：</label></td>
+                <td>
+                    <select name="countryid" id="EditSeriesCountry_6">
+                        <option value="0">请选择</option>
+                        <foreach name="countries" item="vo">
+                            <option value="{$vo['id']}">{$vo['country']}</option>
+                        </foreach>
+                    </select>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!--电视节目总集简介 + 缩略图/海报 show-->
+        <table class="series-info">
+            <tbody>
+            <tr>
+                <td><label for="EditSeriesIntroduction_6">全片简介：</label></td>
+                <td><label for="js-thumb-6" class="text-left">缩略图</label></td>
+                <td><label for="js-poster-6" class="text-left">海报</label></td>
+                <td><label for="js-qrcode-6" class="text-left">二维码</label></td>
+            </tr>
+            <tr>
+                <td><textarea name="introduction" id="EditSeriesIntroduction_6" rows="4" cols="60"></textarea></td>
+                <td><div id="EditSeriesThumb_6"><img id="js-thumb-6" class="thumb" src="" title="电视节目总集缩略图"></div></td>
+                <td><div id="EditSeriesBackground_6"><img id="js-poster-6" class="poster" src="" title="电视节目总集海报"></div></td>
+                <td><div><img id="js-qrcode-6" class="qrcode" src="" title="电视节目总集二维码"></div></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <div class="tables-wrapper">
+        <!-- 全集内容列表：-->
+        <div class="tablewrap">
+            <div class="caption">全集内容列表：</div>
+            <table class="SeriesEpisodesList table table-fixed">
+                <thead class="scrollHead importTableTitle">
+                <tr>
+                    <th class="th-0">&nbsp;</th>
+                    <th class="th-1">NO.</th>
+                    <th class="th-2">文件名</th>
+                    <th class="th-3">时长</th>
+                    <th class="th-5">操作</th>
+                </tr>
+                </thead>
+                <tbody class="scrollBody" id="js-episodes-6">   <!-- 6 电视节目总集 -->
+                <!--分集列表 xhr load -->
+                </tbody>
+            </table>
+        </div>
+        <!-- 附件内容列表：-->
+        <div class="tablewrap">
+            <div class="caption">附件内容列表：</div>
+            <table class="EditSeriesAppendixList table">
+                <thead class="importTableTitle">
+                <tr>
+                    <th class="th-0">&nbsp;</th>
+                    <th class="th-1">NO.</th>
+                    <th class="th-2">文件名</th>
+                    <th class="th-3">大小</th>
+                    <th class="th-4">类型</th>
+                    <th class="th-5">操作</th>
+                </tr>
+                </thead>
+                <tbody id="js-appendix-6">
+                <!--xhr load-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--END #dlg_tvshows-->
+
+<!--#dlg_tvshowepisode 3 电视节目分集-->
+<div id="dlg_tvshowepisode" title="电视节目分集 -- 查看/编辑" style="display: none">
+    <div id="TVShowEpisodeRight">
+        <form id="form-3" method="POST" action="{:U('Content/Search/saveMedia')}">
+            <table class="tab-info">
+                <tbody>
+                <tr>
+                    <td><label for="title-3">所选分集:</label><input type="text" id="title-3" name="title"></td>
+                    <td><label for="oid-3">系统命名:</label><input type="text" id="oid-3" name="oid" value="" readonly></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="episode-tvshow">所属节目集:</label>
+                        <input type="hidden" id="soid-3" name="tvshowoid"/>
+                        <input type="text" id="episode-tvshow" />
+                    </td>
+                    <td><button type="button" id="js-searchTVShows" class="ui-button">查找总节目集</button></td>
+                </tr>
+                <tr>
+                    <td><label for="runtime-3">时长:</label><input id="runtime-3" type="number" name="runtime"> 分</td>
+                    <td><label for="actor-3">嘉宾:</label><input id="actor-3" type="text" name="actor" ></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label for="theme-3">本期主题:</label>
+                        <input id="theme-3" type="text" name="theme">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <hr>
+            <ul class="hlist">
+                <li>
+                    <label for="introduction-3">简介:</label>
+                    <textarea id="introduction-3" name="introduction" rows="5" cols="50">无</textarea>
+                </li>
+                <li>
+                    <label for="js-thumb-3">缩略图:</label>
+                    <div class="img-wrapper"><img id="js-thumb-3" src="" class="thumb"></div>
+                </li>
+                <li>
+                    <label for="js-poster-3">海报:</label>
+                    <div class="img-wrapper"><img id="js-poster-3" src="" class="poster"></div>
+                </li>
+                <li>
+                    <label for="js-qrcode-3">海报:</label>
+                    <div class="img-wrapper"><img id="js-qrcode-3" src="" class="qrcode"></div>
+                </li>
+            </ul>
+        </form>
+        <!--附件列表 添加附件-->
+        <div class="attachment">
+            <div class="appendix-table">
+                <table id="AppendixList-3" class="AppendixList table">
+                    <caption>附件</caption>
+                    <thead class="importTableTitle">
+                    <tr class="filelisttitle center">
+                        <th class="th-0">&nbsp;</th>
+                        <th class="th-1">NO.</th>
+                        <th class="th-2">文件名</th>
+                        <th class="th-3">大小</th>
+                        <th class="th-4">类型</th>
+                        <th class="th-5">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="js-appendix-3"></tbody>
+                </table>
+            </div>
+            <div class="appendix-upload">
+                <form id="appendix_upload-3" method="POST" enctype="multipart/form-data" action="{:U('Content/Edit/xhrupload')}">
+                    <input id="js-attachoid-3" type="hidden" name="attachoid" />
+                    <ul class="attach-operate">
+                        <!--上传文件之前先存草稿-->
+                        <li><input type="file" name="filename" required /></li>
+                        <li>
+                            <label for="attach-type">附件类型: </label>
+                            <select id="attach-type-3" name="appendixtypeid">
+                                <foreach name="appendixtypes" item="vo">
+                                    <option value="{$vo['id']}">{$vo['appendixtype']}</option>
+                                </foreach>
+                            </select>
+                        </li>
+                        <li><button id="add-appendix-3" class="ui-button">添加附件</button></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--在电视节目分集对话框 查找总节目集 -->
+<div id="dlg_search_tvshows" title="电视节目 / 查找" style="display: none">
+    <div class="dialog-body">
+        <!--按片名查找 电视节目总集-->
+        <div class="form-group">
+            <label for="js-searchname-3" class="label-loose">片名: </label>
+            <input id="js-searchname-3" type="text" size="20" />
+            <a id="searchTVShowsBut" class="ui-button" href="javascript:;" title="search"><span class="ui-icon ui-icon-search"></span>查找</a>
+        </div>
+        <!--电视节目总集列表-->
+        <div class="searchTable">
+            <div class="searchTableTitle">
+                <ul>
+                    <li style="width:24px">&nbsp;</li>
+                    <li style="width:34px">序号</li>
+                    <li style="width:120px">片名</li>
+                    <li style="width:80px">地区</li>
+                    <li style="width:90px">语言</li>
+                    <li style="width:104px">节目类型</li>
+                    <li style="width:87px">播出电视台</li>
+                    <li style="width:66px">导入集数</li>
+                    <li style="width:85px">选择</li>
+                </ul>
+            </div>
+            <div class="searchTableContent">
+                <table id="searchTVShowTable" class="table table-fixed table-series">
+                    <tbody>
+                    <!--xhr load-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 热点视频 dialog-->
+<div id="dlg_video" title="内容查询 - 热点视频" style="display: none">
+    <div id="VideoRight">
+        <!--热点视频基本信息-->
+        <form id="form-4" name="VideoInfo" method="POST" action="{:U('Content/Search/saveMedia')}">
+            <table class="tab-info">
+                <tbody>
+                <tr>
+                    <td>
+                        <label for="video-title">标题: </label>
+                        <input type="text" id="video-title" name="title">
+                    </td>
+                    <!--Tv show video OID readonly-->
+                    <td>
+                        <label for="video-oid">系统命名:</label>
+                        <input type="text" id="video-oid" name="oid" value="" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="video-bftime">播发时间: </label>
+                        <input type="text" id="video-bftime" name="bftime" />
+                    </td>
+                    <td>
+                        <label for="video-resource">来源:</label>
+                        <input type="text" id="video-resource" name="resource" />
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <hr>
+            <ul class="hlist">
+                <li>
+                    <label for="video-info">内容描述:</label>
+                    <textarea id="video-info" name="introduction" rows="5" cols="50">无</textarea>
+                </li>
+                <li>
+                    <!--@mediatypeid: 4 热点推送视频-->
+                    <label for="js-thumb-4">缩略图:</label>
+                    <div class="img-wrapper"><img id="js-thumb-4" src="" class="thumb"></div>
+                </li>
+                <li>
+                    <label for="js-poster-4">海报:</label>
+                    <div class="img-wrapper"><img id="js-poster-4" src="" class="poster"></div>
+                </li>
+                <li>
+                    <label for="js-qrcode-4">二维码:</label>
+                    <div class="img-wrapper"><img id="js-qrcode-4" src="" class="qrcode"></div>
+                </li>
+            </ul>
+        </form>
+        <!--附件列表 添加附件-->
+        <div class="attachment">
+            <div class="attachlist">
+                <div class="caption">附件</div>
+                <table class="AppendixList table">
+                    <thead>
+                    <tr class="importTableTitle">
+                        <th class="th-0">&nbsp;</th>
+                        <th class="th-1">NO.</th>
+                        <th class="th-2">文件名</th>
+                        <th class="th-3">大小</th>
+                        <th class="th-4">类型</th>
+                        <th class="th-5">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tbody id="js-appendix-4">
+                    <!--xhr load -->
+                    </tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="attachupload">
+                <form id="appendix_upload-4" method="POST" enctype="multipart/form-data" action="{:U('Content/Edit/xhrUpload')}" >
+                    <input id="js-attachoid-4" type="hidden" name="attachoid" />
+                    <ul class="attach-operate">
+                        <!--上传文件之前先存草稿-->
+                        <li><input type="file" name="filename" required /></li>
+                        <li>
+                            <label for="attach-type">附件类型: </label>
+                            <select id="attach-type" name="appendixtypeid">
+                                <foreach name="appendixtypes" item="vo">
+                                    <option value="{$vo['id']}">{$vo['appendixtype']}</option>
+                                </foreach>
+                            </select>
+                        </li>
+                        <li><button class="ui-button" id="add-appendix-4" type="button">添加附件</button></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--END #dlg_video-->
+
+<!--戏曲 modal-->
+<div id="dlg_opera" title="内容查询 - 戏曲" style="display: none">
+    <div id="OperaRight">
+        <form id="form-7" name="OperaInfo" method="POST" action="{:U('Content/Search/saveMedia')}">
+            <table class="tab-info">
+                <tbody>
+                <tr>
+                    <td><label for="opera-title">片名:</label></td>
+                    <td><input id="opera-title" type="text" name="title" /></td>
+                    <td><label for="opera-oid">系统命名:</label></td>
+                    <!--oid 不可修改-->
+                    <td><input id="opera-oid" type="text" name="oid" readonly /></td>
+                    <td><label for="opera-length">片长:</label></td>
+                    <td><input id="opera-length" type="number" name="runtime" />分钟</td>
+                </tr>
+                <tr>
+                    <td><label for="opera-director">导演:</label></td>
+                    <td><input id="opera-director" type="text" name="director"></td>
+                    <td><label for="opera-actors">主要演员: </label></td>
+                    <td><input id="opera-actors" type="text" name="actor"></td>
+                    <td><label for="opera-rate">评分:</label></td>
+                    <td><input id="opera-rate" type="number" name="rating"></td>
+                </tr>
+                <tr>
+                    <td><label for="opera-type">类型: </label></td>
+                    <td>
+                        <select id="opera-type" name="genreid" title="genre">
+                            <option value="0">请选择</option>
+                            <foreach name="genres" item="vo">
+                                <option value="{$vo['id']}">{$vo['genre']}</option>
+                            </foreach>
+                        </select>
+                    </td>
+                    <td><label for="opera-year">年份: </label></td>
+                    <td>
+                        <select id="opera-year" name="yearid">
+                            <option value="0">请选择</option>
+                            <foreach name="years" item="vo" title="year">
+                                <option value="{$vo['id']}">{$vo['year']}</option>
+                            </foreach>
+                        </select>
+                    </td>
+                    <td><label for="opera-lang">语言: </label></td>
+                    <td>
+                        <select id="opera-lang" name="languageid">
+                            <option value="0">请选择</option>
+                            <foreach name="langs" item="vo" title="language">
+                                <option value="{$vo['id']}">{$vo['language']}</option>
+                            </foreach>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="opera-tag">标签: </label></td>
+                    <td>
+                        <select id="opera-tag" name="tagid">
+                            <option value="0">请选择</option>
+                            <foreach name="tags" item="vo" title="tags">
+                                <option value="{$vo['id']}">{$vo['tagname']}</option>
+                            </foreach>
+                        </select>
+                    </td>
+                    <td><label for="opera-chan">播出频道: </label></td>
+                    <td>
+                        <select id="opera-chan" name="channelid">
+                            <option value="0">请选择</option>
+                            <foreach name="channels" item="vo">
+                                <option value="{$vo['channelid']}">{$vo['name']}</option>
+                            </foreach>
+                        </select>
+                    </td>
+                    <td><label for="opera-country">国家/地区</label></td>
+                    <td>
+                        <select id="opera-country" name="countryid">
+                            <foreach name="countries" item="vo">
+                                <option value="{$vo['id']}">{$vo['country']}</option>
+                            </foreach>
+                        </select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <hr>
+            <ul class="hlist">
+                <li>
+                    <label for="opera-info">内容描述:</label>
+                    <textarea id="opera-info" name="introduction" rows="5" cols="50">无</textarea>
+                </li>
+                <li>
+                    <label for="js-thumb-7">缩略图:</label>
+                    <div class="img-wrapper"><img id="js-thumb-7" class="thumb" src=""></div>
+                </li>
+                <li>
+                    <label for="js-poster-7">海报:</label>
+                    <div class="img-wrapper"><img id="js-poster-7" class="poster" src=""></div>
+                </li>
+                <li>
+                    <label for="js-qrcode-7">海报:</label>
+                    <div class="img-wrapper"><img id="js-qrcode-7" class="qrcode" src=""></div>
+                </li>
+            </ul>
+        </form>
+        <!--附件列表 添加附件-->
+        <div class="attachment">
+            <div class="attachlist">
+                <div class="caption">附件</div>
+                <table class="AppendixList table">
+                    <thead>
+                    <tr class="importTableTitle">
+                        <th class="th-0">&nbsp;</th>
+                        <th class="th-1">NO.</th>
+                        <th class="th-2">文件名</th>
+                        <th class="th-3">大小</th>
+                        <th class="th-4">类型</th>
+                        <th class="th-5">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tbody id="js-appendix-7">
+                    <!--xhr load -->
+                    </tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="attachupload">
+                <form id="appendix_upload-7" method="POST" enctype="multipart/form-data" action="{:U('Content/Edit/xhrupload')}" >
+                    <input id="js-attachoid-7" type="hidden" name="attachoid" />
+                    <ul class="attach-operate">
+                        <!--上传文件之前先存草稿-->
+                        <li><input type="file" name="filename" required /></li>
+                        <li>
+                            <label for="attach-type">附件类型: </label>
+                            <select id="attach-type-7" name="appendixtypeid">
+                                <foreach name="appendixtypes" item="vo">
+                                    <option value="{$vo['id']}">{$vo['appendixtype']}</option>
+                                </foreach>
+                            </select>
+                        </li>
+                        <li><button class="ui-button" id="add-appendix-7" type="submit">添加附件</button></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--END #dlg_opera-->
+
+<!-- BEGIN #dlg_specialseries -->
+<div id="dlg_specialseries" title="内容查询 - 专题节目总集" style="display: none">
+    <!-- BEGIN #EditSeriesInfo 专题节目总集 详情-->
+    <div class="EditSeriesInfo">
+        <!--专题节目总集 基本信息-->
+        <div id="SpecialSeriesInfo">
+            <div class="sp_title">
+                <label for="EditSeriesTitle-8">节目名：</label>
+                <input type="text" name="title" id="EditSeriesTitle-8">
+            </div>
+            <div class="sp_genre">
+                <label for="EditSeriesType-8">类型：	</label>
+                <select id="EditSeriesType-8" name="genreid">
+                    <option value="0">请选择</option>
+                    <foreach name="genres" item="vo">
+                        <option value="{$vo['id']}">{$vo['genre']}</option>
+                    </foreach>
+                </select>
+            </div>
+            <div class="sp_country">
+                <label for="EditSeriesCountry-8">地区：</label>
+                <select name="countryid" id="EditSeriesCountry-8">
+                    <option value="0">请选择</option>
+                    <foreach name="countries" item="vo">
+                        <option value="{$vo['id']}">{$vo['country']}</option>
+                    </foreach>
+                </select>
+            </div>
+            <div class="sp_lang">
+                <label for="EditSeriesLanguage-8">语言：</label>
+                <select name="languageid" id="EditSeriesLanguage-8">
+                    <option value="0">请选择</option>
+                    <foreach name="langs" item="vo" title="language">
+                        <option value="{$vo['id']}">{$vo['language']}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+        <!-- #SpecialInfoAttr 专题节目总集简介 + 自定义属性 + 缩略图/海报-->
+        <div id="SpecialInfoAttr">
+            <!--BEGIN .series_attr 自定义属性-->
+            <div class="series_attr">
+                <!-- 添加自定义属性-->
+                <div class="attr-title">
+                    <label>属性信息</label>
+                    <a id="js_addattr_8" href="javascript:;"><span class="ui-icon ui-icon-plusthick"></span>添加属性</a>
+                </div>
+                <div class="scroll-table">
+                    <table class="attr-table">
+                        <tbody id="attr_8">
+                        <!--<tr class="optional">
+                                <td><label for="s_attr_1">年级:</label></td>
+                                <td>
+                                    <input id="s_attr_1" name="s_attr_1" data-attrid="1" type="text">
+                                    <a href="javascript:;"><span class="badge">--</span></a>
+                                </td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--.series_info_pic 简介 + 缩略图/海报-->
+            <div class="series_info_pic">
+                <div class="sereis_info">
+                    <div><label for="EditSeriesIntroduction-8">简介：</label></div>
+                    <textarea name="introduction" id="EditSeriesIntroduction-8" rows="3" cols="60"></textarea>
+                </div>
+                <div id="series_img_group" class="img_group">
+                    <div>
+                        <label for="eps_thumb_8">缩略图</label>
+                        <!--form from page-->
+                        <form class="appendix_upload_fp" method="POST" enctype="multipart/form-data" action="{:U('Content/Edit/xhrUploadOverwrite')}">
+                            <input type="hidden" id="js-thumboid-8" class="oid" name="attachoid" value="" />
+                            <!--缩略图 appendixtype = 1-->
+                            <input type="hidden" class="attach-type" name="appendixtypeid" value="1" />
+                            <!--data-id="xxx" 附件ID 用于取消对话框删除附件 -->
+                            <input id="eps_thumb_8" type="file" name="filename" data-id="" />
+                        </form>
+                        <div id="js-thumb-8" class="pic thumb" title="点击上传缩略图"></div>
+                    </div>
+                    <div>
+                        <label for="eps_poster_8">海报</label>
+                        <form class="appendix_upload_fp" method="POST" enctype="multipart/form-data" action="{:U('Content/Edit/xhrUploadOverwrite')}">
+                            <input type="hidden" id="js-posteroid-8" class="oid" name="attachoid" value=""/>
+                            <!--海报 appendixtype = 2-->
+                            <input type="hidden" class="attach-type" name="appendixtypeid" value="2" />
+                            <input id="eps_poster_8" type="file" name="filename" data-id="" />
+                        </form>
+                        <div id="js-poster-8" class="poster pic" title="点击上传海报"></div>
+                    </div>
+                    <div class="spqrcodewrp">
+                        <img id="js-qrcode-8" src="" class="qrcode" title="专题节目总集二维码" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- special episodes preview -->
+        <div class="tables-wrapper clearfix">
+            <!-- 全集内容列表：-->
+            <div class="tablewrap">
+                <div class="caption">全集内容列表：</div>
+                <table class="SeriesEpisodesList table table-fixed">
+                    <thead id="importTableTitle-8" class="scrollHead importTableTitle">
+                    <tr>
+                        <th class="th-0">&nbsp;</th>
+                        <th class="th-1">NO.</th>
+                        <th class="th-2">文件名</th>
+                        <th class="th-3">大小</th>
+                        <th class="th-5">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="scrollBody" id="js-episodes-8">
+                    <!--分集列表 xhr load -->
+                    </tbody>
+                </table>
+            </div>
+            <!--分集 缩略图 + 海报-->
+            <div id="episode_images">
+                <div class="img">
+                    <div>缩略图</div>
+                    <img id="img_thumb" src="" alt="" />
+                </div>
+                <div class="img">
+                    <div>海报</div>
+                    <img id="img_poster" src="" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END #dlg_specialseries -->
+</div>
+
+<!--9 专题节目分级 -->
+<div id="dlg_specialepisode" title="内容查询 - 专题节目单集" style="display: none">
+    <div id="SpecialRight">
+        <table class="tab-info">
+            <tr>
+                <td><label for="title-9">所选分集:</label><input id="title-9" type="text" name="title" /></td>
+                <td colspan="2"><label for="oid-9">系统命名:</label><input id="oid-9" type="text" name="name" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="stitle-9">所属节目集:</label>
+                    <input id="stitle-9" type="text" name="stitle" />
+                    <input id="soid-9" type="hidden" name="soid" />
+                </td>
+                <td class="SeriesBtnGrp">
+                    <button id="js-SearchSpecialSeries" class="ui-button">查找总节目集</button>
+                </td>
+                <td>
+                    <label for="episodeindex-9">当前集数: </label>
+                    <input id="episodeindex-9" type="number" name="episodeindex" />
+                </td>
+            </tr>
+        </table>
+        <div class="form-group">
+            <div><label for="introduction-9">简介:</label></div>
+            <textarea id="introduction-9" cols="80" rows="5" name="introduction"></textarea>
+        </div>
+        <!--自定义属性 + 缩略图 + 海报-->
+        <div class="form-group">
+            <!--专题节目单集9 添加自定义属性-->
+            <div id="attr_fp" class="attr">
+                <div class="attr-title">
+                    <label>属性信息</label>
+                    <div class="add-attr"><a id="js_addattr_9" href="javascript:;"><span class="ui-icon ui-icon-plusthick"></span>添加属性</a></div>
+                </div>
+                <div class="scroll-table">
+                    <table class="attr-table">
+                        <tbody id="attr_9">
+                        <!--xhr load-->
+                        <!--<tr class="optional"><td><label for="s_attr_1">年级:</label></td><td><input id="s_attr_1" name="s_attr_1" data-attrid="1" type="text"><a href="javascript:;"><span class="badge">&#45;&#45;</span></a></td></tr>-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="page_img_group" class="img_group">
+                <div>
+                    <label for="eps_poster_9">海报</label>
+                    <form class="appendix_upload_9" method="POST" enctype="multipart/form-data" action="{:U('Content/Edit/xhrUploadOverwrite')}">
+                        <input type="hidden" id="js-posteroid-9" class="oid" name="attachoid" value=""/>
+                        <!--海报 appendixtype = 2-->
+                        <input type="hidden" class="attach-type" name="appendixtypeid" value="2" />
+                        <input id="eps_poster_9" type="file" name="filename" data-id="" />
+                    </form>
+                    <div id="js-poster-9" class="large-poster pic" title="点击上传海报"></div>
+                </div>
+                <div>
+                    <label for="eps_thumb_9">缩略图</label>
+                    <form class="appendix_upload_9" method="POST" enctype="multipart/form-data" action="{:U('Content/Edit/xhrUploadOverwrite')}">
+                        <input type="hidden" id="js-thumboid-9"  class="oid" name="attachoid" value="" />
+                        <!--缩略图 appendixtype = 1-->
+                        <input type="hidden" class="attach-type" name="appendixtypeid" value="1" />
+                        <!--data-id="xxx" 附件ID 用于取消对话框删除附件 -->
+                        <input id="eps_thumb_9" type="file" name="filename" data-id="" />
+                    </form>
+                    <div id="js-thumb-9" class="thumb pic" title="点击上传缩略图"></div>
+                </div>
+                <div><img id="js-qrcode-9" class="qrcode" title="专题节目分集二维码" src="" /></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dlg_save_done" title="保存成功!" style="display: none">
+    <h3 class="text-success"><span class="ui-icon ui-icon-check"></span>保存成功!</h3>
+</div>
+<div id="dlg_delete_series" title="删除总集" style="display: none">
+    <p>该总集中存在分集, 请先删除分集!</p>
+</div>
+
+<div id="dlg_upload_5" title="添加电视剧总集附件" style="display: none">
+    <form id="form_upload_5" method="post" enctype="multipart/form-data" action="{:U('Content/Edit/xhrupload')}">
+        <div class="form-group">
+            <!--name="attachoid" DO NOT CHANGE!-->
+            <input type="hidden" id="js-soid-5" name="attachoid" value="" />
+            <label for="dialog_file_5">选择文件: </label>
+            <input id="dialog_file_5" type="file" name="filename" required />
+        </div>
+        <div class="form-group">
+            <label for="dialog_appendix_type_5">附件类型: </label>
+            <select id="dialog_appendix_type_5" name="appendixtypeid">
+                <foreach name="appendixtypes" item="vo">
+                    <option value="{$vo.id}">{$vo.appendixtype}</option>
+                </foreach>
+            </select>
+        </div>
+    </form>
+</div>
+
+<div id="DialogEditSeriesAppendix" title="添加电视节目总集附件" style="display: none">
+    <form id="editRightSeriesJumpAppendixInfo" method="post" enctype="multipart/form-data" action="{:U('Content/Edit/xhrupload')}">
+        <div class="form-group">
+            <!--name="attachoid" DO NOT CHANGE!-->
+            <input type="hidden" id="js-soid-6" name="attachoid" value="" />
+            <label for="dialog_file_6">选择文件: </label>
+            <input type="file" id="dialog_file_6" name="filename" required />
+        </div>
+        <div class="form-group">
+            <label for="dialog_appendix_type">附件类型: </label>
+            <select id="dialog_appendix_type" name="appendixtypeid">
+                <foreach name="appendixtypes" item="vo">
+                    <option value="{$vo.id}">{$vo.appendixtype}</option>
+                </foreach>
+            </select>
+        </div>
+    </form>
+</div>
+
+<div id="dlg_prompt_attr_8" title="输入属性名称" style="display: none">
+    <form id="form_prompt_attr_8" method="GET" action="{:U('Content/Edit/newAttr')}">
+        <div class="form-group">
+            <label for="prompt_attr_8">属性名称: </label>
+            <input id="prompt_attr_8" name="name" type="text" />
+        </div>
+    </form>
+</div>
+
+<div id="dlg_prompt_attr_9" title="输入属性名称" style="display: none">
+    <form id="form_prompt_attr_9" method="GET" action="{:U('Content/Edit/newAttr')}">
+        <div class="form-group">
+            <label for="prompt_attr_9">属性名称: </label>
+            <input id="prompt_attr_9" name="name" type="text" />
+        </div>
+    </form>
+</div>
+
+<div id="dlg_query_specials" title="专题节目总集 -- 查找" style="display: none">
+    <div class="dialog-body">
+        <div class="form-group">
+            <label for="js-searchname" class="label-loose">片名: </label>
+            <div class="input_wrapper">
+                <input id="js-searchname" type="text" size="20" placeholder="请输入片名">
+            </div>
+            <!--tvprogram.js SearchShowsByCondition()-->
+            <button id="ssbtn" href="javascript:;" title="search" class="ui-button ui-corner-all ui-widget" role="button">
+                <span class="ui-icon ui-icon-search"></span>查找
+            </button>
+        </div>
+        <div class="searchTable">
+            <div id="searchTableTitle-8" class="searchTableTitle">
+                <ul>
+                    <li style="width:24px">&nbsp;</li>
+                    <li style="width:34px">序号</li>
+                    <li style="width:120px">片名</li>
+                    <li style="width:80px">地区</li>
+                    <li style="width:90px">语言</li>
+                    <li style="width:66px">导入集数</li>
+                    <li style="width:85px">选择</li>
+                </ul>
+            </div>
+            <div id="searchTableContent-8" class="searchTableContent">
+                <table id="searchSpecialsTable" class="table table-fixed table-series">
+                    <tbody id="ss_tbody">
+                    <!-- xhr load -->
+                    <!-- <tr data-soid="S2017032200000000000000000000574" class="selected">
+                      <td class="td-0"><div class="tr_arrow"></div></td>
+                      <td class="td-1">1</td>
+                      <td class="td-2">快乐大本营</td>
+                      <td class="td-3">大陆</td>
+                      <td class="td-4">中语中字</td>
+                      <td class="td-5">10</td>
+                      <td class="td-6"><input type="radio" name="specials" title="radio"></td>
+                    </tr> -->
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<load href="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js" />
+<js href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.min.js" />
+<js href="__PUBLIC__/Content/js/index.js" />
+<!--cookie-->
+<js href="__PUBLIC__/Common/js/cookie.js" />
+<js href="__PUBLIC__/Content/js/edit.js" />
+<js href="__PUBLIC__/Content/js/search.unreviewed.js" />
+</html>

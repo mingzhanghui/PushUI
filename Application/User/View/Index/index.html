@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MBIS用户管理系统1.2/用户管理/新用户开户</title>
+    <!--jquery ui css-->
+    <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+    <!--background img css-->
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/User/css/style.css" />
+    <!--custom css-->
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/init.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/User/css/index.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/User/css/upload.css" />
+</head>
+<body>
+<input type="hidden" id="js-baseurl" value="__ROOT__/index.php/User/Index/" />
+<div id="center" class="main-wrapper">
+    <include file="Public/top" />
+    <div id="bottom">
+        <!--sidebar: 1.用户管理 2.数据同步-->
+        <div id="left">
+            <ul>
+                <li class="a active"><a href="{:U('User/Index/index')}"><img src="__PUBLIC__/User/img/down_a.png" /></a></li>
+                <li class="b"><a href="{:U('User/Sync/index')}"><img src="__PUBLIC__/User/img/up_d.png" /></a></li>
+            </ul>
+        </div>
+
+        <div id="right">
+            <div id="childCenter">
+                <div id="Context">
+                    <!--tab title * 3-->
+                    <ul id="Tabs">
+                        <li class="tab1 active"><a href="{:U('User/Index/index')}">新用户开户</a></li>
+                        <li class="tab2"><a href="{:U('User/Index/query')}">用户信息查询</a></li>
+                        <li class="tab3"><a href="{:U('User/Index/stat')}">用户量统计</a></li>
+                    </ul>
+                    <!--tab contents * 3-->
+                    <div class="tcwrapper">
+                        <!--tab-1 新用户开户-->
+                        <div id="tab1Context" class="tabcontent">
+                            <!--hint-->
+                            <div class="hint">
+                                "<span class="text-danger">*</span>"为必填项目，用于注册信息开户，请您认真填写<br />
+                                也可导入Excel2007的***.xslx用户文件
+                            </div>
+                            <!--bulk import-->
+                            <div class="bulk">
+                                <div class="sec_title">批量导入</div>
+                                <!-- Attach a file -->
+                                <iframe id="uploadTrg" name="uploadTrg" height="0" width="0" frameborder="0" scrolling="yes"></iframe>
+                                <form id="newcustomer-1" action="{:U('User/Index/bulkImport')}" method="post" enctype="multipart/form-data" target="uploadTrg">
+                                    <div class="form-group">
+                                        <label for="upload_excel">选择Excel上传: </label>
+                                        <a href="javascript:;" class="a-upload">
+                                            <input id="upload_excel" type="file" class="upload" name="excel" />上传
+                                        </a>
+                                    </div>
+                                </form>
+                                <div id="ajaxResultTest"></div>
+                            </div>
+                            <!--manual import-->
+                            <div class="manual">
+                                <div class="sec_title">手动导入</div>
+                                <form id="newcustomer-2" action="{:U('User/Index/import')}">
+                                    <div class="form-group">
+                                        <span class="require-red">*</span><label for="stbid" class="man">机顶盒ID：</label>
+                                        <input id="stbid" type="text" name="stbid" placeholder="输入16位机顶盒号" />
+                                        <div id="fb-1"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="require-red">*</span><label for="dp-start" class="man">机顶盒有效期开始日期：</label>
+                                        <input id="dp-start" type="text" name="starttime" placeholder="2017-01-01" />
+                                        <div id="fb-2"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="require-red">*</span><label for="dp-end" class="man">机顶盒有效期结束日期：</label>
+                                        <input id="dp-end" type="text" name="endtime" placeholder="2019-12-31" />
+                                        <div id="fb-3"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input id="js-newstb" class="class_button" type="submit" value="提交并开通" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!--tab-2 用户信息查询-->
+                        <div id="tab2Context" class="tabcontent hidden"><!--query.html--></div>
+                        <!--tab-3 用户量统计-->
+                        <div id="tab3Context" class="tabcontent hidden"><!--stat.html--></div>
+                    </div>
+                    <!--END .tcwrapper-->
+                </div>
+            </div>
+            <!--END #childCenter-->
+        </div>
+        <!--END #right-->
+    </div>
+</div>
+<footer><p>版权所有&copy;2017 <a href="__ROOT__">北京迈伦斯科技有限公司</a></p></footer>
+
+<!--1ダイアログを準備-->
+<div id="dialog-1" title="导入EXCEL">
+    <div class="caption">导入Excel...</div>
+    <img src="__PUBLIC__/Content/img/loading.gif" />
+</div>
+
+<div id="dialog-2" title="导入EXCEL完了">
+    <div class="dialog-body" id="js_batch_feedback"></div>
+</div>
+
+<div id="dialog-3" title="手动导入用户">
+    <br /><br />
+    <div class="dialog-body" id="js_manual_feedback"></div>
+</div>
+
+<!--jquery & jquery-ui-->
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js"></script>
+<!--my js func lib-->
+<script type="text/javascript" src="__PUBLIC__/Common/js/function.js"></script>
+<!--for customer page-->
+<script type="text/javascript" src="__PUBLIC__/User/js/index.js"></script>
+<script type="text/javascript" src="__PUBLIC__/User/js/import.js"></script>
+<script>
+    // datepicker
+    $('#dp-start').datepicker({
+        showOn: "button",
+        dateFormat: "yy-mm-dd",
+        buttonImage: "__PUBLIC__/User/img/calendar32.svg",
+        buttonImageOnly: true
+    });
+    $('#dp-end').datepicker({
+        showOn: "button",
+        dateFormat: "yy-mm-dd",
+        buttonImage: "__PUBLIC__/User/img/calendar32.svg",
+        buttonImageOnly: true
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MBIS业务管理2.0 &middot; 电视剧计费</title>
+    <!--jquery-ui css-->
+    <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+    <include file="Public/style" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/init.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/common.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/index.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/charge.css" />
+</head>
+<body>
+<div id="wrapper">
+    <include file="Public/header" />
+    <div id="main-wrapper">
+        <div id="sidebar">
+            <ul class="tab-pages">
+                <li><a href="{:U('Index/index')}"><img src="__PUBLIC__/Subscribe/img/down_a.gif"></a></li>
+                <li><a href="{:U('Subscribe/index')}"><img src="__PUBLIC__/Subscribe/img/down_b.gif"></a></li>
+                <li class="active"><a href="{:U('Charge/index')}"><img src="__PUBLIC__/Subscribe/img/charge.svg"></a></li>
+                <li><a href="{:U('Broadcast/index')}"><img src="__PUBLIC__/Subscribe/img/down_c.gif"></a></li>
+                <li><a href="{:U('Sync/index')}"><img src="__PUBLIC__/Subscribe/img/down_d.gif"></a></li>
+                <li><a href="{:U('Settings/index')}"><img src="__PUBLIC__/Subscribe/img/down_e.gif"></a></li>
+            </ul>
+        </div>
+        <div id="main">
+            <div id="tabs" class="ui-tabs ui-corner-all ui-widget ui-widget-content">
+                <ul role="tablist" class="ui-tabs-nav ui-corner-all ui-helper-reset ui-helper-clearfix ui-widget-header">
+                    <li role="tab" tabindex="0" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true">
+                        <a href="{:U('Charge/index')}" tabindex="-1" class="ui-tabs-anchor" id="ui-id-1">电影</a>
+                    </li>
+                    <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false">
+                        <a href="{:U('Charge/opera')}" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">戏曲</a>
+                    </li>
+                    <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab  ui-tabs-active ui-state-active" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false">
+                        <a href="{:U('Charge/tvplay')}" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">电视剧</a>
+                    </li>
+                    <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-4" aria-labelledby="ui-id-4" aria-selected="false" aria-expanded="false">
+                        <a href="{:U('Charge/tvprogram')}" tabindex="-1" class="ui-tabs-anchor" id="ui-id-4">电视节目</a>
+                    </li>
+                    <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-5" aria-labelledby="ui-id-5" aria-selected="false" aria-expanded="false">
+                        <a href="{:U('Charge/special')}" tabindex="-1" class="ui-tabs-anchor" id="ui-id-5">专题节目</a>
+                    </li>
+                </ul>
+                <div id="tabs-1" aria-labelledby="ui-id-1" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;"></div>
+                <div id="tabs-2" aria-labelledby="ui-id-2" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;"></div>
+                <div id="tabs-3" aria-labelledby="ui-id-3" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="false" style="display: block;">
+                    <div class="tab-body">
+                        <!--主面板左边列 表格 分页-->
+                        <div class="lcol">
+                            <input type="hidden" id="js-mediatypeid" value="5"> <!--电视剧总集-->
+                            <input type="hidden" id="js-contentedit" value="__ROOT__/index.php/Content/Edit" />
+
+                            <div class="tbwrap">
+                                <table id="tbtvplay" class="tbpg tbgrid" data-url="{:U('Subscribe/Charge/listMediaCharge')}">
+                                    <thead class="table_title">
+                                    <tr>
+                                        <th>&nbsp;</th>
+                                        <th>NO.</th>
+                                        <th>文件名称</th>
+                                        <th>大小</th>
+                                        <th>价格</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!--xhr load-->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagination">
+                                <div class="page">
+                                    <ul class="x">
+                                        <li><a id="js_first_page" href="javascript:;">首页</a></li>
+                                        <li><a id="js_prev_page" href="javascript:;">上一页</a></li>
+                                        <li><a id="js_next_page" href="javascript:;">下一页</a></li>
+                                        <li><a id="js_last_page" href="javascript:;">尾页</a></li>
+                                    </ul>
+                                </div>
+                                <div class="st" id="js_page_nav"><!--第1页/共2页--></div>
+                                <div class="jump">
+                                    <input id="js_page_number" type="text" size="4" title="输入页码跳转" />
+                                    <a id="js_page_jump" href="javascript:;">跳转</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--主面板右边列-->
+                        <div class="rcol">
+                            <div class="tosp tosp-lower">
+                                <a class="ui-button" href="{:U('Content/Search/index')}" target="_blank" title="查看内容详情">查看详情</a>
+                            </div>
+                            <div class="fee">
+                                <ul class="fee_l">
+                                    <li><label>费用类型: </label></li>
+                                    <li><input id="js-free" type="radio" name="fee" /><span>免费</span></li>
+                                    <li>
+                                        <input id="js-charge" type="radio" name="fee" checked /><span>收费</span>
+                                        <div id="charge_sp">
+                                            <input type="number" name="charge" placeholder="15.0" /><span>元</span>
+                                            <span>示例: 12.0</span>
+                                        </div>
+                                    </li>
+                                    <!--<li><span>示例: 12.0</span></li>-->
+                                </ul>
+                                <div class="btnwp">
+                                    <button id="js_save_price" class="btn" data-url="{:U('Subscribe/Charge/setPriceByOID')}">保存</button>
+                                </div>
+                            </div>
+                            <!--全集内容列表-->
+                            <div class="tableScroll">
+                                <!--电视剧计费 => 全集内容列表-->
+                                <input id="js_search_url" type="hidden" value="{:U('Content/Search/index')}" title="跳转到查看详情" />
+                                <table id="serial" class="tbgrid caption scrollable caption-lower" data-url="{:U('Subscribe/Charge/listEpisodes')}">
+                                    <caption>全集内容列表</caption>
+                                    <thead class="scrollHead table_title">
+                                    <tr>
+                                        <th class="th-0">&nbsp;</th>
+                                        <th class="th-1">No.</th>
+                                        <th class="th-2">文件名</th>
+                                        <th class="th-3">大小</th>
+                                        <th class="th-4">操作</th>
+                                        <th class="th-5">
+                                            <a href="javascript:;">选择</a>
+                                            <a href="javascript:;" onclick="checkAll(this, 'serial', checkbox_handler)">全选</a>
+                                            <a href="javascript:;" onclick="checkToggle('serial', checkbox_handler)">反选</a>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="scrollBody">
+                                    <!--xhr load-->
+                                    <!--<tr data-oid="0B4A4FDA862E6B8DD304E3C880EA6EE5" title="老乡帮老乡一亩地见分晓1"><td class="td-0"><div class="tr_arrow"></div></td><td class="td-1">1</td><td class="td-2">老乡帮老乡一亩地见分晓1</td><td class="td-3">89.38M</td><td class="td-4"><a href="/PushUI/index.php/Content/Search/index.html">查看详情</a></td><td class="td-5"><input name="serial" title="全集多选" type="checkbox"></td></tr>-->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!--播发任务-->
+                            <div class="tableScroll">
+                                <table id="caption" class="tbgrid caption scrollable caption-lower" data-url="{:U('Subscribe/Charge/listMultiPackageTask')}">
+                                    <caption>播发任务</caption>
+                                    <thead class="scrollHead table_title">
+                                    <tr>
+                                        <th class="th-0">&nbsp;</th>
+                                        <th class="th-1">No.</th>
+                                        <th class="th-2">业务包</th>
+                                        <th class="th-3">业务期</th>
+                                        <th class="th-4">播发日期</th>
+                                        <th class="th-5">轮播次数</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="scrollBody task_low" id="caption_body">
+                                    <!--xhr load by @file: charge.js, @func: list_package_task() -->
+                                    <script>
+                                        <!--init-->
+                                        var tbody = document.getElementById("caption_body");
+                                        var colspan = 6, rowcount = 5;
+                                        for (var i = 0; i < rowcount; i++) {
+                                            var tr = document.createElement("tr");
+                                            tr.classList.add("dumb");
+                                            for (var ii = 0; ii < colspan; ii++) {
+                                                var td = document.createElement("td");
+                                                td.setAttribute("colspan", colspan);
+                                                tr.appendChild(td);
+                                            }
+                                            tbody.appendChild(tr);
+                                        }
+                                    </script>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>  <!--END .rcol -->
+
+                    </div>  <!--END .tab-body-->
+                </div>
+                <div id="tabs-4" aria-labelledby="ui-id-4" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;"></div>
+                <div id="tabs-5" aria-labelledby="ui-id-5" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<load href="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js" />
+<js href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js" />
+<js href="__PUBLIC__/Subscribe/js/index.js" />
+<script type="text/javascript" src="__PUBLIC__/Common/js/cookie.js"></script>
+<!--<js href="__PUBLIC__/Subscribe/js/charge.js" />-->
+<js href="__PUBLIC__/Subscribe/js/chargeseries.js" />
+</body>
+</html>

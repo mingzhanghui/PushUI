@@ -1,0 +1,16 @@
+<div id="top">
+    <div id="logo">
+        <span class="version">1.2</span>
+        <a href="__ROOT__/"><div class="tohome"></div></a>
+        <div class="welcome">
+            <div class="user">
+                <span>{:session('username')}</span>欢迎你
+                <a class="logout" href="{:U('User/Login/logout')}" title="logout"><span class="icon-signout"></span></a>
+            </div>
+            <div class="datetime">
+                <div id="CurrentYear"></div>
+                <div id="CurrentTime"></div>
+            </div>
+        </div>
+    </div>
+</div>

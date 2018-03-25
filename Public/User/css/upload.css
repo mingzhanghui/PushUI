@@ -1,0 +1,42 @@
+.a-upload {
+    padding: 4px 20px;
+    height: 20px;
+    line-height: 20px;
+    position: relative;
+    cursor: pointer;
+    color: #fefefe;
+    background-color: #026c6a;
+    background:-moz-linear-gradient(top, #01aeaa, #026c6a);
+    background:-webkit-gradient(linear, 0 0, 0 bottom, from(#01aeaa), to(#026c6a));
+    background:-o-linear-gradient(top, #01aeaa, #026c6a);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    display: inline-block;
+    zoom: 1;
+}
+
+.a-upload input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+}
+
+.a-upload:hover {
+    color: #ffffff;
+    background: #01aeaa;
+    border-color: #ccc;
+    text-decoration: none;
+}
+
+#newcustomer-1 > .form-group > label {
+    position: relative;
+    top: -10px;
+    line-height: 16px;
+    font-weight: 500;
+    font-size: 14px;
+}

@@ -1,0 +1,154 @@
+@charset "utf-8";
+
+.main-wrapper {
+    width: 1366px;
+    margin: 0 auto;
+}
+
+#Playtab1Context {
+    position: relative;
+    top: 0;
+    left: 3px;
+    display: block;
+    background: white;
+    min-height: 450px;
+    height: auto;
+    clear: both;
+}
+
+#PlayTabs > li > a {
+    text-decoration: none;
+}
+
+#PlayTabs > li.active > a {
+    color: #007c88;
+}
+
+#PlayTabs > li:not(.active) > a {
+    color: #787878;
+}
+
+#Playtab1Context > .query {
+    display: block;
+    box-sizing: content-box;
+    padding: 20px 0 40px 80px;
+}
+
+#Playtab1Context > .query > form > div {
+    display: inline-block;
+    float: left;
+}
+
+#Playtab1Context > .table-wrapper {
+    clear: both;
+}
+
+.table-wrapper > table {
+    border-collapse: collapse;
+}
+
+#PreRollPlayTable, #PausePlayTable {
+    width: 1100px;
+    margin-left: 30px;
+    height: 320px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+}
+
+#PreRollPlayTable td, #PausePlayTable td {
+    height: 29px;
+    line-height: 29px;
+    padding: 0;
+    border: none;
+    outline: none;
+    border-collapse: collapse;
+}
+
+/*.table-wrapper > table > thead, .table-wrapper > table > tbody {display: block;}*/
+
+.putad_title > tr > th {
+    text-align: center;
+    font-weight: normal;
+    table-layout: fixed;
+}
+
+.table_body > tr > td {
+    table-layout: fixed;
+    text-align: center;
+}
+
+.qb_status, .qb_date {
+    margin-right: 20px;
+}
+
+.putad_title > tr {
+    background-color: #c8e8dd;
+    margin-top: -2px;
+}
+
+.putad_title > tr > td {
+    text-align: center;
+}
+
+.putad_title + .table_body > tr {
+    width: 1170px;
+    display: block;
+    text-align: left;
+}
+
+.ui-datepicker-trigger {
+    width: 20px;
+    height: 20px;
+    vertical-align: bottom;
+}
+
+#q_date {
+    width: 100px;
+}
+
+.operate {
+    padding: 0 0 20px;
+}
+
+.pagination {
+    margin-top: 10px;
+}
+
+.operate > .form-group {
+    display: inline-block;
+    float: right;
+    margin: 10px 40px 10px 0;
+}
+
+.dialog-body {
+    padding: 10px;
+}
+
+.dialog-body input[readonly="readonly"]:not(.hasDatepicker) {
+    background-color: #eee;
+    outline: none;
+    border: 1px solid #ccc;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.dialog-body > form > .form-group > label {
+    display: inline-block;
+    float: left;
+    text-align: right;
+    min-width: 100px;
+    width: auto;
+}
+
+.help-block {
+    margin: 0;
+    text-indent: 100px;
+    color: #ff0000;
+}
+
+.font-14 {
+    font-size: 14px;
+}

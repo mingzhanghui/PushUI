@@ -1,0 +1,178 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MBIS业务管理2.0 &middot; 播发管理 &middot; 播发历史记录</title>
+  <!--jquery-ui css-->
+  <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+  <!--customize jquery-ui css-->
+  <include file="Public/style" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/init.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/common.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/index.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/broadcast.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/turing.css" />
+  <style>
+    .lidate.cur > a, .lidate:not(.cur) > a:hover {
+      background-image: url(__PUBLIC__/Subscribe/img/highlight.gif);
+      background-size:100%;
+      -webkit-background-size:100%;
+      -moz-background-size: 100%;
+      -o-background-size: 100%;
+    }
+    #historylist {border: 1px solid #ccc;}
+    #historylist tr:not(:hover) .td0 {
+      background-image: none;
+      opacity: 0;
+    }
+    #historylist tr:not(.dumb):hover .td0 {
+      background-image: url(__PUBLIC__/Subscribe/img/tr_bg.gif);
+      background-repeat: no-repeat;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+<div id="wrapper">
+  <include file="Public/header" />
+  <div id="main-wrapper">
+    <div id="sidebar">
+      <ul class="tab-pages">
+        <li><a href="{:U('Index/index')}"><img src="__PUBLIC__/Subscribe/img/down_a.gif"></a></li>
+        <li><a href="{:U('Subscribe/index')}"><img src="__PUBLIC__/Subscribe/img/down_b.gif"></a></li>
+        <li><a href="{:U('Charge/index')}"><img src="__PUBLIC__/Subscribe/img/charge.svg"></a></li>
+        <li class="active"><a href="{:U('Broadcast/index')}"><img src="__PUBLIC__/Subscribe/img/up_c.gif"></a></li>
+        <li><a href="{:U('Sync/index')}"><img src="__PUBLIC__/Subscribe/img/down_d.gif"></a></li>
+        <li><a href="{:U('Settings/index')}"><img src="__PUBLIC__/Subscribe/img/down_e.gif"></a></li>
+      </ul>
+    </div>
+    <div id="main">
+      <div id="tabs" class="ui-tabs ui-corner-all ui-widget ui-widget-content">
+        <ul role="tablist" class="ui-tabs-nav ui-corner-all ui-helper-reset ui-helper-clearfix ui-widget-header">
+          <li role="tab" tabindex="0" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="false" aria-expanded="false">
+            <a href="{:U('Broadcast/index')}" tabindex="-1" class="ui-tabs-anchor" id="ui-id-1">播发内容列表</a>
+          </li>
+          <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false">
+            <a href="{:U('Broadcast/stat')}" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">播发统计列表</a>
+          </li>
+          <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="true" aria-expanded="true">
+            <a href="{:U('Broadcast/history')}" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">播发历史记录</a>
+          </li>
+          <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-4" aria-labelledby="ui-id-4" aria-selected="false" aria-expanded="false">
+            <a href="{:U('Broadcast/control')}" tabindex="-1" class="ui-tabs-anchor" id="ui-id-4">播发总量控制</a>
+          </li>
+        </ul>
+        <div id="tabs-1" aria-labelledby="ui-id-1" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;"></div>
+        <div id="tabs-2" aria-labelledby="ui-id-2" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;"></div>
+        <!--播发统计列表 END-->
+        <div id="tabs-3" aria-labelledby="ui-id-3" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="false" style="display: block;">
+          <div class="tab-body">
+            <!--查询日期-->
+            <form method="GET" action="{:U()}">
+              <div class="form-group query">
+              <div class="date">
+                <label for="datepicker-3">起始日期: </label>
+                <input id="datepicker-3" name="startdate" class="datepicker" type="text" placeholder="yyyy-mm-dd" value="{$startdate}" />
+                <div class="help-block"></div>
+              </div>
+              <div class="date">
+                <label for="datepicker-4">结束日期: </label>
+                <input id="datepicker-4" name="enddate" class="datepicker" type="text" placeholder="yyyy-mm-dd" value="{$enddate}" />
+                <div class="help-block"></div>
+              </div>
+              <div class="widget">
+                <button class="ui-button ui-widget ui-corner-all" type="submit">查询</button>
+              </div>
+            </div>
+            </form>
+
+            <!--播发历史记录 统计列表-->
+            <div class="form-group list">
+              <table id="historylist" class="scroll">
+                <thead class="scrollHead">
+                <tr>
+                  <th class="th0"></th>
+                  <th class="th1">No.</th>
+                  <th class="th2">文件名称</th>
+                  <th class="th3">所属业务包</th>
+                  <th class="th4">所属期名</th>
+                  <th class="th5">轮播次数</th>
+                  <th class="th6">大小</th>
+                  <th class="th7">日期</th>
+                </tr>
+                </thead>
+                <tbody class="scrollBody">
+
+                <volist name="list" id="vo" key="k" empty="$empty">
+                <tr>
+                  <td class="td0"></td>
+                  <td class="td1">{$k}</td>
+                  <td class="td2">{$vo.filename}</td>
+                  <td class="td3">{$vo.packagename}</td>
+                  <td class="td4">{$vo.missionname}</td>
+                  <td class="td5">{$vo.round}</td>
+                  <td class="td6">{$vo.size}</td>
+                  <td class="td7">{$vo.date}</td>
+                </tr>
+                </volist>
+
+                </tbody>
+              </table>
+            </div>
+          </div>  <!--END .tab-body-->
+        </div>
+        <div id="tabs-4" aria-labelledby="ui-id-4" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<load href="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js" />
+<js href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js" />
+<js href="__PUBLIC__/Subscribe/js/index.js" />
+<script>
+  $(function() {
+    $('#datepicker-3').datepicker({
+      dateFormat: 'yy-mm-dd',
+      showOn: "button",
+      buttonImage: "__PUBLIC__/Subscribe/img/calendar.svg",
+      buttonImageOnly: true,
+    });
+    $('#datepicker-4').datepicker({
+      dateFormat: 'yy-mm-dd',
+      showOn: "button",
+      buttonImage: "__PUBLIC__/Subscribe/img/calendar.svg",
+      buttonImageOnly: true,
+    });
+    $( ".widget input[type=submit], .widget a, .widget button" ).button();
+
+    var table = document.getElementById("historylist");
+    padScrollTable(table, 10, 8);
+
+    // 检查日期格式
+    var start = document.getElementById("datepicker-3");
+    var end = document.getElementById("datepicker-4");
+        // date format YYYY-mm-dd
+    var pat = new RegExp("(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)");
+    var testdate = function(obj) {
+      if (!pat.test(obj.value)) {
+        obj.nextElementSibling.nextElementSibling.innerHTML = 
+            "<span class='text-danger'>日期格式:YYYY-mm-dd</span>";
+        return false;
+      } else {
+        obj.nextElementSibling.nextElementSibling.innerHTML = "";
+      }
+    }
+    start.onchange = function() {
+      testdate(this);
+    }
+    end.onchange = function() {
+      testdate(this);
+    }
+
+  })
+</script>
+</body>
+</html>

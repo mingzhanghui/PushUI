@@ -1,0 +1,144 @@
+<style>
+  .ui-widget-header {
+    border: 1px solid #aed0ea;
+    background: #deedf7 url(__PUBLIC__/jquery-ui-1.12.1/images/ui-bg_highlight-soft_100_deedf7_1x100.png) 50% 50% repeat-x;
+    color: #222222;
+    font-weight: bold;
+  }
+  .ui-state-hover .ui-icon, .ui-state-focus .ui-icon, .ui-button:hover .ui-icon, .ui-button:focus .ui-icon {
+    background-image: url(__PUBLIC__/jquery-ui-1.12.1/images/ui-icons_72a7cf_256x240.png);
+  }
+
+  /* Interaction states
+ ----------------------------------*/
+  .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    border: 1px solid #74b2e2;
+    background: #e4f1fb url(__PUBLIC__/jquery-ui-1.12.1/images/ui-bg_glass_100_e4f1fb_1x400.png) 50% 50% repeat-x;
+    font-weight: bold;
+    color: #0070a3;
+  }
+  .ui-button:hover, .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    border: 1px solid #2694e8;
+    background: #3baae3 url(__PUBLIC__/jquery-ui-1.12.1/images/ui-bg_glass_50_3baae3_1x400.png) 50% 50% repeat-x;
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+  .ui-widget :active { outline: none; }
+
+  .ui-button, .ui-dialog .ui-dialog-buttonpane button  {
+    border: 1px solid #aed0ea;
+    font-weight: bold;
+    color: #2779aa;
+    background: #d7ebf9 url(__PUBLIC__/jquery-ui-1.12.1/images/ui-bg_glass_80_d7ebf9_1x400.png) 50% 50% repeat-x;
+  }
+
+  .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: 1px solid #aed0ea;
+    background: #d7ebf9 url(__PUBLIC__/jquery-ui-1.12.1/images/ui-bg_glass_80_d7ebf9_1x400.png) 50% 50% repeat-x;
+    font-weight: bold;
+    color: #2779aa;
+  }
+
+  .ui-button:hover {
+    border: 1px solid #74b2e2;
+    background: #e4f1fb url(__PUBLIC__/jquery-ui-1.12.1/images/ui-bg_glass_100_e4f1fb_1x400.png) 50% 50% repeat-x;
+    font-weight: bold;
+    color: #0070a3;
+  }
+
+  .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    border: 1px solid #2694e8;
+    background: #3baae3 url(__PUBLIC__/jquery-ui-1.12.1/images/ui-bg_glass_50_3baae3_1x400.png) 50% 50% repeat-x;
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+  .sidebar {
+    width: 140px;
+    height: 600px;
+    float: left;
+    border-right: 1px solid #c0c0c0;
+    border-bottom: solid 1px #57585C;
+    background-image: url(__PUBLIC__/Content/img/left_bg.gif);
+    background-repeat: repeat-x;
+  }
+
+  #childCenter {
+    /*width: 1205px;*/
+    width: 1189px;
+    height: 600px;
+    float: left;
+    margin: 0 auto;
+    background-image: url('__PUBLIC__/Content/img/right_bg.jpg');
+    background-repeat: no-repeat;
+  }
+
+  .importTableTitle {
+    background-image: url('__PUBLIC__/Content/img/table_title.gif');
+    -moz-background-size: 513px 26px;
+    -webkit-background-size: 513px 26px;
+    -o-background-size: 513px 26px;
+    -ms-background-size: 513px 26px;
+    background-repeat: repeat;
+    width: 696px;
+    height: 26px;
+    text-align: left;
+    color: #738899;
+    list-style-type: none;
+    font-size: 12px;
+    border-left: solid 1px #aed0ea;
+    border-right: solid 1px #aed0ea;
+  }
+
+  .tr_arrow {
+    background-image: url('__PUBLIC__/Content/img/tr_bg.gif');
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    display: none;
+  }
+  .table-edit > tbody > tr:hover .tr_arrow {
+    display: inline-table;
+  }
+
+  .table > tbody > tr:hover .tr_arrow {
+    display: inline-table;
+    height: 18px;
+  }
+
+  .editTableTitle {
+    background-image: url('__PUBLIC__/Content/img/table_title.gif');
+    -moz-background-size: 513px 26px;
+    -webkit-background-size: 513px 26px;
+    -o-background-size: 513px 26px;
+    -ms-background-size: 513px 26px;
+    background-repeat: repeat;
+    width: 388px;
+    height: 20px;
+    text-align: left;
+    border-top:1px solid #aed0ea;
+    border-left: solid 1px #aed0ea;
+    border-right: solid 1px #aed0ea;
+  }
+
+  .searchTableTitle {
+    background-image: url('__PUBLIC__/Content/img/table_title.gif');
+    background-repeat: repeat-x;
+    -moz-background-size: 690px 20px;
+    -webkit-background-size: 690px 20px;
+    -o-background-size: 690px 20px;
+    -ms-background-size: 690px 20px;
+    width: 694px;
+    height: 20px;
+    text-align: center;
+    border-left: solid 1px #aed0ea;
+    border-right: solid 1px #aed0ea;
+    border-top:solid 1px #aed0ea;
+  }
+
+  .no-close .ui-dialog-titlebar-close {
+    display: none;
+  }
+
+</style>

@@ -1,0 +1,657 @@
+@charset "utf-8";
+
+button.btn {padding: 0; line-height: 28px;}
+
+input:not([type]), input[type="email"], input[type="number"], input[type="password"], input[type="tel"],
+input[type="url"], input[type="text"] {
+    padding: 1px 0;
+}
+
+input, textarea, keygen, select, button, meter, progress {
+    -webkit-writing-mode: horizontal-tb;
+}
+
+.col-left {
+    height: 600px;
+}
+
+.col-left > .panel {
+    height: 285px;
+    width: 400px;
+    overflow: visible;
+}
+
+.panel-title {
+    font-weight: 600;
+}
+
+.panel-body {
+    font-size: 14px;
+    background-color: #fefefe;
+}
+
+.panel .panel-body .scroll-list {
+    height: 247px;
+}
+
+.panel .panel-body .scroll-list .scroll-inner {
+    min-height: 220px;
+}
+
+#main .col-left .panel:nth-child(2) {
+    margin-top: 12px;
+    height: 334px;
+    overflow: visible;
+}
+
+#main .col-left .panel:nth-child(2) .panel-body {
+    height: 280px;
+    width: 450px;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.4);
+}
+
+thead.scrollHead, tbody.scrollBody {
+    display:block;
+}
+
+#table-mission {
+    width: 400px;
+    height: 231px;
+    border: none;
+}
+
+#table-mission tbody tr td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+#table-mission thead {
+    overflow-x: hidden;
+}
+
+#table-mission thead tr {
+    display: block;
+}
+
+#table-mission tbody {
+    overflow-x: hidden;
+}
+
+#table-mission th, #table-mission td {
+    table-layout: fixed;
+    box-sizing: border-box;
+    text-align: center;
+    height: 28px;
+    line-height: 28px;
+    font-size: 14px;
+}
+
+#table-mission th, table.caption th {
+    font-weight: normal;
+    color: #2a2a2a;
+    font-family: "宋体";
+    background: -moz-linear-gradient(top, #7abeed, #7abeea);
+    background: -webkit-linear-gradient(top, #7abeed, #7abeea);
+    background: -ms-linear-gradient(top, #7abeed, #7abeea);
+    border-collapse: collapse;
+    border: none;
+    outline: none;
+}
+
+#table-mission tbody.scrollBody {
+    overflow-y:scroll;
+    height:200px;
+    width: 410px;
+}
+td.col-4 input[type="radio"] {
+    box-sizing: content-box;
+    display: inline-block;
+    margin-top: 7px;
+    width: 16px;
+    height: 16px;
+}
+
+.col-left {
+    overflow: visible;
+    height: 635px;
+    width: 450px;
+    margin-left: 20px;
+    float: left;
+}
+
+.panel .panel-body:nth-child(2) > div.btn-groups {
+    display: block;
+    margin-right: 20px;
+    margin-top: -2px;
+    float: right;
+}
+
+.panel .panel-body:nth-child(2) > div.btn-groups > .btn {
+    margin-left: 20px;
+}
+
+.panel-body .btn-groups > a.ui-button {
+    float: right;
+}
+
+.col-right {
+    width: 616px;
+    margin-left: 10px;
+    float: left;
+}
+
+.col-right .panel .panel-body {
+    background: #fefefe;
+    border: 2px solid #ccc;
+}
+
+.col-right .panel-body table.pkg {
+    display: inherit;
+}
+
+.col-right .panel .panel-body table.pkg input {
+    /*border: none;*/
+    border: 1px solid #ccc;
+    outline: none;
+    background: transparent;
+    height: 20px;
+    line-height: 20px;
+    width: 100px;
+}
+
+.col-right .panel .panel-body label[for^="pkg-"] {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.col-left .panel .panel-body {
+    width: 420px;
+}
+
+#table-mission {
+    margin-left: 9px;
+    height: 230px;
+    margin-top: 10px;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+#table-mission tbody {
+    height: 200px;
+}
+
+.col-right .panel label {
+    font-size: 13px;
+    color: #565656;
+}
+
+.col-right select {
+    height: 20px;
+    line-height: 20px;
+    display: inline-block;
+}
+
+tbody.scrollBody tr:nth-child(2n) {
+    background: #ffffff;
+}
+
+tbody.scrollBody tr:nth-child(2n+1) {
+    background: #eff0f1;
+}
+
+tbody.scrollBody tr:hover {
+    background: #cfe2f0;
+}
+
+table.pkg {
+    border-bottom: 1px solid #dfdfdf;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.ui-datepicker-trigger {
+    height: 20px;
+    width: 20px;
+    margin-bottom:-3px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.date, .round {
+    margin: 10px 0 0 4px;
+    float: left;
+}
+
+#form_broadcast > .form-group {
+    margin: 0;
+}
+
+.date ul li {
+    float: left;
+    margin: 2px 4px;
+    display: inline-block;
+}
+
+#m_missionname {
+    width: 170px;
+}
+.date ul li input:nth-child(2), .date ul li input:nth-child(3) {
+    width: 80px;
+}
+
+.pkginfo {
+    border-bottom: 1px solid #ccc;
+}
+
+.operate, .operate > div {
+    height: 30px;
+}
+
+.operate {
+    width: 600px;
+    margin-top: -10px;
+    margin-bottom: 6px;
+}
+
+.operate > .feedback {
+    width: 300px;
+    float: left;
+}
+
+.operate > .btn-groups {
+    display: block;
+    width: 270px;
+    float: right;
+}
+
+.operate > .feedback > .ui-widget {
+    display: none;
+}
+
+.operate > .feedback > .ui-widget > .ui-corner-all {
+    margin-top: 5px;
+    padding: 0 .7em;
+    margin-left: 12px;
+    color: darkgreen;
+}
+
+.ui-state-*.ui-corner-all > p > span {
+    float: left;
+    margin-right: .3em;
+}
+
+.ui-state-success {
+    background-color: #C9E2B3;
+    border: 1px solid green;
+}
+
+.operate > .btn-groups > a.ui-button,
+.col-right .panel-body .btn-groups a.ui-button {
+    padding: 4px 20px;
+    margin-right: 40px;
+    display: inline-block;
+}
+
+.issue {height: 320px;}
+
+.issue > .table {
+    margin: 10px 20px;
+}
+
+.col-right table.pkg > tbody > tr > td select {
+    height: 24px;
+}
+
+.caption {
+    border: 1px solid #ccc;
+    vertical-align: top;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+    border-collapse: collapse;
+    width: 560px;
+}
+
+.caption caption {
+    /*text-indent: -176px;*/
+    text-align: left;
+    font-weight: 400;
+}
+
+.caption tbody th {
+    font-size: 13px;
+}
+
+.caption tbody th, .caption tbody td {
+    line-height: 26px;
+    height: 26px;
+}
+
+.caption tbody td {
+    text-align: center;
+    font-size: 14px;
+}
+
+.caption thead th {
+    font-weight: 500;
+}
+
+.caption tbody tr:nth-child(2n) {
+    background: #ffffff;
+}
+
+.caption tbody tr:nth-child(2n+1) {
+    background: #eff0f1;
+}
+
+.caption tbody tr:hover {
+    background: #cfe2f0;
+}
+
+.btn-left .btn-groups {
+    margin-top: -5px;
+    float: left;
+    margin-left: 30px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group:after {
+    content: ".";
+    display: block;
+    height: 0;
+    font-size:0;
+    clear: both;
+    visibility:hidden;
+}
+
+#addMissionInfo > .form-group {
+    width: 540px;
+    height: 30px;
+}
+
+#addMissionInfo > .form-group > div > input[type="text"] {
+    width: 150px;
+}
+
+#addMissionInfo > .form-group > .fg {
+    float: left;
+    height: 30px;
+    width: 260px;
+}
+
+#addMissionInfo .form-group > .fg > .help-block {
+    height: 26px;
+    margin: 4px 0;
+}
+
+#addMissionInfo .form-group > .fg > .help-block > span {
+    display: inline-block;
+    margin-left: 72px;
+    overflow-x: visible;
+}
+
+#addMissionInfo .form-group > .label-wrap {
+    height: 36px;
+    width: 70px;
+    float: left;
+    text-align: right;
+    padding-right: 2px;
+}
+
+#addMissionInfo .form-group > textarea {
+    width:430px;
+    float: left;
+    padding: 2px;
+    box-sizing: border-box;
+}
+
+#addMissionInfo > .form-group:last-child {
+    margin-top: 20px;
+}
+
+.fg > label {
+    text-align: right;
+    display: inline-block;
+    width: 70px;
+}
+
+.require-red {
+    color: #a94442;
+    font-size: 1em;
+    padding-right: 3px;
+}
+
+.text-danger {
+    color: #a94442;
+}
+
+.text-success {
+    color: #3c763d;
+}
+
+.help-inline {display: inline;}
+
+.indent {
+    text-indent: 27px;
+    display: inline-block;
+}
+
+.info_low {
+    margin-left: 18px;
+    letter-spacing: .3em;
+    top: 2px;
+    position: relative;
+}
+
+.info_low > label {vertical-align: top;}
+
+.info_low + .operate {
+    width: 600px;
+    margin-top: 0;
+    margin-bottom: 14px;
+}
+
+.search {
+    float: left;
+    margin-right: 10px;
+}
+
+.searchTable {
+    clear: both;
+    border: 1px solid #bfbfbf;
+    width: 500px;
+    min-height: 100px;
+    height: auto;
+}
+
+.searchTableTitle {
+    background-color: mintcream;
+    height: 22px;
+    line-height: 22px;
+}
+
+.searchTableTitle > ul > li {
+    float: left;
+    text-align: center;
+}
+
+.scroll-header > .li-0 {width: 40px;}
+.scroll-header > .li-1 {width: 30px;}
+.scroll-header > .li-2 {width:150px;}
+.scroll-header > .li-3 {width: 90px;}
+.scroll-header > .li-4 {width: 70px;}
+.scroll-header > .li-5 {width:100px;}
+
+.scroll-body > tr {
+    display: block;
+    width: 500px;
+}
+
+.scroll-body > tr > .td-0 {width: 40px;}
+.scroll-body > tr > .td-1 {width: 30px;}
+.scroll-body > tr > .td-2 {width:160px;}
+.scroll-body > tr > .td-3 {width: 90px;}
+.scroll-body > tr > .td-4 {width: 70px;}
+.scroll-body > tr > .td-5 {width:100px;}
+
+/* dialog 添加新的节目 */
+#snc_tbody > tr > td {text-align: center;}
+
+#snc_tbody > tr > td:last-child > input[type='checkbox'] {
+    float: left;
+    margin-left: 30px;
+    height: 16px;
+    width: 16px;
+}
+
+.table-media > tbody > tr, .table-media > tbody > tr > td {
+    height: 24px;
+    line-height: 24px;
+}
+
+.searchTableContent {
+    height: 240px;
+    margin-bottom: 0;
+}
+
+.table-fixed tr:not(.dumb) {
+    cursor: pointer;
+}
+
+/*スクロール用*/
+.scroll-head, .scroll-body {
+    display:block;
+}
+
+#this_mission.scroll-body {
+    overflow-y:scroll;
+    height: 230px;
+}
+
+/*幅調整*/
+.scroll-head th, .scroll-body td {
+    table-layout:fixed;
+}
+
+#this_mission > tr {
+    width: 540px;
+    display: block;
+    cursor: pointer;
+}
+
+#tableCaption > thead {
+    background-color: #7abeec;
+}
+
+#tableCaption input[type='checkbox'] {
+    height: 16px;
+    width: 16px;
+}
+
+#tableCaption .th-0 {width: 30px;}
+#tableCaption .th-1 {width: 20px;}
+#tableCaption .th-2 {width: 30px;}
+#tableCaption .th-3 {width: 200px;}
+#tableCaption .th-4 {width: 75px;}
+#tableCaption .th-5 {width: 80px;}
+#tableCaption .th-6 {width: 120px;}
+
+#tableCaption .td-0 {width: 30px;}
+#tableCaption .td-1 {width: 20px;}
+#tableCaption .td-2 {width: 30px;}
+#tableCaption .td-3 {width: 200px;}
+#this_mission .td-3 > span {
+    overflow-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    width:200px;
+}
+#tableCaption .td-4 {width: 75px;}
+#tableCaption .td-5 {width: 80px;}
+/*#tableCaption .td-6 {width: 80px;}*/
+#tableCaption .td-6 > a:first-child {margin-right: 10px;}
+
+.scrollHead th, .scroll-head th {
+    font-weight: 600;
+    color: #2b2b2b;
+}
+
+#table-mission {
+    /*width: 100%;*/
+    height: 240px;
+    border: none;
+}
+
+#table-mission thead {
+    overflow-x: hidden;
+}
+
+#table-mission thead tr {
+    display: block;
+}
+
+#table-mission tbody {
+    overflow-x: hidden;
+}
+
+#table-mission tbody tr {
+    display: block;
+    cursor: pointer;
+    height: 28px;
+    line-height: 28px;
+}
+
+#table-mission th, #table-mission td {
+    table-layout: fixed;
+    box-sizing: border-box;
+    text-align: center;
+    height: 28px;
+    line-height: 28px;
+    font-size: 14px;
+}
+
+#table-mission th, table.caption th {
+    font-weight: normal;
+    color: #2a2a2a;
+    font-family: "宋体";
+    background: -moz-linear-gradient(top, #7abeed, #7abeea);
+    background: -webkit-linear-gradient(top, #7abeed, #7abeea);
+    background: -ms-linear-gradient(top, #7abeed, #7abeea);
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+#table-mission tbody.scrollBody {
+    overflow-y:scroll;
+    width: 430px;
+    height: 200px;
+}
+
+#table-mission thead .col-0 { width: 30px; }
+#table-mission thead .col-1 { width: 124px; }
+#table-mission thead .col-2 { width:90px; }
+#table-mission thead .col-3 { width:90px; }
+#table-mission thead .col-4 { width:80px; }
+#table-mission thead .col-5 { width:60px; text-align: center; }
+
+#table-mission tbody .col-0 { width: 30px; }
+#table-mission tbody .col-1 { width:110px; }
+#table-mission tbody .col-2 { width:90px; }
+#table-mission tbody .col-3 { width:90px; }
+#table-mission tbody .col-4 { width:70px; }
+/*#table-mission tbody .col-5 { width:20px;}*/
+
+#snc_tbody {
+    height: 240px;
+    overflow-y: scroll;
+}

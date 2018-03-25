@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MBIS广告管理系统&middot;数据同步&middot;查看同步日志</title>
+    <!--jquery ui css-->
+    <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+    <!--background img css-->
+    <include file="Public/style" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Ads/css/site.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Ads/css/log.css" />
+</head>
+
+<body>
+<div id="center" class="main-wrapper">
+    <include file="Public/header" />
+    <div id="bottom">
+        <div id="left">
+            <ul>
+                <li class="a"><a href="{:U('Ads/Index/index')}"><img src="__PUBLIC__/Ads/img/up_a.gif" /></a></li>
+                <li class="b"><a href="{:U('Ads/Put/index')}"><img src="__PUBLIC__/Ads/img/up_b.gif" /></a></li>
+                <li class="c"><a href="{:U('Ads/Report/index')}"><img src="__PUBLIC__/Ads/img/up_c.gif" /></a></li>
+                <li class="d active"><a href="{:U('Ads/Sync/index')}"><img src="__PUBLIC__/Ads/img/down_d.gif" /></a></li>
+                <li class="e"><a href="{:U('Ads/Set/index')}"><img src="__PUBLIC__/Ads/img/up_e.gif" /></a></li>
+            </ul>
+        </div>
+        <div id="right">
+            <div id="childCenter">
+                <div id="SyncContext">
+                    <!--tab title * 2-->
+                    <ul id="PlayTabs">
+                        <li class="Playtab1" id="Playtab1"><a href="{:U('Ads/Sync/index')}">广告同步</a></li>
+                        <li class="Playtab3 active" id="Playtab3"><a href="{:U('Ads/Sync/log')}">查看同步日志</a></li>
+                    </ul>
+                    <!--tab content-->
+                    <div class="tcwrapper">
+                        <!--广告同步-->
+                        <div id="Tbtab3Context">
+                            <form name="log" action="{:U('Ads/Sync/getLogContent')}" method="get" enctype="multipart/form-data">
+                                <div class="formbody">
+                                    <fieldset class="fs_title">
+                                        <legend>所有日志列表</legend>
+                                        <div class="select-wrap">
+                                            <select id="js_files" name="files" multiple="true">
+                                                <foreach name="loglist" item="log">
+                                                    <option value="{$log}">{$log}</option>
+                                                </foreach>
+                                            </select>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset class="fs_content">
+                                        <legend>查看日志内容</legend>
+                                        <textarea id="js_logcontent" class="text_content" data-url="{:U('Ads/Sync/getLogContent')}"></textarea>
+                                    </fieldset>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--END .tcwrapper-->
+                </div>
+            </div>
+            <!--END #childCenter-->
+        </div>
+        <!--END #right-->
+    </div>
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Ads/js/common.js"></script>
+
+<script type="text/javascript">
+    window.onload = function moveEnd() {
+        var obj = document.getElementById('js_logcontent');
+        obj.focus();
+        var len = obj.value.length;
+        if (document.selection) {
+            var sel = obj.createTextRange();
+            sel.moveStart('character', len);
+            sel.collapse();
+            sel.select();
+        } else if (typeof obj.selectionStart == 'number' && typeof obj.selectionEnd == 'number') {
+            obj.selectionStart = obj.selectionEnd = len;
+        }
+
+        var select = document.getElementById("js_files");
+        Array.prototype.forEach.call(select.children, function(option, i) {
+           option.addEventListener("click", function() {
+               var name = this.value;
+               var target = $('#js_logcontent');
+               var url = target.attr('data-url');
+
+               $.ajax({
+                   type: 'GET',
+                   url: url,
+                   data: {'name':name},
+                   dataType: 'text'
+               }).done(function(resp, textStatus, errorThrown) {
+                   target.val(resp);
+               }).fail(function(jqXHR, textStatus, errorThrown) {
+                   target.val('log内容取得失败: ' + errorThrown);
+               });
+               target.val('log内容取得中...');
+           });
+        });
+        if (select.children.length > 0) {
+            $(select.firstElementChild).trigger('click');
+        }
+    }
+</script>
+
+</body>
+</html>

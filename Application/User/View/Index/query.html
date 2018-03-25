@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MBIS用户管理系统1.2/用户管理/用户信息查询</title>
+    <!--jquery ui css-->
+    <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+    <!--background img css-->
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/User/css/style.css" />
+    <!--custom css-->
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/init.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/User/css/index.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/turing.css" />
+</head>
+<body>
+<input type="hidden" id="js-baseurl" value="__CONTROLLER__/" />
+<div id="center" class="main-wrapper">
+    <include file="Public/top" />
+    <div id="bottom">
+        <!--1.用户管理 2.数据同步 コントローラを切り替え sidebar-->
+        <div id="left">
+            <ul>
+                <li class="a active"><a href="{:U('User/Index/index')}"><img src="__PUBLIC__/User/img/down_a.png" /></a></li>
+                <li class="b"><a href="{:U('User/Sync/index')}"><img src="__PUBLIC__/User/img/up_d.png" /></a></li>
+            </ul>
+        </div>
+        <!--main content-->
+        <div id="right">
+            <div id="childCenter">
+                <div id="Context">
+                    <!--tab title * 3-->
+                    <ul id="Tabs">
+                        <li class="tab1"><a href="{:U('User/Index/index')}">新用户开户</a></li>
+                        <li class="tab2 active"><a href="__SELF__">用户信息查询</a></li>
+                        <li class="tab3"><a href="{:U('User/Index/stat')}">用户量统计</a></li>
+                    </ul>
+                    <!--tab contents * 3-->
+                    <div class="tcwrapper">
+                        <div id="tab1Context" class="tabcontent hidden">
+                            <!--tab#1 新用户开户-->
+                        </div>
+                        <div id="tab2Context" class="tabcontent">
+                            <!--panel left 查询用户-->
+                            <div id="tab2left">
+                                <div class="tab2title">查询用户</div>
+                                <div class="tab2body">
+                                    <!--query customer by stbid-->
+                                    <div class="form">
+                                        <form action="{:U('User/Index/xhrsearch')}" method="get">
+                                            <div class="form-group">
+                                                <label for="query-mode">查找方式: </label>
+                                                <select id="query-mode">
+                                                    <option value="1">机顶盒号</option>
+                                                    <option value="2">添加日期</option>
+                                                    <option value="3">开始日期</option>
+                                                    <option value="4">结束日期</option>
+                                                </select>
+                                                <div class="input_wp">
+                                                    <input type="text" id="query-value-1" name="stbid" title="机顶盒号"/>
+                                                    <input type="date" id="query-value-2" name="customerdateadded" title="添加日期" />
+                                                    <input type="date" id="query-value-3" name="starttime" title="开始日期" />
+                                                    <input type="date" id="query-value-4" name="endtime" title="结束日期" />
+                                                </div>
+                                                <button id="sub-1" class="class_small_button">查找</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!--user stbid list thead-->
+                                    <div class="table">
+                                        <table id="js-stblist" class="tablepage">
+                                            <thead>
+                                            <!--checkAll()  @file: __ROOT__/Public/Common/js/function.js-->
+                                            <tr><th>序号</th><th>机顶盒ID</th><th>用户状态</th><th>开通日期</th><th>机顶盒开通时间</th><th>机顶盒过期时间</th><th><input type="checkbox" title="全选操作" onclick="checkAll(this, 'stb')"></th></tr>
+                                            </thead>
+                                            <tbody>
+                                            <!-- <tr><td>8237604001203519</td><td>开通</td><td>2017-02-08</td><td>2016-11-22</td><td>2019-12-31</td><td><input type="radio" name="stb" title="选择一条用户" /></td></tr>-->
+                                            </tbody>
+                                        </table>
+                                        <!--<img src="__PUBLIC__/User/img/loading.gif" />-->
+                                    </div>
+                                    <div class="pagination">
+                                        <ul class="page">
+                                            <li><a id="js_first_page" class="transition" href="">首页</a></li>
+                                            <li><a id="js_prev_page" class="transition" href="">上一页</a></li>
+                                            <li><a id="js_next_page" class="transition" href="">下一页</a></li>
+                                            <li><a id="js_last_page" class="transition" href="">末页</a></li>
+                                        </ul>
+                                        <div class="stat">
+                                            <!--<div>第<span>1</span>/<span>1</span>页</div>-->
+                                            <div id="js_pagestate"></div>
+                                        </div>
+                                        <div class="gopage">
+                                            <input id="js-page" type="number" title="输入页码跳转" />
+                                            <a id="js-jump" class="btn transition">跳转</a>
+                                        </div>
+                                    </div>
+                                    <div class="buttons">
+                                        <input id="js_delete" class="class_button" type="button" value="删除用户">
+                                        <input id="js_export" class="class_button" type="button" value="点此导出">
+                                    </div>
+                                </div>
+                                <!--END .tab2body-->
+                            </div>
+                            <!--panel right 用户详细信息-->
+                            <div id="tab2right">
+                                <div class="tab2righttitle">用户详细信息</div>
+                                <div class="tab2rightbody">
+                                    <!-- customer info table -->
+                                    <table id="tab2righttable" class="tableone">
+                                        <tbody>
+                                        <tr>
+                                            <td><label for="cus_customerid">用户编号：</label></td>
+                                            <td><input id="cus_customerid" type="text" readonly="readonly" name="customerid"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="cus_customerstate">帐户状态：</label></td>
+                                            <td>
+                                                <select id="cus_customerstate" name="customerstate">
+                                                    <option value="1">开通</option>
+                                                    <option value="0">停机</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="cus_customerdateadded">开户日期：</label></td>
+                                            <td><input id="cus_customerdateadded" type="date" name="customerdateadded" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="cus_starttime">开始时间：</label></td>
+                                            <td><input id="cus_starttime" type="date" name="starttime" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="cus_endtime">结束时间：</label></td>
+                                            <td><input id="cus_endtime" type="date" name="endtime" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="cus_stbid">机顶盒号码：</label></td>
+                                            <td><input type="text" id="cus_stbid" name="stbid"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <!--save / cancel-->
+                                    <div class="btn-wrapper">
+                                        <div class="btn-group clearfix">
+                                            <input id="js_save" class="class_button" type="button" value="保存">
+                                            <input id="js_cancel" class="class_button" type="button" value="取消">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--tab-3 用户量统计-->
+                        <div id="tab3Context" class="tabcontent hidden"><!--stat.html--></div>
+                    </div>
+                    <!--END .tcwrapper-->
+                </div>
+            </div>
+            <!--END #childCenter-->
+        </div>
+        <!--END #right-->
+    </div>
+</div>
+<footer><p>版权所有&copy;2017 <a href="__ROOT__">北京迈伦斯科技有限公司</a></p></footer>
+
+<!--1ダイアログを準備-->
+<div id="dialog-1" title="修改用户详细信息">
+    <br />
+    <p id="js_feedback">dialog demo</p>
+</div>
+
+<div id="dialog-2" title="选择导出数据">
+    <div class="dialog-body">
+        <div class="datepickers">
+            <div class="date-from">从<input type="text" id="datepicker-1" title="选择开通日期范围起始日期" /></div>
+            <div class="date-to">到<input type="text" id="datepicker-2" title="选择开通日期范围截止日期" /></div>
+        </div>
+        <div class="item-stat">
+            当前一共选择了<span id="js-item-stat"></span>条数据
+        </div>
+    </div>
+</div>
+
+<div id="dialog-3" title="确定删除机顶盒" style="display:none">
+    <div class="dialog-body">
+        <p>确定要删除<span id="js_stb_count"></span>条记录?</p>
+    </div>
+</div>
+
+<!--jquery & jquery-ui-->
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js"></script>
+<!--my js func lib-->
+<script type="text/javascript" src="__PUBLIC__/Common/js/function.js"></script>
+<!--for customer page-->
+<script type="text/javascript" src="__PUBLIC__/User/js/index.js"></script>
+<script type="text/javascript" src="__PUBLIC__/User/js/query.js"></script>
+
+</body>
+</html>

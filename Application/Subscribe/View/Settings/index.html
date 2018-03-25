@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MBIS业务管理2.0 &middot; 系统设置</title>
+  <!--jquery-ui css-->
+  <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+  <!--customize jquery-ui css-->
+  <include file="Public/style" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/init.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/common.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/index.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/settings.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/turing.css" />
+</head>
+<body>
+<div id="wrapper">
+  <include file="Public/header" />
+  <div id="main-wrapper">
+    <div id="sidebar">
+      <ul class="tab-pages">
+        <li><a href="{:U('Index/index')}"><img src="__PUBLIC__/Subscribe/img/down_a.gif"></a></li>
+        <li><a href="{:U('Subscribe/index')}"><img src="__PUBLIC__/Subscribe/img/down_b.gif"></a></li>
+        <li><a href="{:U('Charge/index')}"><img src="__PUBLIC__/Subscribe/img/charge.svg"></a></li>
+        <li><a href="{:U('Broadcast/index')}"><img src="__PUBLIC__/Subscribe/img/down_c.gif"></a></li>
+        <li><a href="{:U('Sync/index')}"><img src="__PUBLIC__/Subscribe/img/down_d.gif"></a></li>
+        <li class="active"><a href="{:U('Settings/index')}"><img src="__PUBLIC__/Subscribe/img/up_e.gif"></a></li>
+      </ul>
+    </div>
+    <div id="main">
+      <div id="tabs">
+        <ul>
+          <li><a href="#tabs-1">业务包周期管理</a></li>
+          <li><a href="#tabs-2">日志路径设置</a></li>
+        </ul>
+
+        <div id="tabs-1">
+          <div class="tab-body">
+            <div class="boxes">
+              <div class="box-1">
+                <table id="pkgperiod" class="scroll">
+                  <thead class="scrollHead">
+                  <tr>
+                    <th class="th0"></th>
+                    <th class="th1">编号</th>
+                    <th class="th2">周期类型</th>
+                    <th class="th3">周期计算方法</th>
+                    <th class="th4">选择</th>
+                  </tr>
+                  </thead>
+                  <tbody class="scrollBody" data-url="{:U('Subscribe/Settings/listCycleType')}">
+                  <!--<foreach name="cycletypelist" item="item" >-->
+                    <!--<tr><td class="td0">&nbsp;</td><td class="td1">{$key+1}</td><td class="td2">{$item['updatecycletype']}</td><td class="td3" title="{$item['updatecycledescription']}">{$item['updatecycledescription']}</td><td class="td4"><input type="radio" name="package_selected" title="period" data-id="{$item['id']}"></td></tr>-->
+                  <!--</foreach>-->
+                  </tbody>
+                </table>
+              </div>
+              <div class="box-2">
+                <!--修改业务包周期信息-->
+                <form method="POST" action="{:U('Subscribe/Settings/editCycleType')}">
+                  <div class="form-group">
+                    <input id="js-typeid" type="hidden" value="" name="id" required>
+                    <label for="period-type">周期类型：</label>
+                    <input id="period-type" type="text" name="updatecycletype" title="input period type" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="period-desc">描   述: </label>
+                    <textarea id="period-desc" rows="10" cols="36" name="updatecycledescription"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <button id="js_add" class="btn">新增</button>
+                    <button class="btn" type="submit">修改</button>
+                    <button id="js_del" class="btn" data-url="{:U('Subscribe/Settings/delCycleType')}">删除</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--BEGIN 日志路径设置 -->
+        <div id="tabs-2">
+          <form id="form_logpath" action="{:U('Subscribe/Settings/setlogpath')}" method="POST">
+            <div class="form-group">
+              <label for="js_logpath">日志存放路径: </label>
+              <!--<input type="hidden" name="name" value="log_path">-->
+              <input id="js_logpath" class="path" type="text" name="stringvalue" data-url="{:U('Subscribe/Settings/getlogpath')}"/>
+              <div id="js_helppath" class="help-block"></div>
+            </div>
+            <div class="form-group">
+              <button class="btn" type="submit">提交修改</button>
+            </div>
+          </form>
+        </div>
+        <!--END  日志路径设置-->
+      </div>
+      <!--END #tabs-->
+
+    </div>
+    <!--END #main -->
+  </div>
+</div>
+
+<!--END #main-wrapper-->
+<div id="dialog-1" title="添加业务包周期" class="dialog">
+  <form method="POST" action="{:U('Subscribe/Settings/addCyleType')}">
+    <div class="form-group">
+      <label for="type-1">周期类型：</label>
+      <input id="type-1" type="text" name="updatecycletype" title="input period type">
+    </div>
+    <div class="form-group">
+      <label for="desc-1">描   述: </label>
+      <textarea id="desc-1" rows="6" cols="36" name="updatecycledescription"></textarea>
+    </div>
+  </form>
+</div>
+
+<load href="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js" />
+<js href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js" />
+<js href="__PUBLIC__/Subscribe/js/index.js" />
+<js href="__PUBLIC__/Common/js/cookie.js" />
+<js href="__PUBLIC__/Subscribe/js/settings.js" />
+</body>
+</html>

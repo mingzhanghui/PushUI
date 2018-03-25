@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MBIS业务管理2.0 &middot; 数据同步</title>
+    <!--jquery-ui css-->
+    <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+    <!--customize jquery-ui css-->
+    <include file="Public/style" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/init.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/common.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/index.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/sync.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/turing.css" />
+</head>
+<body>
+<div id="wrapper">
+    <include file="Public/header" />
+    <div id="main-wrapper">
+        <div id="sidebar">
+            <ul class="tab-pages">
+                <li><a href="{:U('Index/index')}"><img src="__PUBLIC__/Subscribe/img/down_a.gif"></a></li>
+                <li><a href="{:U('Subscribe/index')}"><img src="__PUBLIC__/Subscribe/img/down_b.gif"></a></li>
+                <li><a href="{:U('Charge/index')}"><img src="__PUBLIC__/Subscribe/img/charge.svg"></a></li>
+                <li><a href="{:U('Broadcast/index')}"><img src="__PUBLIC__/Subscribe/img/down_c.gif"></a></li>
+                <li class="active"><a href="{:U('Sync/index')}"><img src="__PUBLIC__/Subscribe/img/up_d.gif"></a></li>
+                <li><a href="{:U('Settings/index')}"><img src="__PUBLIC__/Subscribe/img/down_e.gif"></a></li>
+            </ul>
+        </div>
+        <div id="main">
+            <div id="tabs">
+                <ul>
+                    <li><a href="#tab-1">内容同步</a></li>
+                    <li><a href="#tab-2">查看处理日志</a></li>
+                </ul>
+                <!--内容同步-->
+                <div id="tab-1">
+                    <div class="tab-body">
+                        <!--主面板左边列 表格 分页-->
+                        <div class="lcol">
+                            <div class="tableScroll">
+                                <table id="sync-1" class="tbgrid scroll">
+                                    <thead class="scrollHead">
+                                    <tr>
+                                        <th class="col-0">No.</th>
+                                        <th class="col-1">文件名</th>
+                                        <th class="col-2">大小</th>
+                                        <th class="col-3">价格</th>
+                                        <th class="col-4">类型</th>
+                                        <th class="col-5">同步进度</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="scrollBody" data-url="{:U('Subscribe/Sync/listContentSync')}">
+                                    <!--
+                                    <tr>
+                                        <td class="col-0">1</td>
+                                        <td class="col-1">高一物理(上)</td>
+                                        <td class="col-2">10G</td>
+                                        <td class="col-3">￥10.00</td>
+                                        <td class="col-4">专题节目</td>
+                                        <td class="col-5">
+                                            <div class="progress">
+                                                <div id="progressbar-1" role="progressbar" aria-valuemin="0"
+                                                     class="ui-progressbar ui-corner-all ui-widget ui-widget-content" aria-valuemax="100" aria-valuenow="40">
+                                                    <div class="ui-progressbar-value ui-corner-left ui-widget-header" style="width: 40%;"></div>
+                                                </div>
+                                                <span>40%</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--主面板右边列-->
+                        <div class="rcol">
+                            <div class="tableScroll">
+                                <table id="sync-2" class="tbgrid scroll">
+                                    <thead class="scrollHead">
+                                    <tr>
+                                        <th class="col-0">No.</th>
+                                        <th class="col-1">业务包名称</th>
+                                        <th class="col-2">价格</th>
+                                        <th class="col-3">业务期名称</th>
+                                        <th class="col-4">最新版本号</th>
+                                        <th class="col-5">上次同步版本号</th>
+                                        <th class="col-6">上次同步状态</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="scrollBody" data-url="{:U('Subscribe/Sync/listMission')}">
+                                    <!--
+                                    <tr>
+                                        <td class="col-0">1</td>
+                                        <td class="col-1">张国</td>
+                                        <td class="col-2" title="￥20.00">￥20.00</td>
+                                        <td class="col-3" title="物理第1期">物理第1期</td>
+                                        <td class="col-4">1</td>
+                                        <td class="col-5">0</td>
+                                        <td class="col-6 tobedone">未同步</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-0">2</td>
+                                        <td class="col-1" title="zhangguo1">zhangguo1</td>
+                                        <td class="col-2" title="￥30">￥30</td>
+                                        <td class="col-3" title="web前端第5期">web前端第5期</td>
+                                        <td class="col-4">3</td>
+                                        <td class="col-5">2</td>
+                                        <td class="col-6 done">已同步</td>
+                                    </tr>
+                                    -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--同步业务信息 feedback-->
+                            <div class="btninfo">
+                                <div class="tooltip">
+                                    <div class="ui-widget" id="js_feedback" data-url="{:U('Subscribe/Sync/sendQuerySocket')}">
+                                        <!--<div class="ui-state-highlight ui-corner-all" style="display: block;">-->
+                                        <div class="ui-state-highlight ui-corner-all">
+                                            <p><span class="ui-icon ui-icon-info"></span>
+                                                <strong>Info!</strong>业务信息正在同步中...</p>
+                                        </div>
+                                        <div class="ui-state-success ui-corner-all">
+                                            <p><span class="ui-icon ui-icon-check"></span>
+                                                <strong>Success!</strong>业务信息同步成功!</p>
+                                        </div>
+                                        <div class="ui-state-error ui-corner-all">
+                                            <p><span class="ui-icon ui-icon-alert"></span>
+                                                <strong>Error!</strong>同步请求发送失败!</p>
+                                        </div>
+                                        <div class="ui-state-error ui-corner-all">
+                                            <p><span class="ui-icon ui-icon-alert"></span>
+                                                <strong>Error!</strong>同步失败!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="btnwrapper">
+                                    <!--<a id="btn-sync" class="ui-button ui-widget ui-corner-all" href="javascript:void(0)" role="button">同步业务信息</a>-->
+                                    <button id="js_btn_sync" class="btn" data-url="{:U('Subscribe/Sync/sendSyncSocket')}">同步业务信息</button>
+                                </div>
+                            </div>
+                        </div>  <!--END .rcol -->
+
+                    </div>  <!--END .tab-body-->
+                </div>
+                <!--查看处理日志-->
+                <div id="tab-2">
+                    <div class="tab-body">
+                        <div id="fieldset-1">
+                            <fieldset>
+                                <legend>所有日志列表</legend>
+                                <div class="fieldset-body">
+                                    <ul id="js-list" class="loglist" data-url="{:U('Subscribe/Sync/getLogContent')}" >
+                                        <foreach name="loglist" item="log">
+                                            <li><a href="javascript:;">{$log}</a></li>
+                                        </foreach>
+                                    </ul>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div id="fieldset-2">
+                            <fieldset>
+                                <legend>查看日志内容</legend>
+                                <div id="js-content" class="fieldset-body"></div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dialog-1" title="同步业务信息失败!">
+    <p>
+        <span class="ui-icon ui-icon-alert"></span>
+        <span id="js_sync_feedback">同步业务信息失败!</span>
+    </p>
+</div>
+
+<div id="dialog-2" title="业务信息正在同步中...">
+    <br />
+    <p id="js_progress"><!--<img src="__PUBLIC__/Content/img/loading.gif" alt="正在同步业务信息">--></p>
+</div>
+
+<load href="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js" />
+<js href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js" />
+<script>
+    $(function() {
+        $( "#tabs" ).tabs();
+    });
+</script>
+<js href="__PUBLIC__/Subscribe/js/index.js" />
+<js href="__PUBLIC__/Subscribe/js/sync.js" />
+</body>
+</html>

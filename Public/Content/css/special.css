@@ -1,0 +1,364 @@
+label {font-size: 12px;}
+
+#editTabs {width: 1130px;}
+
+#editTabs > .ui-tabs-nav {
+    width: 1120px;
+    height: 30px;
+}
+
+.SeriesBtnGrp > .ui-button {
+    padding: .2em .6em;
+}
+
+.SeriesBtnGrp > .ui-button:first-child {
+    margin-left: 25px;
+}
+
+#page_img_group {
+    float: left;
+    height: 200px;
+}
+
+#page_img_group > .bg {
+    float: left;
+    display: inline-block;
+}
+
+#SpecialRight {
+    width: 670px;
+    float: left;
+    margin-left: 15px;
+    min-height: 470px;
+    height: auto;
+}
+
+#SpecialRight > .tab-info > tbody > tr > td > label {
+    width: 74px;
+    text-align: right;
+}
+
+#SpecialRight > .form-group {
+    margin: 5px 0 10px 10px;
+}
+
+#attr_fp > .scroll-table {
+    margin: 20px 0;
+    width: 250px;
+    height: 190px;
+}
+
+#attr_fp > .attr-title > label {
+    float: left;
+}
+
+#s_name {
+    width: 160px;
+    height: 20px;
+    padding: 0;
+}
+
+.attr {
+    width: 50%;
+    float: left;
+}
+
+.attr-title {
+    padding: 4px 0;
+    text-indent: 6px;
+}
+
+.attr-title .label,
+.attr-title .add-attr {
+    width: 100px;
+    float: left;
+}
+
+.attr-table {
+    display: block;
+    width: 220px;
+    height: 100px;
+    padding: 0;
+}
+
+#s_attr {
+    overflow-y: scroll;
+}
+
+.attr-table > tbody > tr > td {
+    height: 24px;
+    line-height: 24px;
+}
+
+.attr-table > tbody > tr > td > input {
+    width: 120px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0;
+}
+
+.optional > td > label {
+    min-width: 50px;
+    text-align: right;
+    padding: 0 2px 0 0;
+}
+
+.attr-table .required input {
+    width: 130px;
+}
+
+span.require-red {
+    color:#f60;
+    font-family:serif;
+    margin-right:3px;
+}
+
+.optional td:first-child > span {
+    margin-right: 13px;
+}
+
+.attr-table span.badge {
+    color: #fff;
+    background-color: #f20;
+    font-weight: 900;
+    font-size: larger;
+    min-width: 10px;
+    margin-left: 3px;
+    letter-spacing: -3px;
+    padding: 1px 7px 4px 4px;
+    opacity: 0.8;
+    line-height: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.new_special_left,
+.new_special_right {
+    float: left;
+    width: 300px;
+    height: auto;
+}
+
+#dlg_new_specials {
+    padding-left: 20px;
+}
+
+#dlg_new_specials > .new_special_right > .form-group > label {
+    width: 40px;
+    text-align: right;
+}
+
+#dlg_new_specials > .new_special_right > .form-group > input[type="number"] {
+    width: 70px;
+}
+
+#dlg_new_specials > .new_special_right > .form-group > select {
+    padding: 1px;
+}
+
+#dlg_new_specials > .form-group {
+    margin: 10px auto;
+}
+
+#dlg_new_specials > div > .form-group > label {
+    color: #222222;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "微软雅黑";
+    /*width: 65px;*/
+    text-align: right;
+    margin-right: .2em;
+}
+
+.attr > .scroll-table {
+    width: 250px;
+    height: 150px;
+    padding: 0;
+    display: block;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+}
+
+#form_prompt_attr > .form-group {
+    margin: 5px 0;
+}
+
+.pic {
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+}
+
+.thumb, .poster {
+    float: left;
+}
+
+.appendix_upload > input[type="file"],
+.appendix_upload_fp > input[type="file"] {
+    display: none;
+}
+.searchTable,
+.searchTableTitle,
+.searchTableContent,
+#searchSpecialsTable {
+    width: 500px;
+    margin-left: 0;
+}
+
+#ss_tbody {
+    width: 500px;
+}
+
+#ss_tbody > tr {
+    width: 500px;
+    height: 28px;
+    line-height: 28px;
+    display: block;
+    cursor: pointer;
+}
+
+#ss_tbody > tr > td {
+    text-align: center;
+    height: 28px;
+    line-height: 28px;
+}
+
+#ss_tbody > tr > .td-0 {width: 25px;}
+#ss_tbody > tr > .td-1 {width: 35px;}
+#ss_tbody > tr > .td-2 {width: 120px;}
+#ss_tbody > tr > .td-3 {width: 80px;}
+#ss_tbody > tr > .td-4 {width: 90px;}
+#ss_tbody > tr > .td-5 {width: 65px;}
+#ss_tbody > tr > .td-6 {width: 85px;}
+
+.input_wrapper {
+    border: 1px solid #ccc;
+    padding: 2px;
+    display: inline-block;
+    background-color: white;
+}
+
+.input_wrapper > input {
+    border: none;
+}
+
+#ssbtn {
+    padding: .2em .6em;
+    margin-left: 4px;
+}
+
+#system-name {
+    width: 250px;
+    cursor: not-allowed;
+}
+
+#SpecialSeriesInfo {
+    margin: 0 0 0 -30px;
+    width: 500px;
+}
+
+#SeriesRight {height: 470px; width: 770px;}
+
+.series-info > tbody > tr > td > label {width: 80px;}
+
+#SpecialRight > .cut > label {
+    margin-left: 10px;
+}
+
+#SpecialInfoAttr {
+    width: 700px;
+    height: 250px;
+}
+
+#SpecialInfoAttr > .series_info_pic,
+#SpecialInfoAttr > .series_attr {
+    float: left;
+    width: 300px;
+    height: 250px;
+}
+
+#episode_images {
+    margin: 30px 20px;
+    float: left;
+}
+
+#episode_images > .img {
+    margin-bottom: 8px;
+    float: left;
+}
+
+#episode_images > .img > div {
+    padding: 6px 0;
+}
+
+#img_thumb, #img_poster {
+    margin-right: 15px;
+}
+
+#img_poster {
+    width: 68px;
+    height: 96px;
+}
+
+#SeriesEpisodesList >tbody >tr > .col-2 {
+    width: 180px;
+}
+
+.appendix_upload_fp + .poster {
+    width: 68px;
+    height: 96px;
+    background-size: 68px 96px;
+}
+
+.poster {
+    width: 178px;
+    height: 250px;
+    background-size: 178px 250px;
+}
+
+.thumb {
+    width: 132px;
+    height: 96px;
+    background-size: 132px 96px;
+}
+
+.block {
+    display: block;
+}
+
+.qrcode-wrapper {
+    position: relative;
+    display: block;
+}
+
+.cut {
+    float: left;
+    margin-top: 22px;
+}
+
+.poster-right {
+    float: right;
+    position: relative;
+    top: -122px;
+    left: 10px;
+}
+
+.poster-sm {
+    width: 68px;
+    height: 96px;
+    background-size: 68px 96px;
+}
+
+.s_img_uploader, .poster-sm.pic, .thumb.pic {
+    display: inline-block;
+    float: left;
+}
+
+.poster-sm.pic {
+    margin-left: 10px;
+}
+
+.img_group > .s_img_uploader:nth-child(2) > label {
+    text-indent: 1em;
+}

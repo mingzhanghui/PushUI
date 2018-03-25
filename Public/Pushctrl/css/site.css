@@ -1,0 +1,422 @@
+@charset "utf-8";
+/* common css file for module Pushctrl */
+html,body {
+    background-color: #212227;
+    margin: 0;
+    padding:0;
+    font: 12px 宋体;
+    color: #fff;
+}
+
+ul, li {margin: 0; padding: 0;}
+li { list-style: none; }
+
+th, td {
+    color: white;
+}
+
+#wrapper {
+    width:1340px;
+    margin:0 auto;
+    position: relative;
+}
+
+#header {
+    background-repeat: repeat-x;
+    margin: 0;
+    width: 1340px;
+    height: 70px;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.version {
+    display: inline-block;
+    font-size: x-large;
+    position: relative;
+    top: 28px;
+    height: 35px;
+    line-height: 35px;
+    left: 480px;
+    font-family: sans-serif;
+}
+
+.tohome {
+    width:45px;
+    height:45px;
+    float:right;
+    margin-right:50px;
+    margin-top:15px;
+    display: block;
+}
+
+.tohome > a {
+    text-decoration:none;
+    color:rgb(23,29,41);
+}
+
+.welcome {
+    float: right;
+    margin: 0;
+    position: relative;
+    top: 30px;
+    right: 10px;
+}
+
+.icon-signout {
+    margin-right: 2px;
+    margin-top: -1px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    background: url('../../Home/img/f_icon.png') no-repeat -20px -172px;
+}
+
+.logout {
+    display: inline-block;
+}
+
+.logout:hover{
+    background: none;
+}
+
+.logout:hover > .icon-signout {
+    background: url('../../Home/img/f_icon.png') no-repeat -2px -172px;
+}
+
+.user {
+    width: 108px;
+    height: 22px;
+    float: left;
+}
+
+.user > span {
+    color: #fff;
+    font-weight: bold;
+    font-size: 17px;
+    font-family: monospace;
+}
+
+#content-wrapper {
+    width: 1340px;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#content {
+    width: 1125px;
+    float: left;
+    height: 670px;
+    border-bottom: solid 1px #57585C;
+    background-color: #212227;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#sidebar {
+    width:110px;
+    height:600px;
+    float:left;
+    background-repeat:repeat-y;
+    /*border-left: solid 1px #212227;*/
+    /*border-bottom: solid 1px #cecece;*/
+    border: solid 1px #212227;
+}
+
+.tab-pages {
+    position: relative;
+    left: 0;
+    margin: 0;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.tab-pages > li {
+    margin: 25px 0 0 0;
+    padding: 0;
+    height: 80px;
+    width: 80px;
+    display: block;
+}
+
+#childCenter {
+    float: left;
+    position: relative;
+    top: 0;
+    width: 1228px;
+    min-height: 590px;
+    height: auto;
+    border-bottom: solid 1px #57585C;
+    background-color: #212227;
+    left: 0;
+}
+
+#main {
+    width: 950px;
+    height: 600px;
+    float: left;
+}
+
+#main > div:first-child > .ui-tabs {
+    width:1190px;
+    height:550px;
+    margin-top:10px;
+    margin-left:15px;
+    background:#212227;
+}
+
+#aside {
+    top: -6px;
+    width:225px;
+    height:600px;
+    border-left:solid 1px #57585C;
+    float: left;
+    padding-left: 10px;
+}
+
+#player{ width:272px;  margin:15px 0 10px 0; height:204px; text-align:center;}
+
+#RightvideoInfo{
+    width:252px;
+    margin: 15px 10px 10px 0;
+}
+
+.myInput{ border:#666666 solid 1px;background-color:#444444; margin:1px; padding:1px; color:White}
+
+.childMiddle{margin:10px 0 5px 13px;width:944px; height:285px;}
+
+.squareTitle{ width:100%; height:36px; font-weight:bold; text-align:left; color:White; line-height:36px; text-indent:30px;}
+.squareContent{width:100%; height:140px;}
+
+/* 表格 */
+
+.table{width:944px; }
+
+/* 表格头部 */
+.tableTitle ul{ list-style-type:none; margin:0; padding:0; }
+
+.tableTitle th, #nav th {text-align: center;}
+
+.tableTitle ul li{ list-style-type:none; margin:0; padding:0;  float:left; color:White; line-height:35px; font-size:14px; font-weight:bold; text-align:center; display:block;}
+
+/* 播控状态表格内容 */
+
+.tableContentBf{width:943px; height:250px; border-left:solid 1px #4A4B4E; border-right:solid 1px #4A4B4E; overflow-y:auto;white-space:nowrap; }
+
+/* 执行任务表格内容 */
+
+.tableContentDz{width:943px; height:350px; border-left:solid 1px #4A4B4E; border-right:solid 1px #4A4B4E; overflow-y:auto;white-space:nowrap; }
+
+/* 子项播控按钮 */
+
+.itemButton{ width:18px; height:18px;  float:left;}
+
+/* 菜单按钮基本样式 */
+
+.menuButton{ width:120px; height:65px;  float:left; cursor:pointer;}
+
+/* table#tab_list thead#nav */
+#nav tr {width:100px;height:1px;}
+
+.tdValItem3 {
+    float:right;
+    text-align:center;
+    width:40px;
+    margin-right:30px;
+}
+
+.tdProItem3 {
+    width:60%;
+    height:6px;
+    float:left;
+    margin-top: -18px;
+    margin-left:24px;
+}
+
+.tdProItem3 >div {
+    background-color:#47B5DE;
+    vertical-align: middle;
+}
+
+input[type="hidden"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+
+ul.tab-pages > li {
+    list-style: none;
+    box-sizing: content-box;
+}
+
+.childBottom > div {
+    float:left;
+    margin-left:10px;
+    margin-top:10px;
+    width:305px;
+}
+
+.right-thumb-wrapper {
+    width:272px;
+    height:240px;
+    float:right;
+    margin-right:-11px;
+    margin-top:2px;
+}
+
+.right-thumb-wrapper > img {
+    width:272px;
+    height: 240px;
+    float: left;
+    border: solid 1px #aaaaaa;
+}
+
+.bfR {
+    width:240px;
+    height:96px;
+    float:left;
+    margin-top:30px;
+    margin-bottom:15px;
+}
+
+.bfR > span {
+    font-size:12px;
+    display: inline-block;
+}
+
+#time1 {
+    height:34px;
+}
+#time2 {
+    font-size:12px;
+    font-weight:normal;
+}
+
+#tab_list {
+    color: white;
+}
+
+.table-mid {
+    color: #fff;
+    margin-left: 13px;
+    width: 942px;
+    height: 233px;
+    overflow-y: scroll;
+    /*display: block;*/
+}
+
+#main .table-bottom {
+    margin-left: 13px;
+    width: 942px;
+}
+
+.bfR > ul {
+    margin: 0;
+    padding: 0;
+}
+
+.bfR > ul > li {
+    margin-bottom: 10px;
+}
+
+#videoTable tr:hover {
+    background-color: #2a2a45;
+}
+
+.cx_tr_v {
+    vertical-align: middle;
+    height: 27px;
+    line-height: 27px;
+}
+
+.tab-title {
+    padding: 4px 12px;
+    display: inline-block;
+    z-index: 2;
+    opacity: 1;
+}
+
+#tabs > ul.ui-tabs-nav {
+    background-color: #656565;
+    opacity: 0.8;
+    z-index: 1;
+}
+
+#table-settings {
+    border-collapse: collapse;
+    width: 280px;
+    height: 150px;
+    font-size:14px;
+}
+
+#table-settings td:not(:last-child) {
+    text-align: left;
+}
+
+#table-settings td label {
+    color: #fefefe;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.tabletitle-wrapper {
+    margin-left: 13px;
+}
+
+#childMiddle {
+    height:400px;
+    overflow:auto;
+    overflow-x:hidden;
+    margin-top:1px;
+}
+
+.table-mid, .table {
+    border-collapse: collapse;
+    border: 0;
+    padding: 0;
+}
+
+.clearfix {
+    clear: both
+}
+
+.scrollBody {
+    display: block;
+}
+
+.scrollBody > tr > td {
+    table-layout:fixed;
+}
+
+.tableBottom {
+    /*background-image: url(/pushui/Public/Pushctrl/img/table_bottom.gif);*/
+    /*background-repeat: no-repeat;*/
+    width: 920px;
+    height: 14px;
+    background: #3d3f46;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    margin-left: 13px;
+}
+
+.table-fixed {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-info {
+    color: #31708f;
+}

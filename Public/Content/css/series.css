@@ -1,0 +1,579 @@
+@charset "utf-8";
+
+input[type='radio'] {
+  width: 14px;
+  height: 14px;
+}
+
+#tvplay-current,
+#tvplay-total {
+  width: 100px;
+}
+
+.tab-info label {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.SeriesBtnGrp {
+  margin-left: 4px;
+  display: inline-block;
+}
+
+.SeriesBtnGrp > .ui-button {
+  padding: .2em .6em;
+  margin: 4px 5px;
+  letter-spacing: .1em;
+}
+
+#SeriesEpisodeRight > hr {
+  width: 655px;
+}
+
+.btn-small {
+  padding: .3em .8em;
+}
+
+.dialog-body > .form-group > input[type=text],
+.dialog-body > .form-group > input[type=text]:focus {
+  box-sizing: content-box;
+  padding: 2px;
+}
+.dialog-body > .form-group > input[type=text] {
+  border: 1px solid #ccc;
+}
+.dialog-body > .form-group > input[type=text]:focus {
+  border: 1px solid #3ba0ce;
+}
+
+#searchTVSerialBut {
+  margin-left: 20px;
+}
+
+.table-series {
+  width: 700px;
+  height: 280px;
+  border-collapse: collapse;
+  color: #808c9c;
+}
+
+.table-series > tbody > tr {
+  width: 695px;
+  height: 28px;
+  line-height: 28px;
+  display: block;
+  cursor: pointer;
+}
+
+.table-series >tbody > tr > td {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  height: 28px;
+  line-height: 28px;
+  /*cursor: text;*/
+}
+
+.table-series > tbody > tr:not(.dumb) {
+  cursor: hand;
+}
+
+#SeriesTable > tbody > .dumb {
+  cursor: default;
+}
+
+.table-series > tbody > tr:not(.dumb):hover {
+  background-color: #c2e2f0 !important;
+}
+
+.table-series > tbody > tr:nth-child(2n) {
+  background-color: rgb(255, 255, 255);
+}
+
+.table-series > tbody > tr:nth-child(2n+1) {
+  background-color: rgb(239, 239, 239);
+}
+
+.table-series > tbody > tr > td:first-child > .tr_arrow {
+  display: none;
+}
+
+.table-series > tbody > tr:hover > td:first-child > .tr_arrow {
+  display: inline-block;
+}
+
+
+/* 查找电视剧总集 */
+#searchSeriesTable .td-0 {width: 20px;}
+#searchSeriesTable .td-1 {width: 30px;}
+#searchSeriesTable .td-2 {width: 160px;}
+#searchSeriesTable .td-3 {width: 62px;}
+#searchSeriesTable .td-4 {width: 100px;}
+#searchSeriesTable .td-5 {width: 70px;}
+#searchSeriesTable .td-6 {width: 60px;}
+#searchSeriesTable .td-7 {width: 60px;}
+#searchSeriesTable .td-8 {width: 60px;}
+#searchSeriesTable .td-9 {width: 60px;}
+
+/* 查找电视节目总集 */
+#searchTVShowTable > tbody > tr, #searchTVShowTable > tbody > tr > td {
+  height: 28px;
+  line-height: 28px;
+  padding: 0;
+  margin: 0;
+}
+
+#searchTVShowTable .td-0 {width: 25px;}
+#searchTVShowTable .td-1 {width: 34px;}
+#searchTVShowTable .td-2 {width: 120px;}
+#searchTVShowTable .td-3 {width: 80px;}
+#searchTVShowTable .td-4 {width: 90px;}
+#searchTVShowTable .td-5 {width: 105px;}
+#searchTVShowTable .td-6 {width: 87px;}
+#searchTVShowTable .td-7 {width: 66px;}
+#searchTVShowTable .td-8 {width: 85px;}
+
+.dialog-body > form > .form-group > input {
+  line-height: 20px;
+  height: 20px;
+  padding: 0;
+}
+
+.dialog-body > form > .form-group > input[type="number"] {
+  width: 75px;
+}
+
+.dialog-body > form > .form-group > label {
+  width: 75px;
+  text-align: right;
+  font: 12px 宋体;
+}
+
+/* 电视节目简介  */
+.dialog-body > form > .form-group > label[for="shows-introduction"] {
+  display: block;
+  width: 100px;
+}
+
+.dialog-body > form > .form-group > select {
+  width: 80px;
+  height: 20px;
+  line-height: 20px;
+}
+
+#addTVShowsInfo > .form-group > select {
+  margin-right: 68px;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+#addSeriesInfo > .form-group > label {
+  width: 60px;
+  text-align: right;
+  font: 12px 宋体;
+}
+
+#addSeriesInfo > .form-group > label:first-child {
+  text-align: left;
+  vertical-align: top;
+}
+
+#addSeriesInfo > .form-group > input[type=number] {
+  width: 80px;
+}
+
+#addSeriesInfo > .form-group:nth-child(3) > label:not(:first-child),
+#addSeriesInfo > .form-group:nth-child(4) > label:not(:first-child) {
+  margin-left: 50px;
+}
+
+#addSeriesInfo > .form-group > select {
+  width: 80px;
+  height: 20px;
+  line-height: 20px;
+}
+
+#series-title, #series-director {
+  width: 128px;
+}
+
+#system-name {
+  cursor: not-allowed;
+}
+
+#editTabsSeries {
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  height: 100px;
+}
+
+#editTabsB {
+  width:300px;
+  height:446px;
+  float: left;
+}
+
+#editSeriesTabs {
+  text-align:left;
+  padding:0;
+  margin:0;
+  height:100px;
+}
+
+#editSeriesTabs > .editTable,
+#editSeriesTabs > .editTable > .editTableTitle {
+  width:298px;
+}
+
+#SeriesListTitle > li {
+  display: inline-block;
+  float: left;
+  text-align: left;
+}
+
+#SeriesListTitle > li:first-child   {width: 20px;}
+#SeriesListTitle > li:nth-child(2)  {width: 40px;}
+#SeriesListTitle > li:nth-child(3)  {width:150px;}
+#SeriesListTitle > li:last-child(4) {width:20px;}
+
+#SeriesListContent {
+  width:298px;
+  height:395px;
+  background: #fefefe;
+}
+
+#SeriesTable {
+  width: 298px;
+  height: 388px;
+  border-collapse: collapse;
+  color:#808c9c;
+}
+
+#SeriesTable > tbody > tr {
+  display: block;
+  width: 300px;
+  line-height: 27px;
+  height: 27px;
+  cursor: pointer;
+}
+
+#SeriesTable > tbody > tr:before,
+#SeriesTable > tbody > tr:after,
+#SeriesTable > tbody > tr > td:before,
+#SeriesTable > tbody > tr > td:after{
+  content: " ";
+  clear: both;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+}
+
+#SeriesTable > tbody > tr.selected {
+  font-weight: bold;
+  color: #353535;
+}
+
+#SeriesTable > tbody > tr > td {
+  display: inline-block;
+  line-height: 27px;
+  height: 27px;
+}
+
+#SeriesRight {
+  width: 797px;
+  height: 509px;
+  float: left;
+  border: rgb(174,208,234) 1px solid;
+  border-radius: 6px;
+  margin-top: 0;
+  margin-left: 16px;
+}
+
+#SeriesTable .col-0 {width: 20px;}
+#SeriesTable .col-1 {width: 40px;}
+#SeriesTable .col-2 {width: 140px;}
+#SeriesTable .col-3 {width: 70px;}
+
+#editTabsB > .ui-tabs-nav {
+  display: block;
+}
+
+#editTabsB > .ui-tabs-nav > .ui-state-default {
+  height: 24px;
+  line-height: 24px;
+  padding: 0 12px;
+  margin: 0;
+}
+
+#SeriesCaption, #SeriesCaption:hover {
+  padding: 5px 8px;
+}
+
+#SeriesListFooter {
+  width:100px;
+  height:20px;
+  float:left;
+  padding-top:20px;
+  margin-left:90px;
+}
+
+#series-appendix {
+  width: 500px;
+  font: 12px "宋体";
+  margin-top: 10px;
+}
+
+#series-appendix > tbody > tr {
+  height: 26px;
+}
+
+.series-info {
+  width: 750px;
+  border-collapse: collapse;
+  font-size:12px;
+  margin-bottom: 10px;
+  margin-left: -60px;
+}
+
+#EditSeriesInfo > .series-info:nth-child(3) {
+  margin-left: 0;
+  margin-top: -6px;
+}
+
+#EditSeriesInfo > .series-info:nth-child(3) label {
+  text-align: left;
+  text-indent: 4px;
+}
+
+.series-info > tbody > tr {
+  height: 22px;
+  line-height: 22px;
+}
+
+#EditSeriesThumb, #EditSeriesBackground {
+  /*width: 134px;*/
+  /*height: 98px;*/
+  display: inline-block;
+  float: left;
+  border: none;
+}
+
+#EditSeriesInfo {
+  margin: 10px 20px;
+  font: 14px/1.7 微软雅黑;
+}
+
+.table-series > tbody > tr:not(.dumb):hover {
+  background-color: #cfe2f0;
+}
+
+.table-series > tbody > tr.dumb:hover {
+  background-color: transparent;
+}
+
+.series-info > tbody > tr > td > label {
+  width: 100px;
+  height: 22px;
+  line-height: 22px;
+  text-align: right;
+  display: block;
+}
+
+#TVSeriesInfo > tbody > tr > td > label {
+  margin-right: -16px;
+}
+
+.series-info > tbody > tr > td > input {
+  height: 18px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #a9a9a9;
+}
+.series-info > tbody > tr > td > input:focus {
+  border: 1px solid #4d90fe;
+}
+
+#EditSeriesTitle, #EditSeriesDirector {
+  width: 150px;
+  margin-right: -30px;
+  box-sizing: content-box;
+}
+
+#EditSeriesEpisodes, #EditSeriesRating {
+  width: 90px;
+}
+
+.series-info > tbody > tr > td > select {
+  width: 100px;
+}
+
+#EditSeriesActor {
+  width: 200px;
+}
+
+#EditSeriesIntroduction {
+  margin-right: -30px;
+}
+
+#EditSeriesInfo + .tables-wrapper {
+  width: 800px;
+  height: 200px;
+  /*background-color: #5bc0de;*/
+  margin-top: -10px;
+}
+
+#SeriesRight > .tables-wrapper > .tablewrap {
+  width: 390px;
+  height: 200px;
+  /*background-color: #5cb85c;*/
+  float: left;
+  margin-left: 6px;
+}
+#SeriesRight > .tables-wrapper > .tablewrap > table {
+    border: 1px solid skyblue;
+    min-width: 380px;
+}
+
+#SeriesRight > .tables-wrapper > .tablewrap > table > .scrollHead {
+  width: 386px;
+  display: block;
+}
+
+#SeriesRight > .tables-wrapper > .tablewrap > table > .scrollBody {
+  height: 120px;
+  display: block;
+  overflow-y:scroll;
+}
+
+#SeriesRight > .tables-wrapper > .tablewrap > table > .scrollBody > tr {
+  width: 370px;
+  display: block;
+  height: 29px;
+  line-height: 29px;
+}
+
+.scrollHead > tr > th,
+.scrollBody > tr > td {
+  table-layout:fixed;
+}
+
+.caption {
+  height: 27px;
+  line-height: 27px;
+  color: #565656;
+  font-weight: 500;
+  text-indent: 2em;
+}
+
+#SeriesEpisodesList >thead > tr > th,
+#SeriesEpisodesList >tbody > tr > td
+{ text-align: center; }
+
+#SeriesEpisodesList > tbody > tr {cursor: pointer;}
+
+#SeriesEpisodesList > tbody > tr,
+#SeriesEpisodesList > tbody > tr > td {
+  line-height: 29px;
+  height: 29px;
+}
+
+#SeriesEpisodesList >thead > tr > .th-0 {width: 20px;}
+#SeriesEpisodesList >thead > tr > .th-1 {width: 40px;}
+#SeriesEpisodesList >thead > tr > .th-2 {width: 180px;}
+#SeriesEpisodesList >thead > tr > .th-3 {width: 60px;}
+#SeriesEpisodesList >thead > tr > .th-4 {width: 87px;}
+
+#SeriesEpisodesList >tbody >tr > .col-0 {width:  20px;}
+#SeriesEpisodesList >tbody >tr > .col-1 {width:  40px;}
+#SeriesEpisodesList >tbody >tr > .col-2 {width: 190px;}
+#SeriesEpisodesList >tbody >tr > .col-3 {width:  70px;}
+#SeriesEpisodesList >tbody >tr > .col-4 {width:  50px;}
+
+#SeriesRight > .buttons-wrapper {
+  margin: 0 10px;
+}
+
+#SeriesRight > .buttons-wrapper > .ui-button {
+  font-size: 13px;
+  padding: .3em .6em;
+  margin-right: 12px;
+}
+
+#editRightSeriesJumpAppendixInfo > .form-group:first-child {
+  margin: 15px auto;
+  height: 20px;
+  line-height: 20px;
+}
+
+#editRightSeriesJumpAppendixInfo > .form-group:nth-child(2) {
+  margin-top: 35px;
+}
+
+#editRightSeriesJumpAppendixInfo > .form-group > label,
+#editRightSeriesJumpAppendixInfo > .form-group > input {
+  display: block;
+  float: left;
+  border: none;
+}
+
+#EditSeriesAppendixList {
+  width: 370px;
+}
+
+#EditSeriesAppendixList tr {
+  height: 29px;
+  line-height: 29px;
+  width: 368px;
+  display: block;
+}
+
+#EditSeriesAppendixList > tbody > tr > td {
+  display: inline-block;
+}
+
+#EditSeriesAppendixList .th-0 {width: 26px;}
+#EditSeriesAppendixList .th-1 {width: 20px;}
+#EditSeriesAppendixList .th-2 {width: 136px;}
+#EditSeriesAppendixList .th-3 {width: 60px;}
+#EditSeriesAppendixList .th-4 {width: 60px;}
+#EditSeriesAppendixList .th-5 {width: 60px;}
+
+#EditSeriesAppendixList .col-0 {width: 26px;}
+#EditSeriesAppendixList .col-1 {width: 20px;}
+#EditSeriesAppendixList .col-2 {width: 137px;}
+#EditSeriesAppendixList .col-3 {width: 60px;}
+#EditSeriesAppendixList .col-4 {width: 60px;}
+#EditSeriesAppendixList .col-5 {width: 57px;}
+
+#episode-theme {
+  width: 400px;
+}
+
+#TVShowsInfo > tbody > tr > td > label {
+  margin-left: 28px;
+  margin-right: 5px;
+}
+
+#series_img_group {
+  width: 360px;
+}
+
+#series_img_group > div {
+  float: left;
+  /*width: 150px;*/
+  margin-right: 10px;
+}
+
+.appendix_upload + .pic {
+  width: 140px;
+  background-size: 140px 100px;
+  height: 80px;
+}
+
+#TVShowEpisodeRight {
+  width: 695px;
+  height: 470px;
+}

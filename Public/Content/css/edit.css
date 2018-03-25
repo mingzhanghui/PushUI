@@ -1,0 +1,698 @@
+@charset "utf-8";
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizelegibility;
+}
+
+table {
+  border: none;
+}
+
+.scrollHead th, .scrollBody td {
+  table-layout: fixed;
+}
+
+a, a:hover {
+  text-decoration: none;
+}
+
+label {
+  font-weight: normal;
+  color: #2b2b2b;
+}
+
+input {
+  outline: none;
+  border: 1px solid #a9a9a9;
+}
+
+input[type="file"] {
+  border: none;
+}
+
+input:focus {
+  border: 1px solid #4d90fe;
+}
+
+hr {
+  border-top: 1px solid #888;
+}
+
+#editCenter {
+  width: 780px;
+  height: 590px;
+  float: left;
+  margin-left: 10px;
+}
+
+#editTabs {
+  width: 1160px;
+  margin: 25px 0 0 18px;
+  padding: 1px;
+  background-color: #f2f5f7;
+}
+
+#editTabs-1, #editTabs-2, #editTabs-3, #editTabs-4, #editTabs-5, #editTabs-6 {
+  text-align:left;
+  height:500px;
+}
+
+#editTabsA-1, #editTabsB-1, #editTabsC-1 {
+  text-align:left;
+  padding:0;
+  margin:0;
+  width:390px;
+  float:left;
+}
+
+#editTabs > .ui-tabs-nav {
+  width: 1150px;
+  height: 30px;
+}
+
+#editTabs > .ui-tabs-nav > li > a {
+  padding: 8px 12px;
+}
+
+#editTabs > .ui-tabs-nav > li {
+  height: 27px;
+  line-height: 27px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  float: left;
+}
+
+#MovieRight, #SeriesEpisodeRight, #TVShowEpisodeRight, #SpecialRight {
+  width: 695px;
+  height: 453px;
+  padding-left: 15px;
+  padding-top: 3px;
+  margin-left: 5px;
+  float: right;
+  border: rgb(174,208,234) 1px solid;
+  border-radius: 6px;
+}
+
+.editTable {
+  width: 348px;
+  height: 464px;
+}
+
+.table-edit tr td {
+  margin: 0;
+  padding: 0;
+  line-height: 27px;
+  height: 27px;
+  font-size: 13px;
+  color: #666666;
+}
+
+.table-edit tr.selected td {
+  color: #111111;
+  font-weight:600;
+}
+
+.editTableTitle > ul > li {
+  float: left;
+  display: inline-block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  line-height: 20px;
+  color: #738899;
+  font-size: 12px;
+  text-align: center;
+}
+.editTableTitle > ul:before,
+.editTableTitle > ul:after {
+  clear: left;
+  content: " ";
+}
+
+.li-0 {  width:35px;}
+.li-1 {  width:20px; }
+.li-2 {  width:180px; }
+.li-3 {  width:50px; }
+.li-4 {  width:50px; }
+.li-5 {  width:50px; }
+
+.editTableContent {
+  width: 388px;
+  height: 435px;
+  border-left: solid 1px #aed0ea;
+  border-right: solid 1px #aed0ea;
+  border-bottom: solid 1px #aed0ea;
+  overflow: auto;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+.table-fixed td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+#movie-table {
+  width: 388px;
+  color: #808c9c;
+}
+
+.table-edit > tbody > tr {
+  display: block;
+  width: 388px;
+  line-height: 27px;
+  height: 27px;
+  cursor: pointer;
+}
+
+.table-edit .col-0 {width: 35px;}
+.table-edit .col-1 {width: 15px;}
+.table-edit .col-2 {width: 180px;}
+.table-edit .col-3 {width: 50px;}
+.table-edit .col-4 {width: 50px;}
+.table-edit .col-5 {width: 50px;}
+
+.panel-footer {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 0;
+  border-radius: 4px;
+}
+
+#editTabsA-1 > .panel-footer > .pager-stat {
+  margin-top: 3px;
+}
+
+.pager-stat input {
+  width: 70px;
+  margin-right: 10px;
+}
+
+.pagination > li > a, .pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 4px 8px;
+  margin-left: -1px;
+  color: #337ab7;
+  text-decoration: none;
+  background-color: inherit;
+  border: none;
+}
+
+.pagination > li > a:hover { color: gold; }
+.pagination > li > a:visited { color: blue; }
+
+
+.tab-info {
+  font-size: 13px;
+  border: transparent;
+}
+
+.tab-info tr td label {
+  font-weight: 500;
+}
+
+/* 系统命名: 32 */
+#movie-name {
+  cursor: not-allowed;
+}
+
+#MovieRight > .tab-info {
+  width: 700px;
+  margin-left: -35px;
+}
+
+#MovieRight > .tab-info input[type="text"] {
+  width: 130px;
+  height: 22px;
+  box-sizing: border-box;
+}
+
+#MovieRight > .tab-info label {
+  width: 100px;
+  height: 22px;
+  line-height: 22px;
+  text-align: right;
+  letter-spacing: .1em;
+}
+
+.hlist {
+  margin: 0;
+}
+
+.hlist > li {
+  float: left;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.hlist > li > label {
+  display: block;
+  clear: left;
+}
+
+#MovieRight > .hlist {
+  margin-left: 4px;
+  margin-top: -10px;
+}
+
+.importTableTitle ul li {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  float: left;
+  color: #738899;
+  line-height: 20px;
+  font-size: 12px;
+  text-align: center;
+  display: block;
+}
+
+.filelisttitle > .li-0 {width: 35px;}
+.filelisttitle > .li-1 {width: 20px;}
+.filelisttitle > .li-2 {width: 160px;}
+.filelisttitle > .li-3 {width: 60px;}
+.filelisttitle > .li-4 {width: 40px;}
+.filelisttitle > .li-5 {width: 70px;}
+
+.AppendixListWrapper {
+  width:390px;
+  height:84px;
+  overflow:auto;
+  border-left: 1px solid #AED0EA;
+  border-bottom: 1px solid #AED0EA;
+  border-right: 1px solid #AED0EA;
+}
+
+#AppendixList {
+  width:388px;
+  height: 84px;
+}
+
+#AppendixList >tr, #AppendixList >tr > td,
+#AppendixList >tr:hover, #AppendixList >tr:hover > td {
+  line-height: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+#AppendixList .col-0 {width: 35px;}
+#AppendixList .col-1 {width: 20px;}
+#AppendixList .col-2 {width: 100px; text-align: center;}
+#AppendixList .col-3 {width: 50px;}
+#AppendixList .col-4 {width: 40px;}
+#AppendixList .col-5 {width: 30px;}
+
+.ui-button {
+  border-radius: 6px;
+}
+
+.attachment {
+  width: 700px;
+}
+
+.attachment >tbody >tr:first-child {
+  height: 30px;
+  line-height: 30px;
+}
+.attachment >tbody >tr:nth-child(2) {
+  height: 107px;
+}
+
+.appendix-table {
+  width: 392px;
+  height: 20px;
+  border-top:1px solid #AED0EA;
+  border-left:1px solid #AED0EA;
+  border-right:1px solid #AED0EA;
+}
+
+.importTableTile {
+  text-align:center;
+}
+
+.tab-info tr td:nth-child(3n) input {
+  width: 70px;
+}
+
+#myTabContent .list-left {
+  width: 500px;
+  height: 530px;
+  margin-left: 8px;
+}
+
+.list-left .scroll-wrapper {
+  width: 498px;
+  height: 448px;
+  overflow-y: scroll;
+  overflow-x: auto;
+}
+
+.table-attach {
+  line-height: 27px;
+  width: 280px;
+  height: 80px;
+  display: table-cell;
+}
+
+.table-attach td, .table-attach th {
+  width: 20%;
+}
+
+.img-wrapper {
+  display: inline-block;
+  /*border: 1px solid #ccc;*/
+}
+
+.thumb {
+  width: 132px;
+  height: 96px;
+}
+
+.poster {
+  width: 68px;
+  height: 96px;
+}
+
+.scrollBody tr:nth-child(2n),
+.table-attach tbody tr:nth-child(2n) {
+  background-color: #eff0f1;
+}
+
+.scrollBody tr:nth-child(2n+1),
+.table-attach tbody tr:nth-child(2n+1) {
+  background-color: #fefefe;
+}
+.table-attach tbody tr:hover {
+  background: #cfe2f0;
+}
+
+.scrollBody tr:hover {
+  background-color: #e2e2e2;
+}
+
+.scrollBody tr:hover,
+.table-attach tbody tr.selected {
+  background-color: #cee7f9 !important;
+}
+
+.table-attach td, .table-attach th {
+  font-weight: normal;
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 2px;
+}
+
+.attachment, .attachment button {
+  font-size: 13px;
+}
+
+.attachment button, .cut button {
+  /*padding: 2px 6px;*/
+  padding: 4px 10px;
+}
+
+.cut > .ui-button {
+  margin-left: 10px;
+  font-size: 12px;
+  padding: .4em 1em;
+}
+
+.cut > .ui-button:nth-child(4) {
+  margin-left: 74px;
+}
+
+.attach-list, .attach-operate {
+  float: left;
+}
+
+.attach-operate {
+  width: 250px;
+  margin: 4px 0;
+}
+
+.attach-operate li {
+  padding: 6px 0;
+  text-align: left;
+}
+
+.list-right hr {
+  margin: 8px auto;
+  width: 560px;
+}
+
+.cut {
+  float: left;
+  margin-top: 3px;
+}
+
+.cut > span {
+  color: #8a6d3b;
+}
+
+.cut ul li {
+  float: left;
+}
+
+.cut ul li button {
+  margin-right: 20px;
+}
+
+.list-right .tab-info .btn.btn-primary.btn-xs {
+  margin-right: 10px;
+}
+
+#tvplay .tab-info {
+  position: relative;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+#tvplay .attach-operate {
+  bottom: 69px;
+}
+
+#tvplay .cut {
+  bottom: 33px;
+}
+
+#video .tab-info {
+  position: relative;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+#video .attach-operate {
+  bottom: 69px;
+}
+
+#video .cut {
+  bottom: 33px;
+}
+
+.scroll-table {
+  width: 250px;
+  height: 250px;
+  margin: 20px 10px;
+  padding: 4px 12px;
+  /*background-color: yellowgreen;*/
+  display: block;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.search-title {
+  float: left;
+  display: inline-block;
+}
+
+.modal-body .form-group {
+  width: 560px;
+  top: 8px;
+}
+
+.form-group .search input[type="text"] {
+  background-color: #fff;
+  float: left;
+  margin-left: 2px;
+  outline: none;
+  border: none;
+  width: 172px;
+}
+
+.form-group .search {
+  padding: 4px 12px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  width: 216px;
+  height: 28px;
+  left: 40px;
+}
+
+label.placeholder {
+  color: #ccc;
+}
+
+.inline-forms {
+  display: inline-block;
+}
+
+.panel-footer .btn {
+  box-shadow: 0 0 2px gray;
+}
+
+ul.btngrps {
+  margin-left: 80px;
+}
+
+ul.btngrps > li {
+  display: inline-block;
+  float: left;
+  margin: 0 20px;
+}
+
+.list-left.panel.panel-default {
+  width: 500px;
+}
+
+#movie-attach {
+  padding: 2px;
+}
+
+#fb_savedraft {
+  display: inline-block;
+  color: #317EF3;
+}
+
+.label-loose {
+  letter-spacing: .4em;
+}
+
+.dialog-body {
+  padding: 10px 20px;
+}
+
+.searchTable {
+  width: 695px;
+  height: 310px;
+  margin: 0 0 -10px -10px;
+}
+
+.searchTableTitle > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.searchTableTitle > ul > li {
+  float: left;
+  display: inline-block;
+}
+
+.searchTableContent {
+  border-left: solid 1px #aed0ea;
+  border-right: solid 1px #aed0ea;
+  border-bottom: solid 1px #aed0ea;
+  overflow-x: hidden;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+#TVShowEpisodeRight > .hlist {
+  margin-top: -10px;
+}
+
+#TVShowEpisodeRight > .tab-info > tbody > tr {
+  height: 27px;
+}
+
+#TVShowEpisodeRight > .tab-info > tbody > tr > td > label {
+  width: 70px;
+  text-align: right;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+#TVShowEpisodeRight > .tab-info > tbody > tr > td > input[type="number"] {
+  width: 60px;
+}
+
+#TVShowEpisodeRight > .tab-info > tbody > tr > td > .ui-button {
+  padding: 3px 10px;
+  margin-left: 10px;
+}
+
+.ui-icon.ui-icon-alert {
+  float: left;
+  margin-right: .3em;
+}
+
+#AppendixList > tbody > tr {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+}
+
+#AppendixList > tbody > tr > td {
+  height: 40px;
+  line-height: 40px;
+}
+
+#AppendixList > tbody > tr > .col-0 { width: 40px; }
+#AppendixList > tbody > tr > .col-1 { width: 30px; }
+#AppendixList > tbody > tr > .col-2 { width: 150px; }
+#AppendixList > tbody > tr > .col-3 { width: 70px; }
+#AppendixList > tbody > tr > .col-4 { width: 60px; }
+#AppendixList > tbody > tr > .col-5 { width: 40px; }
+
+#VideoRight {
+  width: 680px;
+  height: 410px;
+  padding: 20px 15px;
+  margin-left: 20px;
+  float: left;
+  border: rgb(174,208,234) 1px solid;
+  border-radius: 6px;
+}
+
+#VideoForm > table > tbody > tr > td > label {
+  width: 70px;
+  height: 20px;
+  text-align: right;
+}
+
+#OperaRight {
+  width: 680px;
+  height: 460px;
+  margin-left: 10px;
+  padding: 10px;
+  float: left;
+  border: rgb(174,208,234) 1px solid;
+  border-radius: 6px;
+}
+
+#OperaForm > .tab-info > tbody >  tr > td > label {
+  width: 60px;
+  padding: 0 4px 0 6px;
+  display: block;
+  float: left;
+  text-align: right;
+}
+
+.qrcode {
+  width: 98px;
+  height: 98px;
+}

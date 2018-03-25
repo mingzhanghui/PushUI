@@ -1,0 +1,6 @@
+resource/
+Application/Runtime/
+.idea/
+.git/
+*.sublime-project
+*~

@@ -1,0 +1,363 @@
+@charset "utf-8";
+
+.panel-title {
+    margin-bottom: -1px;
+    display: inline-block;
+    line-height: 30px;
+    font-size: 14px;
+    color: #353535;
+    font-weight: 400;
+    z-index: 2;
+}
+
+.scroll-list {
+    height: 510px;
+    width: 100%;
+    overflow-y: scroll;
+    border: 2px solid #bfbfbf;
+}
+
+.scroll-list .scroll-inner {
+    min-height: 490px;
+    height: auto;
+    background-color: #ffffff;
+    padding: 10px 20px;
+    line-height: 26px;
+}
+
+.panel-footer > div.btn-groups {
+    display: inline-flex;
+    margin-left: 60px;
+    margin-top: 10px;
+}
+
+.panel-footer > div.btn-groups > a.btn {
+    margin-left: 20px;
+}
+
+ul.tree {
+    margin: 0;
+    display: block;
+    font-size: 13px;
+}
+
+ul.tree > li > a {
+    display: inline-block;
+    width: 200px;
+}
+
+ul.tree > li > a:hover {
+    background-color: #eff2f8;
+}
+
+li.file > a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+li.file {
+    margin-left: 40px;
+}
+
+li.directory > a {
+    display: inline-block;
+    text-decoration: none;
+    text-indent: 24px;
+}
+
+div.square {
+    display: inline-block;
+    border: 1px solid #323232;
+    width: 15px;
+    height: 15px;
+    margin-right: 2px;
+}
+
+li.directory > span.ui-icon {
+    border: 1px solid #323232;
+    display: inline-block;
+    margin-right: -18px;
+}
+
+li.directory > ul.tree {
+    /*text-indent: 22px;*/
+}
+
+ul.tree > li {
+    list-style: none;
+    padding-left: 22px;
+    width: auto;
+    margin: 0;
+    white-space: nowrap;
+}
+
+ul.tree > li.file {
+    padding-left: 42px;
+}
+
+
+.col-right > .panel-body {
+    height: 560px;
+    width: 100%;
+    border: 2px solid #ccc;
+    background-color: #f2f5f7;
+}
+
+label[for^="pkg-"] {
+    margin-left: 40px;
+}
+
+.col-right .panel-body table.pkg,
+.col-right .panel-body div.charge,
+.col-right .panel-body div.info {
+    display: block;
+    margin: 10px auto;
+}
+
+.col-right .panel-body div.pic {
+    margin: 20px 0;
+}
+
+.col-right .panel-body div.pic {
+    line-height: 26px;
+}
+
+.pic input[type="text"] {
+    width: 400px;
+    height: 26px;
+    border: 1px solid #ccc;
+}
+
+.panel-body > div.pic input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    right: 112px;
+    height: 26px;
+    width: 400px;
+}
+
+.pkg > tbody > tr > td {
+    line-height: 26px;
+    height: 26px;
+    padding-bottom: 2px;
+}
+
+.pkg > tbody > tr > td select {
+    display: inline-block;
+    vertical-align: center;
+    min-width: 70px;
+}
+
+label[for="pkg-charge"] + input[type="radio"] {
+    margin-left: 8px;
+}
+
+.col-right table.pkg + .charge .pay {
+    margin-left: 42px;
+}
+
+.pay > input[type="radio"] + div.pay-spec {
+    display: inline-block;
+}
+
+.pay > input[type="radio"] + div.pay-spec > input[type="number"] {
+    width: 103px;
+}
+
+.charge > .free + .pay > input[type="radio"] { margin-left: 70px;}
+
+span.blur {
+    display: inline-block;
+    text-indent: 0.5em;
+    opacity: 0.5;
+}
+
+#pkg-info {
+    margin-left: 40px;
+    padding: 2px;
+}
+
+.col-right > .panel-body > .btn-groups {
+    display: inline-flex;
+    margin-left: 200px;
+}
+
+.col-right > .panel-body > .btn-groups > a.btn {
+    margin-left: 20px;
+}
+
+.ui-widget-overlay {
+    background: #aaaaaa;
+    opacity: 0.3;
+    filter: Alpha(Opacity=.3);
+}
+
+.ui-dialog-buttonset button.ui-button {
+    font-size: 13px;
+    padding: .3em 1em;
+}
+
+#dialog-add-pkg form td {
+    line-height: 26px;
+    height: 26px;
+}
+
+#dialog-add-pkg form td:nth-child(4n+3) > label {
+    margin-left: 20px;
+}
+
+#dialog-add-pkg form .charge .pay > input[type="radio"] {
+    margin-left: 64px;
+}
+
+.ui-icon-plusthick + a + ul.tree {
+    display: none;
+}
+
+thead + tbody tr.selected {
+    background-color: #cee7f9 !important;
+}
+
+#dialog-add-pkg form table tr {
+    /*display: block;*/
+    margin-bottom: 4px;
+    line-height: 30px;
+    height: 30px;
+}
+
+#dialog-add-pkg form table tr select {
+    height: 26px;
+    line-height: 26px;
+}
+
+.clearfix {
+    clear: both;
+}
+
+thead.scrollHead, tbody.scrollBody {
+    display: block;
+}
+
+tbody.scrollBody {
+    overflow-y: scroll;
+}
+
+.scrollHead th, .scrollBody td {
+    table-layout: fixed;
+}
+
+.tab-body {
+    width: 1100px;
+    height: 560px;
+    /*background-color: #4cae4c;*/
+    font-size: 13px;
+}
+
+.lcol, .rcol {
+    float: left;
+    height: auto;
+    padding: 0 10px;
+}
+
+.lcol {
+    width: 500px;
+    /*background-color: #dcdcdc;*/
+}
+
+.rcol {
+    width: 540px;
+    /*background-color: #c9e2b3;*/
+}
+
+.tbgrid tbody tr:nth-child(2n) {
+    background: #ffffff;
+}
+
+.tbgrid tbody tr:nth-child(2n+1) {
+    /*background: #eff0f1;*/
+    background: #f1f7f7;
+}
+
+.tbgrid tbody tr:hover {
+    background: #cfe2f0;
+}
+
+.tbgrid a {
+    color: #2a78e4;
+}
+
+.tbgrid a:hover, ul.x li a:hover {
+    color: #2a96d8;
+    /*background-color: #a6e1ec;*/
+}
+
+.tbgrid th {
+    height: 28px;
+    line-height: 28px;
+    border-collapse: collapse;
+    padding: 0;
+}
+
+.tbgrid th, .tbgrid td {
+    /*border-right: 1px solid #bfbfbf;*/
+    box-sizing: border-box;
+    /*font-family: "宋体";*/
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.tbgrid th:last-child, .tbgrid td:last-child {
+    border-right: none;
+}
+
+.panel-body > form > .btn-groups {
+    display: inline-block;
+    margin-left: 220px;
+}
+
+.form-group {
+    margin-bottom: 4px;
+}
+
+.inputfile {
+    margin-left: 120px;
+    height: 27px;
+    line-height: 27px;
+}
+.inputfile > div {
+    height: 27px;
+    line-height: 27px;
+    margin-top: -29px;
+}
+.folder-open {
+    margin-left: 372px;
+    width: 32px;
+    z-index: 2;
+}
+.folder-open > img {
+    width: 23px;
+    height: 23px;
+}
+.file {
+    width: 36px;
+    height: 27px;
+    z-index: 1;
+}
+
+#pkg-pic {
+    width: 398px;
+    cursor: pointer;
+    /*background: antiquewhite;*/
+    opacity: 0;
+    display: inline-block;
+}
+
+.hide {display: none !important;}
+
+.scrollBody td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+

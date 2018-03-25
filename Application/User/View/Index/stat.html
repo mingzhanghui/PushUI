@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MBIS用户管理系统1.2/用户管理/用户量统计</title>
+    <!--jquery ui css-->
+    <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+    <!--background img css-->
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/User/css/style.css" />
+    <!--custom css-->
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/init.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/User/css/index.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/turing.css" />
+</head>
+<body>
+<div id="center" class="main-wrapper">
+    <include file="Public/top" />
+    <div id="bottom">
+        <!--sidebar: 1.用户管理 2.数据同步 コントローラを切り替え-->
+        <div id="left">
+            <ul>
+                <li class="a active"><a href="{:U('User/Index/index')}"><img src="__PUBLIC__/User/img/down_a.png" /></a></li>
+                <li class="b"><a href="{:U('User/Sync/index')}"><img src="__PUBLIC__/User/img/up_d.png" /></a></li>
+            </ul>
+        </div>
+        <!--main: <iframe><div id="right"></div></iframe>-->
+        <div id="right">
+            <div id="childCenter">
+                <div id="Context">
+                    <!--tab title * 3-->
+                    <ul id="Tabs">
+                        <li class="tab1"><a href="{:U('User/Index/index')}">新用户开户</a></li>
+                        <li class="tab2"><a href="{:U('User/Index/query')}">用户信息查询</a></li>
+                        <li class="tab3 active"><a href="javascript:;">用户量统计</a></li>
+                    </ul>
+                    <!--tab contents * 3-->
+                    <div class="tcwrapper">
+                        <!--tab-1 新用户开户-->
+                        <div id="tab1Context" class="tabcontent hidden"></div>
+                        <!--tab-2 用户信息查询-->
+                        <div id="tab2Context" class="tabcontent hidden"></div>
+                        <!--tab-3 用户量统计-->
+                        <div id="tab3Context" class="tabcontent">
+                            <div>
+                                <h2>当前用户量为：<span>{$count}</span>名</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!--END .tcwrapper-->
+                </div>
+            </div>
+            <!--END #childCenter-->
+        </div>
+        <!--END #right-->
+    </div>
+</div>
+<footer><p>版权所有&copy;2017 <a href="__ROOT__">北京迈伦斯科技有限公司</a></p></footer>
+<!--jquery & jquery-ui-->
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js"></script>
+<!--my js func lib-->
+<script type="text/javascript" src="__PUBLIC__/Common/js/function.js"></script>
+<!--for customer page-->
+<script type="text/javascript" src="__PUBLIC__/User/js/index.js"></script>
+</body>
+</html>

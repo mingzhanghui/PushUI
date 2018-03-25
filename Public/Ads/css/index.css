@@ -1,0 +1,369 @@
+@charset "utf-8";
+
+#Playtab1Context, #Playtab3Context {
+    width: 1080px;
+    min-height: 400px;
+    height: auto;
+    float: left;
+    margin-left: 3px;
+    padding: 12px;
+    background-color: #fefefe;
+}
+
+#EditTabs {
+    margin: 0;
+    padding: 0;
+}
+
+#EditTabs > li > a {
+    text-decoration: none;
+    color: #007C88;
+}
+
+.main-list {
+    width:760px;
+    height:495px;
+    float:left;
+}
+
+.table_query {
+    width: 750px;
+    height: 30px;
+    margin-bottom: 10px;
+    border-collapse: collapse;
+}
+
+.table_query td {
+    text-align: center;
+}
+
+.table_mid {
+    width: 750px;
+    height: 30px;
+    border-collapse: collapse;
+}
+
+.table_body_wrapper {
+    width:750px;
+    height:352px;
+    overflow-x:hidden;
+    overflow-y:auto;
+    border-bottom:2px solid #CCCCCC;
+}
+
+#PreRollTable {
+    border-collapse: collapse;
+    width: 750px;
+    height: 352px;
+}
+
+#PreRollTable tr {
+    text-align: center;
+    height: 32px;
+    line-height: 32px;
+    cursor: default;
+}
+
+.table_body tr:nth-child(2n+1) {
+    background: rgb(255, 255, 255);
+}
+
+.table_body tr:nth-child(2n) {
+    background: rgb(238, 253, 255);
+}
+
+.table_body tr:hover {
+    background-color: #A5E3B0;
+}
+
+.td-6 a {
+    text-decoration: none;
+}
+
+.td-0 { width: 70px; }
+.td-1 { width: 100px; }
+.td-2 { width: 120px; }
+.td-3 { width: 90px; }
+.td-4 { width: 90px; }
+.td-5 { width: 140px; }
+.td-6 { width: 80px;}
+.td-7 { width: 56px;}
+
+.table_body td {
+    height: 35px;
+    line-height: 35px;
+    padding: 0;
+    margin: 0;
+}
+
+.table_page {
+    border:none;
+    width: 750px;
+    height: 70px;
+    margin-top: 10px;
+}
+
+.table_page tr:first-child {
+    vertical-align: middle;
+}
+
+.btn-groups > input[type="button"] {
+    float: right;
+    margin-left: 20px;
+}
+
+.adinfo {
+    width:310px;
+    height:380px;
+    margin-top: 40px;
+    padding-left:9px;
+    float:right;
+}
+
+.adinfo > form {
+    padding: 10px 10px;
+}
+
+.aside_table {
+    padding: 0;
+    margin: 0;
+    border: none;
+    width: 320px;
+}
+
+.aside_table tr {
+    height: 33px;
+}
+
+.aside_table td {
+    text-align: left;
+}
+
+.aside_table tr:last-child {
+    height: 50px;
+}
+
+.aside_table > tr > td:nth-child(2n+1) {
+    float: right;
+}
+
+.aside_table > tr > td:last-child(2n) {
+    float: left;
+}
+
+.aside_table td select {
+    min-width: 100px;
+    width: auto;
+    display: inline-block;
+}
+
+.file_desc {
+    width:190px;
+    height:80px;
+}
+
+#EditTabs > li {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#EditTabs > li > a, #PlayTabs > li > a {
+    width: 154px;
+    height: 36px;
+    display: inline-block;
+}
+
+
+#Edittab1Context > aside {
+    margin-right: 10px;
+}
+
+#PlayTabs > li > a {
+    text-decoration: none;
+    color: #007C88;
+}
+
+.query {
+    width: 1080px;
+    height: 40px;
+    padding-left: 20px;
+}
+
+.query > div {
+    display: inline-block;
+    float: left;
+    min-width: 100px;
+    height: 30px;
+    line-height: 30px;
+    margin: auto 20px;
+}
+
+input.hasDatepicker + .ui-datepicker-trigger {
+    margin-bottom: -6px;
+    width: 22px;
+    height: 22px;
+}
+
+.tbody_wrapper {
+    width:1079px;
+    height:330px;
+    overflow-x:hidden;
+    border-bottom: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+    border-left: 1px solid #CCCCCC;
+}
+
+.tbody {
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    border: none;
+    font-size:12px;
+    width: 1080px;
+    height: 330px;
+}
+
+#PreRollPlayTable tr {
+    text-align: center;
+    height: 29px;
+    line-height: 29px;
+    cursor: default;
+}
+
+#PreRollPlayTable tr:nth-child(2n+1) {
+    background-color: #fefefe;
+}
+
+#PreRollPlayTable tr:nth-child(2n) {
+    background: rgb(238, 253, 255);
+}
+
+#PreRollPlayTable tr:hover {
+    background-color: #A5E3B0;
+}
+
+.operate {
+    margin-top: 20px;
+}
+
+.pull-left {
+    float: left !important;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+#PageA, #PageB {
+    margin-top: -30px;
+    margin-left: 200px;
+}
+
+.pages > a {
+    padding: 6px 16px;
+    border: 1px solid #ccc;
+    transition-duration: 0.2s;
+}
+
+.pages > a:hover {
+    background-color: #c1e2b3;
+}
+
+.table_query input.but {
+    margin-right: 10px;
+}
+
+table.ui-datepicker-trigger td {
+    text-align: left;
+}
+
+.ui-datepicker-trigger {
+    cursor: pointer;
+}
+
+.c8-0 {width: 50px;}
+.c8-1 {width: 175px;}
+.c8-2 {width: 175px;}
+.c8-3 {width: 130px;}
+.c8-4 {width: 80px;}
+.c8-5 {width: 80px;}
+.c8-6 {width: 190px;}
+.c8-7 {width: 190px;}
+
+.text-danger, .help-danger {
+    color: red;
+}
+
+#PreRollPlayTable td {
+    text-align: center;
+}
+
+.ui-widget-overlay {
+    background: #aaaaaa;
+    opacity: 0.3;
+    overflow: hidden;
+}
+
+.dialog-body {
+    text-align: left;
+    font-size: 13px;
+}
+
+.dialog-body > form > .form-group {
+    margin-top: 15px;
+}
+
+.dialog-body .form-group textarea {
+    width: 400px;
+    height: 100px;
+}
+
+.dialog-body .form-group label {
+    display: inline-block;
+    float: left;
+}
+
+ #dialog-1, #dialog-2 {
+    overflow-y: hidden;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.lbcol1, .lbcol2 {
+    float: left;
+}
+
+.lbcol2 {
+    margin-left: 30px;
+}
+
+.d_warn, .help-block {
+    color: #fe2222;
+}
+
+.ui-dialog-title {
+    text-align: left;
+}
+
+.table_body {
+    border-left:2px solid #CCCCCC;
+    border-right:2px solid #CCCCCC;
+    border-collapse: collapse;
+}
+
+#dialog-2 > .dialog-body > form {
+    margin-left: 10px;
+}
+
+#dialog-2 > .dialog-body > form > .form-group > label {
+    width: 60px;
+}
+
+input[readonly="readonly"] {
+    background-color: #EEEEEE;
+    outline: none;
+    border: 1px solid #ccc;
+}

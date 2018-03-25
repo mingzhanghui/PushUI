@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MBIS广告管理系统 &middot; 广告编辑 &middot; 片头广告</title>
+    <!--jquery ui css-->
+    <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Ads/css/site.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Ads/css/index.css" />
+</head>
+<body>
+<input type="hidden" id="js_baseurl" value="__ROOT__/index.php/Ads/Index/">
+<div id="center" class="main-wrapper">
+    <include file="Public/header" />
+    <div id="bottom">
+        <div id="left">
+            <ul>
+                <li class="a active"><a href="{:U('Ads/Index/index')}"><img src="__PUBLIC__/Ads/img/down_a.gif" /></a></li>
+                <li class="b"><a href="{:U('Ads/Put/index')}"><img src="__PUBLIC__/Ads/img/up_b.gif" /></a></li>
+                <li class="c"><a href="{:U('Ads/Report/index')}"><img src="__PUBLIC__/Ads/img/up_c.gif" /></a></li>
+                <li class="d"><a href="{:U('Ads/Sync/index')}"><img src="__PUBLIC__/Ads/img/up_d.gif" /></a></li>
+                <li class="e"><a href="{:U('Ads/Set/index')}"><img src="__PUBLIC__/Ads/img/up_e.gif" /></a></li>
+            </ul>
+        </div>
+        <div id="right">
+            <div id="childCenter">
+                <div id="EditContext">
+                    <!--tab title * 2-->
+                    <ul id="EditTabs">
+                        <li class="Edittab1 active" id="Edittab1"><a href="{:U('Ads/Index/index')}">片头广告</a></li>
+                        <li class="Edittab3" id="Edittab3"><a href="{:U('Ads/Index/pause')}">暂停广告</a></li>
+                    </ul>
+                    <!--tab contents * 2-->
+                    <div class="tcwrapper">
+                        <!--tab-1 片头广告-->
+                        <div id="Edittab1Context" class="tabcontent">
+                            <!--中间列表-->
+                            <div class="main-list">
+                                <!--按文件名查找 / 按广告名查找-->
+                                <div class="search-group">
+                                    <form method="GET" action="{:U('')}">
+                                        <label for="qbfname">按文件名查找：</label>
+                                        <input id="qbfname" type="text" size="20" name="name">
+                                        <input type="submit" value="查询" class="but" title="按文件名查找片头广告">
+                                    </form>
+                                    <form method="GET" action="{:U('')}">
+                                        <label for="qbadname">按广告名查找：</label>
+                                        <input id="qbadname" type="text" size="20"  name="advertisename">
+                                        <input type="submit" value="查询" class="but" title="按广告名查找广告">
+                                    </form>
+                                </div>
+                                <!--页面中间 表格标题 thead-->
+                                <table class="table_title table_mid">
+                                    <thead>
+                                    <tr>
+                                        <th width="70px">序号</th>
+                                        <th width="100px">广告名称</th>
+                                        <th width="120px">文件名称</th>
+                                        <th width="90px">文件类型</th>
+                                        <th width="90px">时长</th>
+                                        <th width="140px">入库日期</th>
+                                        <th width="80px">操作</th>
+                                        <th width="56px">
+                                            <input id="checkBoxA" type="checkbox" onchange="checkAll(this, 'PreRollID[]')" title="全选">
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                                <!--页面 中间表格内容 tbody -->
+                                <div class="table_body_wrapper">
+                                    <table class="table_body" id="PreRollTable">
+                                        <tbody>
+
+                                        <foreach name="adlist" item="vo" key="k">
+                                            <tr data-adid="{$vo['id']}" data-contentid="{$vo['contentid']}" title="{$vo['advertisename']}">
+                                                <td class="td-0">{$k+1}</td>
+                                                <td class="td-1" title="{$vo['advertisename']}">{$vo['advertisename']}</td>
+                                                <td class="td-2" title="{$vo['name']}">{$vo['name']}</td>
+                                                <td class="td-3">{$vo['filetype']}</td>
+                                                <td class="td-4">{$vo['time']}s</td>
+                                                <td class="td-5">{$vo['addeddate']}</td>
+                                                <td class="td-6">
+                                                    <if condition="mediastatus eq 0">
+                                                        <a href="javascript:;" onclick="putad(this)">投放</a>
+                                                    </if>
+                                                </td>
+                                                <td class="td-7"><input type="checkbox" name="PreRollID[]" value="{$vo['id']}" title="select" /></td>
+                                            </tr>
+                                        </foreach>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!--pagination buttons-->
+                                <div class="table_page">
+                                    {$page}
+                                    <input id="js_btn_1" type="button" value="新增广告内容" class="but_out">
+                                    <input id="js_btn_2" type="button" value="删除广告" class="but_out">
+                                </div>
+                            </div>
+
+                            <!--侧边广告详情-->
+                            <aside class="table adinfo">
+                                <form method="post" id="UpdatePreRollForm" name="UpdatePreRollForm" action="{:U('Ads/Index/putPrerollAdMedia')}" enctype="multipart/form-data">
+                                    <input type="hidden" id="up_id" name="id" value="">
+                                    <table class="aside_table">
+                                        <tbody>
+                                        <tr>
+                                            <td><label for="up_advertisename">广告名称：</label></td>
+                                            <td><input type="text" name="advertisename" id="up_advertisename"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="up_name">文件名称：</label></td>
+                                            <td><input type="text" name="name" id="up_name" readonly="readonly"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="up_url">文件地址：</label></td>
+                                            <td><input type="text" name="url" id="up_url" readonly="readonly"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="up_filetypeid">文件类型：</label></td>
+                                            <td>
+                                                <select id="up_filetypeid" name="filetypeid">
+                                                    <!--
+                                                    <option value="1">video</option>
+                                                    <option value="2">picture</option>
+                                                    <option value="3">text</option>
+                                                    -->
+                                                    <foreach name="filetypes" item="vo">
+                                                        <option value="{$vo.id}">{$vo.name}</option>
+                                                    </foreach>
+                                                </select>
+                                                <!--<input type="text" id="FileTypeTxt" disabled="disabled">-->
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="up_time">时长：</label></td>
+                                            <td>
+                                                <select id="up_time" name="time" readonly="readonly">
+                                                    <option value="5">5s</option>
+                                                    <option value="10">10s</option>
+                                                    <option value="15">15s</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="up_description">文件描述：</label></td>
+                                            <td><textarea id="up_description" class="file_desc" name="description"></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <!--入库时间不能修改-->
+                                            <td><label for="up_addeddate">入库时间：</label></td>
+                                            <td><input type="text" id="up_addeddate" name="addeddate" readonly="readonly" disabled="disabled"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="form-group">
+                                        <input type="submit" value="保存修改" class="but_out" title="修改片头广告信息">
+                                        <input id="js_cancel" type="button" value="取消" class="but_out" title="undo change">
+                                    </div>
+                                </form>
+                            </aside>
+
+                        </div>
+                        <!--tab-2 暂停广告-->
+                        <div id="Edittab3Context" class="tabcontent hide"><!--pause.html--></div>
+                    </div>
+                    <!--END .tcwrapper-->
+                </div>
+            </div>
+            <!--END #childCenter-->
+        </div>
+        <!--END #right-->
+    </div>
+</div>
+
+<!--ダイアログを準備-->
+<div id="dialog-1" title="添加片头广告">
+    <div class="dialog-body">
+        <form method="POST" action="{:U('Ads/Index/preRollAddMedia')}" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="d_adtitle">广告名称：</label>
+                <input id="d_adtitle" type="text" name="advertisename"/>
+            </div>
+            <div class="form-group">
+                <label for="d_adfile">文件地址：</label>
+                <input id="d_adfile" type="file" name="file" required>
+                <span class="d_warn">文件大小不能超过100M</span>
+            </div>
+            <div class="form-group">
+                <label for="d_adftype">文件类型：</label>
+                <select id="d_adftype" name="filetypeid" class="lbcol1">
+                    <foreach name="filetypes" item="vo">
+                        <option value="{$vo.id}">{$vo.name}</option>
+                    </foreach>
+                </select>
+                <label for="d_adtime" class="lbcol2">时长：</label>
+                <select id="d_adtime" name="time">
+                    <option value="5">5s</option>
+                    <option value="10">10s</option>
+                    <option value="15">15s</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="d_addesc">文件描述：</label>
+                <textarea id="d_addesc" name="description">无</textarea>
+            </div>
+            <div class="form-group">
+                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                    <div class="ui-dialog-buttonset">
+                        <button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
+                            <span class="ui-button-text">上传</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="dialog-2" title="投放片头广告">
+    <div class="dialog-body">
+        <form method="POST" action="{:U('Ads/Index/putAd')}">
+            <input type="hidden" name="adid" />
+            <div class="form-group">
+                <label for="put_advertisename">广告名称: </label>
+                <input id="put_advertisename" name="advertisename" type="text">
+            </div>
+            <div class="form-group">
+                <label for="put_name">文件名称: </label>
+                <!--<input id="put_name" name="name" type="text" disabled="disabled">-->
+                <input id="put_name" name="name" type="text" readonly="readonly">
+            </div>
+            <div class="form-group">
+                <label for="put_startdate">起始时间: </label>
+                <input id="put_startdate" name="startdate" type="text" readonly="readonly">
+                <div class="help-block"></div>
+            </div>
+            <div class="form-group">
+                <label for="put_enddate">结束时间: </label>
+                <input id="put_enddate" name="enddate" type="text" readonly="readonly">
+                <div class="help-block"></div>
+            </div>
+            <div class="form-group">
+                <label for="put_packageid">业务包: </label>
+                <select id="put_packageid" name="packageid">
+                    <option value=""></option>
+                </select>
+            </div>
+            <!--<div class="form-group"><input type="button" class="but" value="确定" /></div>-->
+        </form>
+    </div>
+</div>
+
+<div id="dialog-3" title="广告投放成功">
+    <div class="dialog-body"><br /><br /><span class="ui-icon ui-icon-check"></span>广告投放成功!</div>
+</div>
+
+<div id="dialog-4" title="出错了">
+    <div class="dialog-body"><br /><br /><span class="ui-icon ui-icon-info"></span><span id="js_error"></span></div>
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js"></script>
+<!--<script type="text/javascript" src="../../../Public/Common/js/cookie.js"></script>-->
+<script type="text/javascript" src="__PUBLIC__/Ads/js/common.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/Ads/js/editPreroll.js"></script>
+<script>
+    // 新增广告内容
+    $('#dialog-1').dialog({
+        width: 500,
+        height: 400,
+        autoOpen: false,
+        modal: true
+    });
+    $('#js_btn_1').click(function () {
+        $("#dialog-1").dialog('open');
+    });
+    $("#put_startdate").datepicker({
+        dateFormat: 'yy-mm-dd',
+        showOn: "button",
+        buttonImage: '__PUBLIC__/Ads/img/calendar.gif',
+        buttonImageOnly: true
+    });
+    $("#put_enddate").datepicker({
+        dateFormat: 'yy-mm-dd',
+        showOn: "button",
+        buttonImage: '__PUBLIC__/Ads/img/calendar.gif',
+        buttonImageOnly: true
+    });
+</script>
+<if condition="($_GET['e'] neq 0)">
+    <script>
+        $("#dialog-1").dialog("open");
+    </script>
+</if>
+</body>
+</html>

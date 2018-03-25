@@ -1,0 +1,236 @@
+#childLeft > .tableBottom {
+    margin-left: 13px;
+    width: 920px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+#jumbotron {
+    width: 930px;
+    border: none;
+    border-collapse: collapse;
+    color:White;
+    font-weight:bold;
+    margin-left:15px;
+}
+
+#jumbotron tr {
+    height:40px;
+}
+
+#jumbotron tr td {
+    text-align: left;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+#jumbotron tr td:nth-child(1) {
+    width: 380px;
+    height: 80px;
+}
+
+#jumbotron tr td:nth-child(2) {
+    width: 265px;
+}
+
+#progressBar {
+    max-width: 357px;
+    width: 1%;
+}
+
+#progressbarValue {
+    font-size:16px;
+    display: block;
+    font-weight: 300;
+    font-family: monospace;
+}
+
+.curtime {
+    float:left;
+    line-height:34px;
+    font-size: 1.2em;
+}
+
+#currentTime {
+    height:34px;
+    display: block;
+}
+
+#currentDate {
+    font-size: 1.2em;
+    font-weight:normal;
+    display: block;
+    clear: both;
+    margin-top: 10px;
+}
+
+#videoTable {
+    /*overflow-y: scroll;*/
+    /*height: 260px;*/
+    background: #232429;
+    z-index: 1;
+    display: block;
+}
+
+#videoTable > tr {
+    display: block;
+    clear: both;
+    width: 920px;
+    z-index: 2;
+    vertical-align: middle;
+    height: 26px;
+    line-height: 26px;
+    padding: 0;
+    margin: 0;
+}
+
+#videoTable > tr:not(.dumb) {
+    cursor: pointer;
+}
+
+#videoTable > tr > td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space: nowrap;
+    display: inline-block;
+    float: left;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    height: 26px;
+    line-height: 26px;
+}
+
+#videoTable > tr:not(:hover) > .tr_arrow {
+    opacity: 0;
+}
+#videoTable > tr:hover > .tr_arrow {
+    opacity: 1;
+}
+
+#videoTable > tr > td:first-child {width: 20px;}
+#videoTable > tr > td:nth-child(2) {width: 50px;}
+#videoTable > tr > td:nth-child(3) {width: 100px;}
+#videoTable > tr > td:nth-child(4) {width: 100px;}
+#videoTable > tr > td:nth-child(5) {width: 160px;}
+#videoTable > tr > td:nth-child(6) {width: 80px;}
+#videoTable > tr > td:nth-child(7) {width: 60px;}
+#videoTable > tr > td:nth-child(8) {width: 60px;}
+#videoTable > tr > td:nth-child(9) {width: 220px;}
+#videoTable > tr > td:nth-child(10) {}
+
+#videoTable > tr:nth-child(2n+1) {
+    background-color: #43444a;
+}
+#videoTable > tr:nth-child(2n) {
+    background-color: #37383E;
+}
+#videoTable > tr:hover {
+    background-color: #2a2a45 !important;
+}
+
+#tab_list > thead > .tableTitle {
+    display: block;
+    height: 35px;
+    line-height: 35px;
+    border-top-right-radius: 8px;
+}
+
+#tab_list > thead > .tableTitle > th {
+    display: inline-block;
+    float: left;
+}
+
+.progress-value {
+    float: left;
+    margin-left: 162px;
+}
+
+.th-1 {width: 20px;}
+.th-2 {width: 50px;}
+.th-3 {width: 100px;}
+.th-4 {width: 100px;}
+.th-5 {width: 160px;}
+.th-6 {width: 80px;}
+.th-7 {width: 60px;}
+.th-8 {width: 60px;}
+.th-9 {width: 220px;}
+.th-10 {width: 30px;}
+
+.status {
+    margin-top: 20px;
+    margin-left: 10px;
+    text-align: left;
+}
+
+.status > div {
+    float: left;
+    margin-right: 10px;
+    width: 303px;
+    height: 175px;
+    color: #fff;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.state-header {
+    margin-left: 30px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.item {
+    font-size: 1em;
+    padding: 20px;
+}
+
+.item > .ui-progressbar {
+    width: 150px;
+    height: 12px;
+    border-radius: 8px;
+    float: left;
+    background-color: #222222;
+}
+
+.item-title {
+    width: 30px;
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    line-height: 13px;
+}
+
+.pbv {
+    display: inline-block;
+    float: left;
+    margin-left: 10px;
+}
+
+.item > .ui-progressbar > .ui-progressbar-value {
+    width: 1%;
+}
+
+#networkState > ul > .item > .item-title {
+    width: 50px;
+}
+
+#networkState > ul > .item > div:last-child {
+    width: 200px;
+    height: 70px;
+    display: block;
+    /*background: #2b2b2b;*/
+    float: left;
+    margin-left: 50px;
+    margin-top: -32px;
+    margin-bottom: 16px;
+}
+
+#dataRepair > .state-header + div {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0);
+    width: 260px;
+    height: 150px;
+}

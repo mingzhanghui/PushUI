@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MBIS业务管理系统2.0 &middot; 业务管理</title>
+    <!--jquery-ui css-->
+    <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+    <!--customize jquery-ui css-->
+    <include file="Public/style" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/init.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/common.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/index.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/subscribe.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/turing.css" />
+</head>
+<body>
+
+<!--url: /PushUI/index.php/Subscribe/Subscribe-->
+<input type="hidden" id="js-indexcontroller" value="{:U('Subscribe/Index/index')}" />
+<input type="hidden" id="js-subscribe-url" value="__URL__">
+<input type="hidden" id="js-imgpath" value="__PUBLIC__/Subscribe/img" />
+
+<div id="wrapper">
+    <include file="Public/header" />
+    <div id="main-wrapper">
+        <div id="sidebar">
+            <ul class="tab-pages">
+                <li><a href="{:U('Index/index')}"><img src="__PUBLIC__/Subscribe/img/down_a.gif"></a></li>
+                <li class="active"><a href="{:U('Subscribe/index')}"><img src="__PUBLIC__/Subscribe/img/up_b.gif"></a></li>
+                <li><a href="{:U('Charge/index')}"><img src="__PUBLIC__/Subscribe/img/charge.svg"></a></li>
+                <li><a href="{:U('Broadcast/index')}"><img src="__PUBLIC__/Subscribe/img/down_c.gif"></a></li>
+                <li><a href="{:U('Sync/index')}"><img src="__PUBLIC__/Subscribe/img/down_d.gif"></a></li>
+                <li><a href="{:U('Settings/index')}"><img src="__PUBLIC__/Subscribe/img/down_e.gif"></a></li>
+            </ul>
+        </div>
+        <div id="main">
+            <div class="col-left">
+                <!--业务包列表 left top -->
+                <div class="panel">
+                    <div class="panel-title">
+                        <div class="tab">业务包列表</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="scroll-list">
+                            <div class="scroll-inner">
+                                <div class="square"></div>
+                                <span><a href="javascript:;" onclick="resetPackage('js-package-tree')">业务包列表</a></span>
+                                <!--load package tree controller url-->
+                                <input type="hidden" id="js-loadTreeUrl" value="{:U('Subscribe/Index/getPackageList')}" />
+                                <div id="js-package-tree"><!--load by package.js @function: loadPackageTree()--></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--所含业务期 左下 -->
+                <div class="panel">
+                    <div class="panel-title">
+                        <div class="tab">所含业务期</div>
+                    </div>
+                    <div class="panel-body">
+                        <table id="table-mission" class="table table-fixed">
+                            <thead class="scrollHead">
+                            <tr>
+                                <th class="col-0"></th>
+                                <th class="col-1">业务期名</th>
+                                <th class="col-2">起始日期</th>
+                                <th class="col-3">结束日期</th>
+                                <th class="col-4">状态</th>
+                                <th class="col-5">选择</th>
+                            </tr>
+                            </thead>
+                            <tbody class="scrollBody" id="js-PackageMission">
+                            <!--xhr load <tr>-->
+                            </tbody>
+                        </table>
+                        <!--END #table-mission-->
+                        <div class="btn-groups">
+                            <button id="js-addmission" class="btn">添加业务期</button>
+                            <button id="js-delmission" class="btn">删除业务期</button>
+                        </div>
+                    </div>
+                </div>
+                <!--END 所含业务期-->
+            </div>
+
+            <div class="col-right">
+                <!--本期内容详情面板页 -->
+                <div class="panel">
+                    <div class="panel-title">
+                        <div class="tab">本期内容详情</div>
+                    </div>
+                    <div class="panel-body">
+
+                        <!--package 业务包基本信息 只读-->
+                        <table class="pkg">
+                            <tr>
+                                <td><label for="pkg_packagename">所属业务包: </label></td>
+                                <td><input id="pkg_packagename" type="text" disabled="disabled" readonly /></td>
+                                <td><label for="pkg_updatecycletypeid">订阅周期: </label></td>
+                                <td>
+                                    <select id="pkg_updatecycletypeid" disabled="disabled" readonly>
+                                        <foreach name="updateCycleTypeList" item="vo" >
+                                            <option value="{$vo.id}">{$vo.updatecycletype}</option>
+                                        </foreach>
+                                    </select>
+                                </td>
+                                <td><label for="pkg_packagetemplateid">业务包模板: </label></td>
+                                <td>
+                                    <select id="pkg_packagetemplateid" disabled="disabled" readonly>
+                                        <!--<option value="0">未选择</option>-->
+                                        <foreach name="packagetpllist" item="vo">
+                                            <option value="{$vo.packagetemplateid}">{$vo.description}</option>
+                                        </foreach>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="pkg_packagetypeid">业务包类型: </label></td>
+                                <td>
+                                    <select id="pkg_packagetypeid" disabled="disabled" readonly>
+                                        <foreach name="packagetypelist" item="vo">
+                                            <option value="{$vo.packagetypeid}">{$vo.description}</option>
+                                        </foreach>
+                                    </select>
+                                </td>
+                                <td><label for="pkg_price">业务包价格: </label></td>
+                                <td>
+                                    <span>￥</span>
+                                    <input id="pkg_price" type="number" size="5" disabled="disabled" readonly/>
+                                </td>
+                                <td><label for="pkg_chargetypeid">计费周期: </label></td>
+                                <td>
+                                    <select id="pkg_chargetypeid" disabled="disabled" readonly="readonly">
+                                        <volist name="chargeTypeList" id="vo">
+                                            <option value="{$vo.chargetypeid}">按{$vo.chargetypename}</option>
+                                        </volist>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!--mission 业务期 基本信息 可以改变-->
+                        <div class="pkginfo">
+                            <form id="js-missioninfo" method="POST" action="{:U('Subscribe/Subscribe/editMission')}">
+
+                                <input type="hidden" id="m_mid" name="id">  <!--missionid  业务期ID-->
+                                <input type="hidden" id="m_pid" name="packageid">  <!--业务包ID-->
+
+                                <div class="date">
+                                    <ul>
+                                        <li>
+                                            <label for="m_missionname">业务期名: </label>
+                                            <input id="m_missionname" name="missionname" value="">
+                                        </li>
+                                        <li>
+                                            <label for="m_startdate">起始日期: </label>
+                                            <input id="m_startdate" type="text" name="startdate" />
+                                        </li>
+                                        <li>
+                                            <label for="m_enddate">结束日期: </label>
+                                            <input id="m_enddate" type="text" name="enddate" />
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="info_low clearfix">
+                                    <label for="m_missiondescription">简介:</label>
+                                    <textarea id="m_missiondescription" name="missiondescription" cols="50" rows="3"></textarea>
+                                </div>
+                                <!--修改/取消-->
+                                <div class="operate">
+                                    <div class="feedback">
+                                        <div class="ui-widget" id="js-mission-success">
+                                            <div class="ui-state-success ui-corner-all"><span class="ui-icon ui-icon-check"></span>业务期修改成功!</div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-groups">
+                                        <button id="btn-submit" type="submit" class="btn" title="修改业务期">修改</button>
+                                        <button id="btn-cancel" class="btn">取消</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--本期内容列表-->
+                        <div class="issue">
+                            <div class="table">
+                                <table class="caption" id="tableCaption">
+                                    <caption>本期内容列表</caption>
+                                    <colgroup>
+                                        <col style="width: 33px;" />
+                                        <col style="width: 20px;" />
+                                        <col style="width: 30px;" />
+                                        <col style="width: 200px;" />
+                                        <col style="width: 110px;" />
+                                        <col style="width: 80px;" />
+                                    </colgroup>
+                                    <thead class="scroll-head">
+                                    <tr class="colHeaders">
+                                        <th class="th-0">&nbsp;</th>
+                                        <th class="th-1"><input type="checkbox" title="全选/全不选" onclick="checkAll(this, 'iscont')"></th>
+                                        <th class="th-2">No</th>
+                                        <th class="th-3">文件名</th>
+                                        <th class="th-4">播发日期</th>
+                                        <th class="th-5">轮播次数</th>
+                                        <th class="th-6" colspan="2">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="this_mission" class="scroll-body">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="btn-left">
+                                <div class="btn-groups">
+                                    <button id="btn-issue" class="btn">新增内容</button>
+                                    <button class="btn" onclick="bulk_delete_media(this)" data-url="{:U('Subscribe/Subscribe/bulkDelcontent')}">批量删除</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end .panel-body-->
+                </div>
+                <!--end .panel-->
+            </div>
+            <!--end .col-right-->
+        </div>
+        <!--end #main-->
+    </div>
+    <!--end #main-wrapper-->
+</div>
+<!--end #wrapper-->
+
+<!--BEGIN dialogs-->
+
+<!--BEGIN 添加新的期号的弹出框--->
+<div id="dlg_add_mission" title="添加新的业务期">
+    <form method="post" id="addMissionInfo">
+        <!--业务包ID-->
+        <input type="hidden" id="js-id" value="">
+        <div class="form-group">
+            <div class="fg">
+                <label for="addPackageID"> 业务包名:</label>
+                <select id="addPackageID" name="PackageID" readonly="readonly" disabled="disabled">
+                    <!--subscribe.js function listNodePackage()-->
+                </select>
+            </div>
+            <div class="fg">
+                <label for="addMissionName" class="indent"> 期名: </label>
+                <input id="addMissionName" type="text" name="MissionName" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="fg">
+                <label for="datepicker-2"><span class="require-red">*</span>起始日期:</label>
+                <input type="text" id="datepicker-2" name="StartDate">
+                <div class="help-block" id="js-help-start">
+                    <!--<span class="text-danger">日期非法</span>-->
+                </div>
+            </div>
+            <div class="fg">
+                <label for="datepicker-3"><span class="require-red">*</span>结束日期:</label>
+                <input type="text" id="datepicker-3" name="EndDate">
+                <div class="help-block" id="js-help-end">
+                    <!--<span class="text-success">日期合法</span>-->
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="label-wrap"><label for="addMissionDesc" class="align-top">本期简介:</label></div>
+            <textarea id="addMissionDesc" name="MissionDescription"></textarea>
+        </div>
+    </form>
+</div>
+<!--END 添加新的期号的弹出框--->
+
+<!-- 添加新的节目-->
+<div id="dlg_add_media" title="添加新的节目">
+    <div class="dialog-body">
+        <!--按片名查找 电视节目总集-->
+        <form id="js-formsearch" method="GET" action="{:U('Subscribe/Subscribe/listMissionContent')}">
+            <div class="form-group">
+                <div class="search">
+                    <label for="js-searchname">文件名: </label>
+                    <input id="js-searchname" name="asset_name" size="20" type="text">
+                </div>
+                <div class="search">
+                    <label for="js-mediatypeid">类型: </label>
+                    <select id="js-mediatypeid" name="mediatypeid">
+                        <option value="3">电视节目分集</option>
+                    </select>
+                </div>
+                <div class="search">
+                    <button id="js-searchcontent" class="btn">查找</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="searchTable">
+            <div class="searchTableTitle">
+                <ul class="scroll-header">
+                    <li class="li-0">&nbsp;</li>
+                    <li class="li-1">NO.</li>
+                    <li class="li-2">文件名</li>
+                    <li class="li-3">类型</li>
+                    <li class="li-4">大小</li>
+                    <li class="li-5">选择</li>
+                </ul>
+            </div>
+            <div class="searchTableContent">
+                <table class="table table-fixed table-media">
+                    <tbody id="snc_tbody" class="scroll-body">
+                    <!-- <tr data-oid="">
+                        <td class="td-0"><div class="tr_arrow"></div></td>
+                        <td class="td-1">1</td>
+                        <td class="td-2">快乐大本营</td>
+                        <td class="td-3">电视节目</td>
+                        <td class="td-4">1712MB</td>
+                        <td class="td-5"><input type="checkbox" name="MediaOID[]" value="" title="checkbox"/></td>
+                    </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <form id="form_broadcast" method="GET" action="{:U('Subscribe/Subscribe/addContent')}">
+            <div class="form-group">
+                <!--选择播发日期-->
+                <div class="date">
+                    <label for="c_date">选择播发日期: </label>
+                    <input type="text" id="c_date" name="date" size="10" onchange="checkDate(this)">
+                    <!--<input type="text" id="c_date" name="date" size="10" class="hasDatepicker">-->
+                    <!--<img class="ui-datepicker-trigger" src="__PUBLIC__/Subscribe/img/calendar.svg" alt="选择播发日期" title="选择播发日期">-->
+                    <div class="help-inline">
+                        <!--<span class="text-danger">日期非法</span>-->
+                    </div>
+                </div>
+                <!--轮播次数-->
+                <div class="round">
+                    <label for="c_round">轮播次数: </label>
+                    <select id="c_round" name="round"></select>
+                    <script>
+                        var round = document.getElementById("c_round");
+                        var option = null;
+                        for (var i = 0; i < 20; i++) {
+                            option = document.createElement("option");
+                            option.value = i+1;
+                            option.innerHTML = i+1;
+                            round.appendChild(option);
+                        }
+                    </script>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 修改业务期下的内容 -->
+<div id="dlg_edit_content" title="修改本期内容">
+    <form id="FormEditContent" method="GET" action="{:U('Subscribe/Subscribe/editContent')}">
+        <input type="hidden" id="ed_id" name="id" value="">
+        <input type="hidden" id="ed_missionid" name="missionid" value="" />
+        <div class="form-group">
+            <!--选择播发日期-->
+            <div class="date">
+                <label for="ed_date">选择播发日期: </label>
+                <input type="text" id="ed_date" name="date" size="10" onchange="checkDate(this)">
+                <!--<input type="text" id="c_date" name="date" size="10" class="hasDatepicker">-->
+                <!--<img class="ui-datepicker-trigger" src="__PUBLIC__/Subscribe/img/calendar.svg" alt="选择播发日期" title="选择播发日期">-->
+                <div class="help-inline"></div>
+            </div>
+            <!--轮播次数-->
+            <div class="round">
+                <label for="ed_round">轮播次数: </label>
+                <select id="ed_round" name="round"></select>
+                <script>
+                    var round = document.getElementById("ed_round");
+                    var option = null;
+                    for (var i = 0; i < 20; i++) {
+                        option = document.createElement("option");
+                        option.value = i+1;
+                        option.innerHTML = i+1;
+                        round.appendChild(option);
+                    }
+                </script>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="DialogErrorMission" title="业务包目录不能创建业务期">
+    <div>
+        <p class="text-danger"><span class="ui-icon ui-icon-info"></span>只有叶子节点才能创建业务期!</p>
+    </div>
+</div>
+
+<div id="DialogDateCompare" title="开始日期或结束日期不合法">
+    <div>
+        <p class="text-danger"><span class="ui-icon ui-icon-info"></span>开始日期或结束日期不合法!</p>
+    </div>
+</div>
+
+<div id="DialogCannotDeleteMission" title="业务期下有内容">
+    <div>
+        <p class="text-danger"><span class="ui-icon ui-icon-info"></span>业务期下有内容, 请先删除对应的媒体内容! </p>
+    </div>
+</div>
+
+<div id="dlg_cannot_add_content" title="业务期已过期">
+    <br />
+    <p class="text-danger"><span class="ui-icon ui-icon-info"></span>该业务播发完成或者正在播发不能新增内容!</p>
+</div>
+
+<div id="dlg_cannot_edit_content" title="业务期不可编辑">
+    <br />
+    <p class="text-danger"><span class="ui-icon ui-icon-info"></span>该业务期播发完成或者正在播发不能修改内容!</p>
+</div>
+
+<div id="dlg_illegal_date" title="日期不合法">
+    <br />
+    <p class="text-danger"><span class="ui-icon ui-icon-info"></span>日期不合法, 修改失败！</p>
+</div>
+
+<!--dialog success-->
+<div id="dialog_edit_success" title="修改成功">
+    <br />
+    <p class="text-success"><span class="ui-icon ui-icon-check"></span>修改成功！</p>
+</div>
+<div id="dlg_confirm_delete" title="确定要删除这个播发计划"  style="display: none">
+    <p class="text-info"><span class="ui-icon ui-icon-info"></span>确定要删除这个播发计划?</p>
+</div>
+
+<div id="dlg_confirm_bulkDelete" title="确定要批量删除"  style="display: none">
+    <p class="text-info"><span class="ui-icon ui-icon-info"></span>确定要批量删除这些内容?</p>
+</div>
+<!--END dialogs -->
+
+<!--jQuery + jQueryUI-->
+<load href="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js" />
+<js href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js" />
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.datepicker-zh-CN.js"></script>
+
+<!--cookie-->
+<js href="__PUBLIC__/Common/js/cookie.js" />
+<!--time-->
+<js href="__PUBLIC__/Subscribe/js/index.js" />
+<!--load package tree-->
+<js href="__PUBLIC__/Subscribe/js/package.js" />
+<!--function checkAll()-->
+<script type="text/javascript" src="__PUBLIC__/Common/js/function.js"></script>
+<!--for this page only-->
+<js href="__PUBLIC__/Subscribe/js/subscribe.js" />
+</body>
+</html>

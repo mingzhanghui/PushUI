@@ -1,0 +1,267 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Microsoft Himalaya";
+}
+
+a {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+#content-wrapper {
+  width: 1260px;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  overflow-x: hidden;
+  box-shadow: -3px 0 5px -3px rgba(1, 1, 1, 0.87), 3px 0 5px -3px rgba(1, 1, 1, 0.87);
+  border-top: 1px solid #333;
+  border-radius: 0 0 4px 4px;
+}
+
+.row {
+  width: 1260px;
+  max-width: 100%;
+  min-width: 768px;
+  margin: 0 auto;
+}
+
+.columns {
+  float: left;
+  min-height: 1px;
+  position: relative;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+#content-wrapper > header {
+  width: 100%;
+  position: relative;
+  left: 0;
+  margin: 0;
+  background-size: 100%;
+  height: 70px;
+}
+
+.welcome .datetime {
+  width: 210px;
+  height: 30px;
+  line-height: 30px;
+  clear: both;
+  position: relative;
+  right: 0;
+}
+
+.main-wrapper {
+  margin: 0;
+  position: relative;
+  left: 0;
+  top: 0;
+}
+
+.sidebar {
+  border: none;
+}
+
+#tabs, #tabs > div[id^="tabs-"] {
+  border-radius: 4px;
+}
+
+#tabs {
+  margin: 20px 20px 0 10px;
+  min-height: 530px;
+  height: auto;
+}
+
+#tabs > div[id^="tabs-"] {
+  background-color: #f2f5f7;
+}
+
+#tabs > ul > li.ui-tabs-tab {
+  border: 1px solid skyblue !important;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.panels-wrapper {
+  padding: 10px;
+  box-sizing: content-box;
+  /*background-color: #4cae4c;*/
+  min-height: 400px;
+  height: auto;
+}
+
+.panel {
+  min-width: 300px;
+  max-width: 400px;
+  max-height: 470px;
+  /*background-color: antiquewhite;*/
+  /*border: 1px solid #bfbfbf;*/
+  min-height: 400px;
+  float: left;
+}
+
+#panel-mediatype {
+  margin-left: 10px;
+}
+
+#panel-appendixtype {
+  margin-left: 60px;
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.panel-heading {
+  width: 100%;
+  min-width: 300px;
+  height: 30px;
+  padding: 2px 1px 0 1px;
+  box-sizing: border-box;
+  /*background-color: #01B1AB;*/
+  border-radius: 4px;
+}
+
+.panel-heading > span.caption {
+  float: left;
+  margin-top: 4px;
+  margin-left: 2px;
+  background-color: #62BBE8;
+  color: white;
+}
+
+.panel > .ui-tabs-nav > .ui-state-default > a {
+  padding: .4em .8em;
+  height: 19px;
+  line-height: 19px;
+  display: inline-block;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.panel > .ui-tabs-nav {
+  margin: 0;
+  padding: .2em .2em 0;
+  height: 30px;
+}
+
+.table-scroll > thead, .table-scroll > tbody {
+  display: block;
+}
+.table-scroll > tbody {
+  overflow-y: scroll;
+  /*height: 100px;*/    /* ajust */
+}
+
+.list_types > tbody {
+  height: 336px;
+}
+
+.table-scroll > thead > tr > th,
+.table-scroll > tbody > tr > td {
+  /*table-layout: fixed;*/
+}
+
+.table-fixed-4 > thead, .table-fixed-4 > tbody, .table-fixed-4 > thead > tr {
+  width: 310px;
+  display: block;
+}
+
+.table-fixed-4 > thead, .table-fixed-4 > thead > tr, .table-fixed-4 > thead > th  {
+  height: 20px;
+  line-height: 20px;
+}
+
+.table-fixed-4 > tbody > tr {
+  width: 293px;
+  display: block;
+}
+
+.table-fixed-4 > thead > tr > th {
+  line-height: 20px;
+  padding: 0;
+  display: block;
+  float: left;
+}
+
+.table-fixed-4 > tbody > tr > td {
+  height: 28px;
+  line-height: 28px;
+}
+
+.table-fixed-4 .th-0 {width:40px;}
+.table-fixed-4 .th-1 {width:40px;}
+.table-fixed-4 .th-2 {width:150px;}
+.table-fixed-4 .th-3 {width:70px;}
+
+.importTableTitle {width: 310px;}
+
+.table-fixed-4 .td-0 {width:40px;}
+.table-fixed-4 .td-1 {width:50px;}
+.table-fixed-4 .td-2 {width:150px;}
+.table-fixed-4 .td-3 {width:60px;}
+
+.table-fixed-4 > tbody {
+  border-left: 1px solid skyblue;
+  border-right: 1px solid skyblue;
+  border-bottom: 1px solid skyblue;
+}
+
+.ui-button {border-radius: 4px;}
+
+#tabs-1 .panel-footer > .ui-button {
+  margin-top: 10px;
+  margin-left: 40px;
+}
+
+#tabs-2 .panel-footer > .ui-button {
+  margin: 10px;
+}
+
+#tabs-2 > .panels-wrapper > div[id^="panel-"] {
+  margin-right: 20px;
+}
+
+#panel-genre > .ui-tabs-nav,
+#panel-country > .ui-tabs-nav,
+#panel-year > .ui-tabs-nav {
+  width: 305px;
+}
+
+.text-danger {
+  color: #a94442;
+}
+a.text-danger:hover,
+a.text-danger:focus {
+  color: #843534;
+}
+
+#form-config {
+  margin-left: 40px;
+  margin-top: 10px;
+  width: 650px;
+}
+
+#form-config > .form-group {
+  margin-bottom: 10px;
+}
+
+#form-config > .form-group > label {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+#form-config > .form-group > input {
+  width: 300px;
+  height: 18px;
+  line-height: 18px;
+}
+
+#form-config > .form-group > .help-block {
+  float: right;
+  display: inline-block;
+  margin-left: 10px;
+}

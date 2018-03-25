@@ -1,0 +1,206 @@
+#main {
+    width: 940px;
+}
+
+.date-input {
+    width: 900px;
+    height: 110px;
+    margin: 10px;
+    padding: 10px 5px 0 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #2e2e3a;
+    color: #ffffff;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.form-wrapper {
+    margin-bottom: 10px;
+}
+
+.date-input > .form-wrapper {
+    float: left;
+    margin-left: 40px;
+    position: relative;
+}
+
+.input-wrapper {
+    border: 1px solid #666;
+    display: inline-block;
+    float: left;
+    background-color: #444;
+    padding: 2px;
+}
+
+.date-input > .form-wrapper > form > .input-wrapper > input {
+    background-color: #444;
+    color: #fff;
+    outline: none;
+    border: 0;
+    padding: 0;
+    height: 20px;
+}
+
+.submit {
+    display: inline-block;
+    float: left;
+    margin-left: 10px;
+}
+
+.date-cursor {
+    width: 100%;
+    height: 50px;
+    margin-top: 40px;
+    position: relative;
+    clear: both;
+}
+
+.date-cursor > a:hover {
+    background-color: gray;
+}
+
+.arrow {
+    width: 20px;
+    height: 65px;
+    float: left;
+}
+
+.date-cursor > a > .arrow {
+    margin: 0 8px;
+}
+
+.uldate {
+    width: 810px;
+    height: 60px;
+    display: block;
+    margin-left: 5px;
+    margin-right: -5px;
+    padding: 0;
+    float: left;
+}
+
+.lidate {
+    list-style: none;
+}
+
+.lidate > a {
+    float: left;
+    width: 115px;
+    height: 50px;
+    line-height: 50px;
+    text-decoration: none;
+    display: block;
+    box-sizing: content-box;
+    color: #ffffff;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.broadcast {
+    margin-left: 10px;
+}
+
+.broadcast > .table {
+    color: #ffffff;
+    width: 900px;
+}
+
+.broadcast > table > thead > tr,
+.broadcast > table > tbody > tr {
+    display: block;
+    width: 900px;
+    clear: left;
+}
+
+.tableTitle th {
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    border-top-left-radius: 4px;
+    display: inline-block;
+    float: left;
+}
+
+.th-0 {width: 30px;}
+.th-1 {width: 50px;}
+.th-2 {width: 300px;}
+.th-3 {width: 100px;}
+.th-4 {width: 100px;}
+.th-5 {width: 100px;}
+.th-6 {width: 150px;}
+/*.th-7 {}*/
+
+#tasklist td:first-child  {width: 30px; float: left;}
+#tasklist td:nth-child(2) {width: 60px;}
+#tasklist td:nth-child(3) {width: 300px;}
+#tasklist td:nth-child(4) {width: 100px;}
+#tasklist td:nth-child(5) {width: 100px;}
+#tasklist td:nth-child(6) {width: 100px;}
+#tasklist td:nth-child(7) {width: 150px;}
+/*#tasklist td:nth-child(8) {width: 50px;}*/
+
+.tr_arrow {
+    width: 20px;
+    height: 27px;
+}
+
+#tasklist {
+    height: 350px;
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+#tasklist > tr:not(.dumb) {
+    cursor: pointer;
+}
+
+#tasklist > tr:last-child {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+#tasklist > tr, #tasklist > tr > td {
+    height: 30px;
+    line-height: 30px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+#tasklist td:first-child > .tr_arrow {
+    opacity: 0;
+}
+
+#tasklist > tr:hover td:first-child > .tr_arrow {
+    opacity: 1;
+}
+
+#tasklist > tr:first-child > .text-center {
+    padding-left: 400px;
+}
+
+.table > tbody > tr:nth-child(2n) {
+    background-color: rgb(55, 56, 62);
+}
+
+.table > tbody > tr:nth-child(2n+1) {
+    background-color: rgb(67, 68, 74);
+}
+
+.table > tbody > tr:hover {
+    background-color: #2a2a45 !important;
+}
+
+.table-bottom {
+    width: 900px;
+    height: 14px;
+    background: #3d3f46;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    margin-left: 0;
+}

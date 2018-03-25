@@ -1,0 +1,20 @@
+<header>
+    <div class="logo">
+        <span class="version">2.0</span>
+    </div>
+    <div class="home">
+        <div class="welcome">
+            <div class="user">
+                欢迎您: <span class="username">{:session('username')}</span>
+            </div>
+            <a class="logout" href="{:U('Subscribe/Login/logout')}" title="logout"><span class="icon-signout"></span></a>
+            <div class="datetime">
+                <span id="js-date"></span>
+                <span id="js-time"></span>
+            </div>
+        </div>
+        <div class="homeicon">
+            <a href="__ROOT__/"><img src="__PUBLIC__/Subscribe/img/home.png"></a>
+        </div>
+    </div>
+</header>

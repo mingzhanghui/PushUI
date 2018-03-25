@@ -1,0 +1,48 @@
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ui-widget-overlay {
+  background: #aaaaaa;
+  opacity: 0.3;
+  overflow: hidden;
+}
+
+.clearfix {
+  clear: both;
+}
+
+.table-fixed td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.table tbody tr:nth-child(2n) {
+  background-color: #eff0f1;
+}
+
+.table tbody tr:nth-child(2n+1) {
+  background-color: #fefefe;
+}
+.table tbody tr:hover {
+  background: #cfe2f0;
+}
+.table {
+  margin-bottom: 0;
+  border-collapse: collapse;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  padding: 0;
+  vertical-align: middle;
+  border: none;
+}

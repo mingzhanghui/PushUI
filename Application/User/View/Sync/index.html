@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MBIS用户管理系统 / 用户管理 / 用户信息查询</title>
+    <!--jquery ui css-->
+    <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+    <!--background img css-->
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/User/css/style.css" />
+    <!--custom css-->
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/init.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/User/css/index.css" />
+    <style>
+        .tooltip p {
+            padding: 0.2em 0.9em;
+        }
+        .ui-state-success {
+            background-color: #C9E2B3;
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body>
+<input id="js_controller" type="hidden" value="__CONTROLLER__" />
+<div id="center" class="main-wrapper">
+    <include file="Public/top" />
+    <div id="bottom">
+        <!--sidebar: 1.用户管理 2.数据同步 -->
+        <div id="left">
+            <ul>
+                <li class="a"><a href="{:U('User/Index/index')}"><img src="__PUBLIC__/User/img/up_a.png" /></a></li>
+                <li class="b active"><a href="{:U('User/Sync/index')}"><img src="__PUBLIC__/User/img/down_d.png" /></a></li>
+            </ul>
+        </div>
+        <!--main: previous version <iframe><div id="right"></div></iframe>-->
+        <div id="right">
+            <div id="childCenter">
+                <div id="Context">
+                    <!--tab title * 1-->
+                    <ul id="Tabs">
+                        <li class="tab1"><a href="{:U('User/Sync/index')}">同步设置</a></li>
+                    </ul>
+                    <!--tab contents * 1-->
+                    <div class="tcwrapper">
+                        <!--tab-1 数据同步-->
+                        <div id="tab1Context" class="tabcontent">
+                            <section class="sync-btn">
+                                <input id="js-btn" class="class_middle_button" type="button" value="用户信息同步">
+                            </section>
+                            <section class="tooltip">
+                                <div id="js_fb_wrapper" class="ui-widget">
+                                    <div class="ui-state-error ui-corner-all hide">
+                                        <p>
+                                            <span class="ui-icon ui-icon-alert"></span>
+                                            <strong>Error!</strong>用户信息同步失败!
+                                        </p>
+                                    </div>
+                                    <div class="ui-state-highlight ui-corner-all hide">
+                                        <p>
+                                            <span class="ui-icon ui-icon-info"></span>
+                                            <strong>Info!</strong>业务信息正在同步中...
+                                        </p>
+                                    </div>
+                                    <div class="ui-state-success ui-corner-all hide">
+                                        <p>
+                                            <span class="ui-icon ui-icon-check"></span>
+                                            <strong>Success!</strong>业务信息同步成功!
+                                        </p>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                    </div>
+                    <!--END .tcwrapper-->
+                </div>
+            </div>
+            <!--END #childCenter-->
+        </div>
+        <!--END #right-->
+    </div>
+</div>
+<footer><p>版权所有&copy;2017 <a href="__ROOT__/">北京迈伦斯科技有限公司</a></p></footer>
+
+<!--1ダイアログを準備-->
+<div id="dialog-1" title="用户信息同步">
+    <div class="dialog-body">
+        <p>同步请求已发出...请稍等</p>
+    </div>
+</div>
+
+<div id="dialog-2" title="用户信息同步">
+    <div class="dialog-body">
+        <h3 id="js_feedback"></h3>
+    </div>
+</div>
+
+<!--jquery & jquery-ui-->
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js"></script>
+<!--my js func lib-->
+<script type="text/javascript" src="__PUBLIC__/Common/js/function.js"></script>
+<!--for customer page-->
+<script type="text/javascript" src="__PUBLIC__/User/js/index.js"></script>
+<script type="text/javascript" src="__PUBLIC__/User/js/sync.js"></script>
+
+</body>
+</html>

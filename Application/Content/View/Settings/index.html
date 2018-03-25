@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="cms,MBIS内容管理系统">
+  <title>PushUI / 内容管理 / 系统设置</title>
+  <!--jquery-ui css-->
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+  <include file="Public/style" />
+  <style>
+    #content {
+      width: 1120px;
+      height: 600px;
+      margin: 0 auto;
+      background-image: url('__PUBLIC__/Content/img/right_bg.jpg');
+      background-repeat: no-repeat;
+      float: left;
+    }
+  </style>
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Content/css/index.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Content/css/settings.css" />
+</head>
+<body>
+<div id="content-wrapper" class="clearfix row">
+  <input type="hidden" id="js-settingscontroller" value="{:U('Content/Settings/index')}" />
+  <include file="Public/header" />
+  <div class="main-wrapper">
+    <!--sidebar-->
+    <div class="sidebar columns">
+      <ul class="nav nav-stacked">
+        <li role="presentation"><a href="{:U('Index/index')}"><img src="__PUBLIC__/Content/img/down_import.gif" /></a></li>
+        <li role="presentation"><a href="{:U('Edit/index')}"><img src="__PUBLIC__/Content/img/down_edit.gif" /></a></li>
+        <li role="presentation"><a href="{:U('Search/index')}"><img src="__PUBLIC__/Content/img/down_search.gif" /></a></li>
+        <li role="presentation" class="active"><a href="{:U('Settings/index')}"><img src="__PUBLIC__/Content/img/up_system.gif" /></a></li>
+      </ul>
+    </div>
+    <!--主体内容-->
+    <div id="content">
+      <div id="tabs">
+        <ul>
+          <li><a href="#tabs-1">类型管理</a></li>
+          <li><a href="#tabs-2">分类管理</a></li>
+          <li><a href="#tabs-3">管理设置</a></li>
+        </ul>
+        <!--类型管理-->
+        <div id="tabs-1">
+          <div class="panels-wrapper">
+            <!--media type-->
+            <div id="panel-mediatype" class="panel">
+              <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+                <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+                  <a href="javascript:;">主文件类型</a></li>
+              </ul>
+              <div class="panel-body">
+                <table id="table-1" class="table table-scroll table-fixed-4 list_types">
+                  <thead class="importTableTitle">
+                  <tr>
+                    <th class="th-0">&nbsp;</th>
+                    <th class="th-1">NO.</th>
+                    <th class="th-2">类型名称</th>
+                    <th class="th-3">操作</th>
+                  </tr>
+                  </thead>
+                  <tbody id="js-mediatype">
+                  <foreach name="mediatypes" item="vo" key="k">
+                    <tr data-id="{$vo.id}">
+                      <td class="td-0"><div class="tr_arrow"></div></td>
+                      <td class="td-1">{$k+1}</td>
+                      <td class="td-2" title="{$vo.mediatype}">{$vo.mediatype}</td>
+                      <td class="td-3"><input type="radio" name="mediatypeid" value="{$vo.id}"></td>
+                    </tr>
+                  </foreach>
+                  </tbody>
+                </table>
+              </div>
+              <div class="panel-footer">
+                <button id="js-addmediatype" class="ui-button disabled" title="添加媒体类型">
+                  <span class="ui-icon ui-icon-plusthick"></span>添加
+                </button>
+                <button id="js-editmediatype" class="ui-button disabled" title="修改媒体类型">
+                  <span class="ui-icon ui-icon-pencil"></span>修改
+                </button>
+              </div>
+            </div>
+            <!--appendix type-->
+            <div id="panel-appendixtype" class="panel">
+              <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+                <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+                  <a href="javascript:;">附文件类型</a></li>
+              </ul>
+              <div class="panel-body">
+                <table id="table-2" class="table table-scroll table-fixed-4 list_types">
+                  <thead class="importTableTitle">
+                  <tr>
+                    <th class="th-0">&nbsp;</th>
+                    <th class="th-1">NO.</th>
+                    <th class="th-2">类型名称</th>
+                    <th class="th-3">操作</th>
+                  </tr>
+                  </thead>
+                  <tbody id="js-appendixtype">
+                  <foreach name="appendixtypes" item="vo" key="k">
+                    <tr data-id="{$vo.id}">
+                      <td class="td-0"><div class="tr_arrow"></div></td>
+                      <td class="td-1">{$k+1}</td>
+                      <td class="td-2" title="{$vo.appendixtype}">{$vo.appendixtype}</td>
+                      <td class="td-3"><input type="radio" name="appendixtypeid" value="{$vo.id}"></td>
+                    </tr>
+                  </foreach>
+                  </tbody>
+                </table>
+              </div>
+              <div class="panel-footer">
+                <button id="js-addappendixtype" class="ui-button disabled" title="添加媒体类型">
+                  <span class="ui-icon ui-icon-plusthick"></span>添加
+                </button>
+                <button id="js-editappendixtype" class="ui-button disabled" title="修改媒体类型">
+                  <span class="ui-icon ui-icon-pencil"></span>修改
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--分类管理-->
+        <div id="tabs-2">
+          <div class="panels-wrapper">
+            <!--genre type-->
+            <div id="panel-genre" class="panel">
+              <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+                <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+                  <a href="javascript:;">剧情类型管理</a></li>
+              </ul>
+              <div class="panel-body">
+                <table id="table-3" class="table table-scroll table-fixed-4 list_types">
+                  <thead class="importTableTitle">
+                  <tr>
+                    <th class="th-0">&nbsp;</th>
+                    <th class="th-1">NO.</th>
+                    <th class="th-2">类型名称</th>
+                    <th class="th-3">操作</th>
+                  </tr>
+                  </thead>
+                  <tbody id="js-genre">
+                  <foreach name="genretypes" item="vo" key="k">
+                    <tr data-id="{$vo.id}">
+                      <td class="td-0"><div class="tr_arrow"></div></td>
+                      <td class="td-1">{$k+1}</td>
+                      <td class="td-2" title="{$vo.genre}">{$vo.genre}</td>
+                      <td class="td-3"><input type="radio" name="genreid" value="{$vo.id}"></td>
+                    </tr>
+                  </foreach>
+                  </tbody>
+                </table>
+              </div>
+              <div class="panel-footer">
+                <button id="js-addgenre" class="ui-button" title="添加剧情类型">
+                  <span class="ui-icon ui-icon-plusthick"></span>添加
+                </button>
+                <button id="js-editgenre" class="ui-button" title="修改剧情类型">
+                  <span class="ui-icon ui-icon-pencil"></span>修改
+                </button>
+                <button id="js-delgenre" class="ui-button" title="修改剧情类型">
+                  <span class="ui-icon ui-icon-trash"></span>删除
+                </button>
+              </div>
+            </div>
+            <!--country type-->
+            <div id="panel-country" class="panel">
+              <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+                <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+                  <a href="javascript:;">地区类型管理</a></li>
+              </ul>
+              <div class="panel-body">
+                <table id="table-4" class="table table-scroll table-fixed-4 list_types">
+                  <thead class="importTableTitle">
+                  <tr>
+                    <th class="th-0">&nbsp;</th>
+                    <th class="th-1">NO.</th>
+                    <th class="th-2">类型名称</th>
+                    <th class="th-3">操作</th>
+                  </tr>
+                  </thead>
+                  <tbody id="js-country">
+                  <foreach name="countrytypes" item="vo" key="k">
+                    <tr data-id="{$vo.id}">
+                      <td class="td-0"><div class="tr_arrow"></div></td>
+                      <td class="td-1">{$k+1}</td>
+                      <td class="td-2" title="{$vo.country}">{$vo.country}</td>
+                      <td class="td-3"><input type="radio" name="countryid" value="{$vo.id}"></td>
+                    </tr>
+                  </foreach>
+                  </tbody>
+                </table>
+              </div>
+              <div class="panel-footer">
+                <button id="js-addcountry" class="ui-button" title="添加国家/地区">
+                  <span class="ui-icon ui-icon-plusthick"></span>添加
+                </button>
+                <button id="js-editcountry" class="ui-button" title="修改国家/地区">
+                  <span class="ui-icon ui-icon-pencil"></span>修改
+                </button>
+                <button id="js-delcountry" class="ui-button" title="删除国家/地区">
+                  <span class="ui-icon ui-icon-trash"></span>删除
+                </button>
+              </div>
+            </div>
+            <!--country type-->
+            <div id="panel-year" class="panel">
+              <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+                <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+                  <a href="javascript:;">时间类型管理</a></li>
+              </ul>
+              <div class="panel-body">
+                <table id="table-5" class="table table-scroll table-fixed-4 list_types">
+                  <thead class="importTableTitle">
+                  <tr>
+                    <th class="th-0">&nbsp;</th>
+                    <th class="th-1">NO.</th>
+                    <th class="th-2">类型名称</th>
+                    <th class="th-3">操作</th>
+                  </tr>
+                  </thead>
+                  <tbody id="js-year">
+                  <foreach name="yeartypes" item="vo" key="k">
+                    <tr data-id="{$vo.id}">
+                      <td class="td-0"><div class="tr_arrow"></div></td>
+                      <td class="td-1">{$k+1}</td>
+                      <td class="td-2" title="{$vo.year}">{$vo.year}</td>
+                      <td class="td-3"><input type="radio" name="yearid" value="{$vo.id}"></td>
+                    </tr>
+                  </foreach>
+                  </tbody>
+                </table>
+              </div>
+              <div class="panel-footer">
+                <button id="js-addyear" class="ui-button" title="添加年份">
+                  <span class="ui-icon ui-icon-plusthick"></span>添加
+                </button>
+                <button id="js-edityear" class="ui-button" title="修改年份">
+                  <span class="ui-icon ui-icon-pencil"></span>修改
+                </button>
+                <button id="js-delyear" class="ui-button" title="删除年份">
+                  <span class="ui-icon ui-icon-trash"></span>删除
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--管理设置-->
+        <div id="tabs-3">
+          <form id="form-config" method="POST" action="{:U('Content/Settings/putConfig')}">
+            <div class="form-group">
+              <label for="js-content_path">内容的存放路径: </label>
+              <input type="text" id="js-content_path" name="content_path" value=""/>
+              <div class="help-block"><span class="text-danger">(tips:请确保修改的内容路径里有ftp文件夹)</span></div>
+            </div>
+            <div class="form-group">
+              <label for="js-appendix_path">附件的存放路径: </label>
+              <input type="text" id="js-appendix_path" name="appendix_path" value=""/>
+            </div>
+            <div class="form-group">
+              <label for="js-thumb_path">缩略图存放路径: </label>
+              <input type="text" id="js-thumb_path" name="thumb_path" value=""/>
+            </div>
+            <div class="form-group">
+              <label for="js-background_path">背景图存放路径: </label>
+              <input type="text" id="js-background_path" name="background_path" value="">
+            </div>
+            <div class="form-group">
+              <label for="js-thumb_width">缩略图的宽度值: </label>
+              <input type="number" id="js-thumb_width" name="thumb_width" value="">
+            </div>
+            <div class="form-group">
+              <label for="js-thumb_height">缩略图的长度值: </label>
+              <input type="number" id="js-thumb_height" name="thumb_height" value="">
+            </div>
+            <div class="form-group">
+              <label for="js-background_width">背景图的宽度值: </label>
+              <input type="number" id="js-background_width" name="background_width" value="">
+            </div>
+            <div class="form-group">
+              <label for="js-background_height">背景图的宽度值: </label>
+              <input type="number" id="js-background_height" name="background_height" value="">
+            </div>
+            <input id="js-putConfig" type="submit" class="ui-button" value="提交修改">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--#tabs-1 dialogs-->
+<div id="dlg_add_mediatype" title="添加媒体类型">
+  <form id="form-1" method="GET" action="{:U('Content/Settings/addMediaType')}">
+    <div class="form-group">
+      <label for="js-prompt-addmediatype">类型名称：</label>
+      <input type="text" id="js-prompt-addmediatype" name="mediatype">
+    </div>
+  </form>
+</div>
+
+<div id="dlg_edit_mediatype" title="修改媒体类型">
+  <form id="form-2" method="GET" action="{:U('Content/Settings/editType')}">
+    <input type="hidden" id="js-prompt-editmediaid" name="id" value="">
+    <input type="hidden" name="table" value="mediatype">
+    <div class="form-group">
+      <label for="js-prompt-editmediatype">类型名称：</label>
+      <input type="text" id="js-prompt-editmediatype" name="name">
+    </div>
+  </form>
+</div>
+
+<div id="dlg_add_appendixtype" title="添加附件类型">
+  <form id="form-3" method="GET" action="{:U('Content/Settings/addType')}">
+    <input type="hidden" name="table" value="appendixtype" />
+    <div class="form-group">
+      <label for="js-prompt-addappendixtype">类型名称：</label>
+      <input type="text" id="js-prompt-addappendixtype" name="name">
+    </div>
+  </form>
+</div>
+
+<div id="dlg_edit_appendixtype" title="修改附件类型">
+  <form id="form-4" method="GET" action="{:U('Content/Settings/editType')}">
+    <input type="hidden" id="js-prompt-editappendixid" name="id" value="">
+    <input type="hidden" name="table" value="appendixtype">
+    <div class="form-group">
+      <label for="js-prompt-editappendixtype">类型名称：</label>
+      <input type="text" id="js-prompt-editappendixtype" name="name">
+    </div>
+  </form>
+</div>
+
+<!--#tabs-2 dialogs-->
+<!--剧情类型管理-->
+<div id="dlg_add_genre" title="添加剧情类型">
+  <form id="form-5" method="GET" action="{:U('Content/Settings/addType')}">
+    <input type="hidden" name="table" value="genre" />
+    <div class="form-group">
+      <label for="js-prompt-addgenre">类型名称：</label>
+      <input type="text" id="js-prompt-addgenre" name="name">
+    </div>
+  </form>
+</div>
+
+<div id="dlg_edit_genre" title="修改剧情类型">
+  <form id="form-6" method="GET" action="{:U('Content/Settings/editType')}">
+    <input type="hidden" id="js-prompt-editgenreid" name="id" value="">
+    <input type="hidden" name="table" value="genre">
+    <div class="form-group">
+      <label for="js-prompt-editgenre">类型名称：</label>
+      <input type="text" id="js-prompt-editgenre" name="name" value="">
+    </div>
+  </form>
+</div>
+
+<div id="dlg_del_genre" title="删除剧情类型">
+  <form id="form-7" method="GET" action="{:U('Content/Settings/delType')}">
+    <input type="hidden" name="table" value="genre" />
+    <input type="hidden" id="js-prompt-delgenreid" name="id" value="" />
+    <br />
+    <h4>确定要删除剧情类型<span id="js-prompt-delgenre" class="text-danger"></span>?</h4>
+  </form>
+</div>
+
+<!--地区类型管理-->
+<div id="dlg_add_country" title="添加地区类型">
+  <form id="form-8" method="GET" action="{:U('Content/Settings/addType')}">
+    <input type="hidden" name="table" value="country" />
+    <div class="form-group">
+      <label for="js-prompt-addcountry">类型名称：</label>
+      <input type="text" id="js-prompt-addcountry" name="name">
+    </div>
+  </form>
+</div>
+
+<div id="dlg_edit_country" title="修改地区类型">
+  <form id="form-9" method="GET" action="{:U('Content/Settings/editType')}">
+    <input type="hidden" id="js-prompt-editcountryid" name="id" value="">
+    <input type="hidden" name="table" value="country">
+    <div class="form-group">
+      <label for="js-prompt-editcountry">类型名称：</label>
+      <input type="text" id="js-prompt-editcountry" name="name" value="">
+    </div>
+  </form>
+</div>
+
+<div id="dlg_del_country" title="删除地区类型">
+  <form id="form-10" method="GET" action="{:U('Content/Settings/delType')}">
+    <input type="hidden" name="table" value="country" />
+    <input type="hidden" id="js-prompt-delcountryid" name="id" value="" />
+    <br />
+    <h4>确定要删除地区类型<span id="js-prompt-delcountry" class="text-danger"></span>?</h4>
+  </form>
+</div>
+
+<!--时间类型管理-->
+<div id="dlg_add_year" title="添加时间类型">
+  <form id="form-11" method="GET" action="{:U('Content/Settings/addType')}">
+    <input type="hidden" name="table" value="year" />
+    <div class="form-group">
+      <label for="js-prompt-addyear">类型名称：</label>
+      <input type="text" id="js-prompt-addyear" name="name">
+    </div>
+  </form>
+</div>
+
+<div id="dlg_edit_year" title="修改时间类型">
+  <form id="form-12" method="GET" action="{:U('Content/Settings/editType')}">
+    <input type="hidden" id="js-prompt-edityearid" name="id" value="">
+    <input type="hidden" name="table" value="year">
+    <div class="form-group">
+      <label for="js-prompt-edityear">类型名称：</label>
+      <input type="text" id="js-prompt-edityear" name="name" value="">
+    </div>
+  </form>
+</div>
+
+<div id="dlg_del_year" title="删除时间类型">
+  <form id="form-13" method="GET" action="{:U('Content/Settings/delType')}">
+    <input type="hidden" name="table" value="year" />
+    <input type="hidden" id="js-prompt-delyearid" name="id" value="" />
+    <br />
+    <h4>确定要删除时间类型<span id="js-prompt-delyear" class="text-danger"></span>?</h4>
+  </form>
+</div>
+
+<div id="dlg_feedback" title="提交管理设置">
+  <h4 id="js-feedback"></h4>
+</div>
+
+</body>
+<load href="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js" />
+<js href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js" />
+<js href="__PUBLIC__/Content/js/index.js" />
+<js href="__PUBLIC__/Content/js/settings.js" />
+</html>

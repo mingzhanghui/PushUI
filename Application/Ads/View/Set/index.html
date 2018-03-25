@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MBIS广告管理系统&middot;系统设置&middot;系统设置</title>
+    <!--jquery ui css-->
+    <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+    <!--custom css-->
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Ads/css/site.css" />
+    <style>
+        #systemLog > form {
+            display: inline-block;
+            position: relative;
+            left: 0;
+            top: 0;
+            float: left;
+            text-align: left;
+        }
+        input[type='text'] {
+            width: 300px;
+        }
+        .Systemtab1 {
+            background-image: url('__PUBLIC__/Ads/img/tab_active.png');
+        }
+        .dialog-body {
+            padding-top: 30px;
+        }
+        .feedback {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<input type="hidden" id="js_baseurl" value="__ROOT__/index.php/Ads/Set/" />
+<div id="center" class="main-wrapper">
+    <include file="Public/header" />
+    <div id="bottom">
+        <div id="left">
+            <ul>
+                <li class="a"><a href="{:U('Ads/Index/index')}"><img src="__PUBLIC__/Ads/img/up_a.gif" /></a></li>
+                <li class="b"><a href="{:U('Ads/Put/index')}"><img src="__PUBLIC__/Ads/img/up_b.gif" /></a></li>
+                <li class="c"><a href="{:U('Ads/Report/index')}"><img src="__PUBLIC__/Ads/img/up_c.gif" /></a></li>
+                <li class="d"><a href="{:U('Ads/Sync/index')}"><img src="__PUBLIC__/Ads/img/up_d.gif" /></a></li>
+                <li class="e active"><a href="{:U('Ads/Set/index')}"><img src="__PUBLIC__/Ads/img/down_e.gif" /></a></li>
+            </ul>
+        </div>
+        <div id="right">
+            <div id="childCenter">
+                <div id="SystemContext">
+                    <div id="SystemTabs">
+                        <div class="Systemtab1">系统设置</div>
+                    </div>
+                    <div>
+                        <div id="Systemtab1Context">
+                            <div id="systemLog">
+                                <form id="js_setadvpath" action="{:U('Ads/Set/setadpath')}" method="POST">
+                                    <div class="form-group">
+                                        <label class="wide" for="Adlog_path">同步日志路径: </label>
+                                        <input id="Adlog_path" type="text" class="path" name="Adlog_path" />
+                                        <input id="url-log" type="hidden" value="{:U('Ads/Set/getlogadvpath')}" />
+                                        <div id="fb-1" class="help-block"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="wide" for="Adv_path">广告存储路径: </label>
+                                        <input id="Adv_path" type="text" class="path" name="Adv_path" />
+                                        <input id="url-ad" type="hidden" value="{:U('Ads/Set/getadvpath')}" />
+                                        <div id="fb-2" class="help-block"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input id="js_submit" type="submit" class="but_out" value="提交修改">
+                                        <div id="fb-3" class="help-block"></div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--end form wrap #systemLog-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--END #childCenter-->
+        </div>
+        <!--END #right-->
+    </div>
+</div>
+<div id="dialog-1" title="系统设置">
+    <div class="dialog-body">
+        <span class="ui-icon ui-icon-info"></span><div id="js_feedback" class="feedback"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Ads/js/common.js"></script>
+<!--广告管理 / 系统设置 / 系统设置-->
+<script type="text/javascript" src="__PUBLIC__/Ads/js/set.js"></script>
+</body>
+</html>

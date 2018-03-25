@@ -1,0 +1,18 @@
+<header style="background-image: url('__PUBLIC__/Content/img/logo_bg.gif')">
+    <div class="logo"><span class="version">2.0</span></div>
+    <div class="home">
+        <div class="welcome">
+            <div class="user">
+                欢迎您: <span class="username">{:$_SESSION['username']}</span>
+                <a href="{:U('Content/login/logout')}" title="logout"><span class="icon-signout"></span></a>
+            </div>
+            <div class="datetime">
+                <span id="js-date"></span>
+                <span id="js-time"></span>
+            </div>
+        </div>
+        <div class="homeicon">
+            <a href="__ROOT__/" title="Back to Home Page"><img src="__ROOT__/Public/Common/img/home.png"></a>
+        </div>
+    </div>
+</header>

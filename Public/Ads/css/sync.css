@@ -1,0 +1,124 @@
+#PlayTabs > li.active > a {
+    color: rgb(0, 124, 136);
+}
+
+#PlayTabs > li:not(.active) > a {
+    color: rgb(120, 120, 120);
+}
+
+#Playtab1Context {
+    width: 1080px;
+    float: left;
+    height: 480px;
+    display: block;
+    padding-left: 30px;
+    padding-top: 10px;
+    background-color: #ffffff;
+    position: relative;
+    top: 0;
+    left: 3px;
+}
+
+#Playtab1Context > table, #PreRollPlayTable {
+    width: 1050px;
+}
+
+#Playtab1Context > .tbody_wrapper {
+    overflow-x: hidden;
+    width: 1067px;
+    height: 360px;
+    overflow-y: scroll;
+    border: 2px solid #ccc;
+    border-top: none;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+#PreRollPlayTable {
+    border-collapse: collapse;
+    height: 360px;
+}
+
+#PreRollPlayTable td {
+    height: 30px;
+    line-height: 30px;
+    border-collapse: collapse;
+    border: 0;
+    padding: 0;
+}
+
+.cp-0 {width: 5%}
+.cp-1 {width: 15%}
+.cp-2 {width: 15%}
+.cp-3 {width: 15%}
+.cp-4 {width: 10%}
+.cp-5 {width: 10%}
+.cp-6 {width: 10%}
+.cp-7 {width: 15%}
+.cp-8 {width: 5%}
+
+.hide {display: none;}
+
+.operate {
+    margin-top: 10px;
+}
+
+.ui-state-error, .ui-state-highlight, .ui-state-success {
+    padding: 0 .7em;
+}
+
+.ui-state-error {
+    background-color: #fff7f4;
+    color: #cd0a0a;
+}
+
+.ui-state-highlight {
+
+}
+
+.ui-state-success {
+    background-color: #e6f4f4;
+    border: 1px solid #439f85;
+    color: #47a584;
+}
+
+.ui-state-success > p {
+
+}
+
+.operate > .ui-state-error,
+.operate > .ui-state-highlight,
+.operate > .ui-state-success {
+    width: 800px;
+    display: block;
+    float: left;
+    font-weight: bold;
+}
+
+.ui-state-error > .ui-icon, .ui-state-highlight > .ui-icon, .ui-state-success  > .ui-icon {
+    float: left;
+    margin-right: .3em;
+}
+
+.operate > input[type='button'] {
+    vertical-align: middle;
+    display: inline-block;
+    float: right;
+    position: relative;
+    right: 26px;
+}
+
+.table_body > tbody > tr {
+    overflow-x: hidden;
+    display: table-row;
+}
+
+.dialog-body {
+    padding-top: 30px;
+    box-sizing: border-box;
+}
+
+.dialog-body > .ui-ico-info + div {
+    display: inline-block;
+    font-size: 14px;
+}

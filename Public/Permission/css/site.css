@@ -1,0 +1,167 @@
+@charset "utf-8";
+
+#iframe {
+    width: 1300px;
+    min-height: 600px;
+    background-size:100%;
+    background-image:url('../img/left_bg.gif');
+}
+
+#logo {
+    width:1300px;
+    height:68px;
+    top: 0;
+}
+
+.home {
+    width: 48px;
+    height: 48px;
+    float: right;
+    background-image:url('../../Common/img/home.png');
+}
+
+.home:hover {
+    background-color: aliceblue;
+    border-radius: 4px;
+}
+
+.tohome {
+    display: inline-block;
+    float: right;
+    padding: 10px 20px 10px 10px;
+    text-decoration:none;
+    color:rgb(23,29,41);
+}
+
+.welcome {
+    width:232px;
+    height:67px;
+    float:right;
+    margin-top:0;
+}
+
+.user {
+    width:140px;
+    height:22px;
+    padding-top:15px;
+    float: right;
+    font-family:"宋体";
+    font-size: 17px;
+    overflow: hidden;
+    color: #fefefe;
+    font-weight: 600;
+}
+
+#CurrentYear {
+    width:130px;
+    height:28px;
+    float:left;
+}
+
+#CurrentTime {
+    width:100px;
+    height:20px;
+    float:right;
+}
+
+#travel {
+    margin: 0 auto;
+}
+
+.strong {
+    color: #cd0a0a;
+}
+.super {
+    color: #ff0000;
+}
+
+#travel > tbody > tr {
+    height: 49px;
+    line-height: 49px;
+}
+
+td.uname {
+    background: #91C5D4;
+    font-weight: bold;
+}
+
+input[type="checkbox"] {
+    height:15px;
+    width: 15px;
+}
+
+.operate {
+    width: 300px;
+}
+
+input[disabled] {
+    color: #C2C2C2;
+}
+
+.adduser {
+    margin-top: 20px;
+}
+
+.adduser > input {
+    float: left;
+    margin-left: 84px;
+}
+
+.ui-widget-overlay {
+    background: #aaaaaa;
+    opacity: 0.4;
+}
+
+.ui-dialog-title {
+    text-align: left;
+}
+
+#fadduser {
+    font-size: 13px;
+    margin-bottom: -10px;
+}
+
+.form-group {
+    margin: 15px auto;
+}
+
+.form-group > input {
+    outline: none;
+    border: 1px solid #ccc;
+}
+
+.ui-dialog .ui-dialog-content {
+    overflow-y: hidden;
+}
+
+.version {
+    position: relative;
+    color: white;
+    font-weight: bold;
+    left: -16px;
+    top: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 26px;
+    font-family: sans-serif;
+}
+
+#form_adduser > .form-group > label,
+#form_modPwd > .form-group > label {
+    display: inline-block;
+    width: 60px;
+    text-align: right;
+    padding-right: 2px;
+}
+
+#form_adduser > .form-group > span.text-danger,
+#form_modPwd > .form-group > span.help-block {
+    display: block;
+    color: #fe2222;
+    text-indent: 90px;
+    text-align: left;
+}
+
+.hide {
+    display: none;
+}

@@ -1,0 +1,96 @@
+.ui-dialog-buttonset > .ui-button {
+    border: 1px solid #aed0ea;
+    background: #d7ebf9 url('../../jquery-ui-1.12.1/images/ui-bg_glass_80_d7ebf9_1x400.png') 50% 50% repeat-x;
+    font-weight: bold;
+    color: #2779aa;
+}
+.ui-dialog-buttonset > .ui-button:hover {
+    border: 1px solid #74b2e2;
+    background: #e4f1fb url('../../jquery-ui-1.12.1/images/ui-bg_glass_100_e4f1fb_1x400.png') 50% 50% repeat-x;
+    font-weight: bold;
+    color: #0070a3;
+}
+#sidebar {background-image: url('../img/left_bg.gif');}
+#main {background-image: url('../img/right_bg.jpg');}
+
+#bclist tr:not(:hover) .td0 {
+    background-image: none;
+    opacity: 0;
+}
+#bclist tr:not(.dumb):hover .td0 {
+    background-image: url(../img/tr_bg.gif);
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+#pkgperiod tr:not(:hover) .td0 {
+    background-image: none;
+    opacity: 0;
+}
+#pkgperiod tr:not(.dumb):hover .td0 {
+    background-image: url('../img/tr_bg.gif');
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+
+.tab {
+    width: 153px;
+    height: 33px;
+    background-image: url('../img/tab.gif');
+    background-repeat: no-repeat;
+    text-align: center;
+    line-height: 34px;
+    font-size: 15px;
+    text-indent: -20px;
+    font-weight: bold;
+    color: white;
+    font-family: "宋体";
+}
+.tab > a {color: white;}
+
+.btn {
+    width: 95px;
+    height: 30px;
+    font-size: 12px;
+    background-image: url('../img/button-out.gif');
+    background-repeat: no-repeat;
+    border: 0;
+    color: #ffffff;
+    cursor: pointer;
+    text-align: center;
+    line-height: 30px;
+}
+.btn:hover {
+    background-image: url('../img/button-over.gif');
+}
+
+.tr_arrow {
+    background-image: url('../img/tr_bg.gif');
+    background-repeat: no-repeat;
+    width: 18px;
+    height: 18px;
+    display: none;
+    margin: 0;
+    padding: 0;
+}
+tr:hover > td:first-child > .tr_arrow
+    /*, tr.selected > td:first-child > .tr_arrow */
+{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.searchTableTitle {
+    background-image: url('../../Common/img/table_title.gif');
+    -moz-background-size: 500px 22px;
+    -webkit-background-size: 500px 22px;
+    -o-background-size: 500px 22px;
+    background-repeat: repeat-x;
+    width: 500px;
+    height: 22px;
+    list-style-type: none;
+}
+
+.mar-l-20 {
+    margin-left: 20px;
+}

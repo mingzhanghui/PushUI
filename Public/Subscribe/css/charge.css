@@ -1,0 +1,464 @@
+@charset "utf-8";
+
+#main {
+    top: 0;
+    position: relative;
+    padding: 0;
+}
+
+th {
+    font-weight: normal;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+}
+
+input[type="text"], input[type="number"] {
+    padding: 2px;
+    margin: 0;
+    height: auto;
+    /*width: 100%;*/
+    z-index: 6;
+    left: 0;
+}
+
+a {
+    text-decoration: none;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+a:hover,
+a:focus {
+    color: #188eee;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.link-dark:hover,
+.link-light:hover,
+.link-white {
+    color: #188eee;
+}
+
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+    float: left;
+    padding: .4em 1em;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+}
+
+.ui-tabs .ui-tabs-nav li {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.ui-button {
+    border-radius: 4px;
+}
+
+#tabs {
+    position: relative;
+    left: 20px;
+    top: 20px;
+    width: 1080px;
+}
+
+#tabs > div {
+    background-color: #f1f7f7;
+}
+
+.lcol, .rcol {
+    float: left;
+    height: auto;
+    padding: 0;
+}
+
+.tab-body {
+    height: 520px;
+}
+#main {
+    height: 640px;
+}
+
+.tbpg {
+    width: 480px;
+    margin-top: 10px;
+    border: 1px solid #bfbfbf;
+    border-collapse: collapse;
+    font-family: "宋体";
+}
+
+.tbpg > tbody {height: 450px;}
+
+.tbpg thead, .caption thead {
+    color: #2b2b2b;
+}
+
+.tbpg > tbody > tr:not(.dumb) {
+    cursor: pointer;
+}
+
+.tbpg thead th {
+    border: none;
+}
+
+.tbpg > .table_title {
+    background-size: 500px 30px;
+}
+
+.tbpg > tbody > tr > td:first-child > .tr_arrow {
+    display: inline-block;
+    opacity: 0;
+}
+
+.tbpg > tbody > tr:hover > td:first-child > .tr_arrow {
+    display: inline-block;
+    opacity: 1;
+}
+
+.tbpg tbody td {
+    text-align: center;
+    line-height: 30px;
+    height: 30px;
+    border: none;
+}
+
+ul.x li a, .jump a {
+    padding: 2px 8px;
+    color: #007fff;
+}
+
+.pagination {
+    margin: 20px 0;
+}
+
+.pagination > div {
+    display: inline-block;
+    float: left;
+    margin-left: 2px;
+    margin-right: 20px;
+    overflow-x: hidden;
+}
+
+ul.x li {
+    float: left;
+}
+
+.jump input {
+    width: 80px;
+    background: white;
+}
+
+.tosp {
+    margin: 10px 0;
+}
+
+.tosp-lower {
+    margin: 0;
+}
+
+a.ui-button {
+    box-shadow:2px 2px 2px #555;
+    transition: opacity 0.218s;
+}
+
+.example {
+    display: inline-block;
+    opacity: 0.6;
+}
+
+.btnwp > .btn {
+    line-height: 28px;
+    float: right;
+    position: relative;
+    right: 20px;
+}
+
+ul.fee_l {
+    margin: 20px 0;
+}
+
+ul.fee_l li {
+    float: left;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+ul.fee_l li span {
+    line-height: 24px;
+    height: 24px;
+}
+
+ul.fee_l li input[type="number"] {
+    width: 100px;
+}
+
+.caption {
+    width: 100%;
+    border: 1px solid #bfbfbf;
+}
+
+.caption caption {
+    text-align: left;
+    margin-bottom: 10px;
+    border-collapse: collapse;
+}
+
+.caption-lower caption {
+    margin-bottom: 0;
+}
+
+.caption-lower .scrollBody {
+    height: 138px;
+}
+
+.caption thead th, .caption tbody td {
+    box-sizing: border-box;
+    height: 30px;
+    line-height:30px;
+}
+/*
+.caption thead th:not(:last-child), .caption tbody td:not(:last-child) {
+    border-right: 1px solid #bfbfbf;
+}
+.caption thead th:last-child, .caption tbody td:last-child {
+    border-right: none;
+} */
+
+.caption tbody td {
+    text-align: center;
+}
+
+.caption .scrollBody {
+    /*height: 330px;*/
+    border: none;
+}
+
+.task_high.scrollBody {
+    height: 330px;
+}
+
+.task_low.scrollBody {
+    height: 150px;
+}
+
+.caption .scrollBody tr {
+    display: block;
+    width: 520px;
+    overflow-x: hidden;
+}
+
+.caption thead {
+    width: 537px;
+    display: block;
+}
+
+.scrollHead th, .scrollBody td {
+    display: inline-block;
+}
+
+.scrollHead tr {
+    display: block;
+    background: inherit;
+}
+
+.scrollHead > tr > th {
+    display: inline-block;
+    float: left;
+}
+
+.scrollBody {
+    clear: left;
+}
+
+.scrollHead .th-0 {width: 40px;}
+.scrollHead .th-1 {width: 60px;}
+.scrollHead .th-2 {width: 100px;}
+.scrollHead .th-3 {width: 130px;}
+.scrollHead .th-4 {width: 90px;}
+.scrollHead .th-5 {width: 100px;}
+
+.scrollBody .td-0 {width: 40px;}
+.scrollBody .td-1 {width: 60px;}
+.scrollBody .td-2 {width: 100px;}
+.scrollBody .td-3 {width: 130px;}
+.scrollBody .td-4 {width: 90px;}
+.scrollBody .td-5 {width: 100px;}
+
+#serial > .scrollBody {
+    height: 160px;
+}
+#serial > .scrollBody > tr:not(.dumb) {cursor: pointer;}
+
+#serial .scrollHead .th-0 {width: 50px;}
+#serial .scrollHead .th-1 {width: 50px;}
+#serial .scrollHead .th-2 {width: 150px;}
+#serial .scrollHead .th-3 {width: 80px;}
+#serial .scrollHead .th-4 {width: 80px;}
+#serial .scrollHead .th-5 {width: 127px;}
+
+#serial > .scrollBody .td-0 {width: 50px;}
+#serial > .scrollBody .td-1 {width: 50px;}
+#serial > .scrollBody .td-2 {width: 150px;}
+#serial > .scrollBody .td-3 {width: 80px;}
+#serial > .scrollBody .td-4 {width: 80px;}
+/*#serial > .scrollBody .td-5 {width: 80px;}*/
+
+#serial th {
+    background-color: #7abeed;
+}
+
+#serial th a {
+    color: #000;
+}
+
+#serial th a:hover {
+    text-decoration: underline;
+}
+
+td:last-child input[type="checkbox"] {
+    display: inline-block;
+    margin-top: 6px;
+}
+
+#charge_sp {
+    display: inline;
+}
+
+li.opt {
+    padding: 2px 8px;
+}
+
+span.price {
+    display: inline-block;
+    width: 52px;
+}
+
+.ui-widget-content a {
+    color: #188eee;
+}
+
+.modal-body {
+    display: block;
+    box-sizing: content-box;
+}
+
+.modal-body tr {
+    height: 30px;
+    line-height: 30px;
+}
+
+.modal-body td {
+    box-sizing: content-box;
+    display: table-cell;
+}
+
+.modal-body td label {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.modal-body input[type="radio"] {
+    width: 15px;
+    height: 15px;
+    padding: 0 4px;
+}
+
+.modal-input {
+    width: 100px;
+}
+
+.sample {
+    display: inline-block;
+    float: right;
+    margin-left: 20px;
+}
+
+.freeornot {
+    margin-left: 4px;
+}
+
+.ui-dialog-content.ui-widget-content .btn-groups {
+    margin: 20px 60px;
+    display: inline-block;
+    float: right;
+}
+
+.ui-dialog-content.ui-widget-content .btn-groups a.ui-button {
+    margin: 0 20px;
+}
+
+.selected > td {
+    font-weight: bold;
+}
+
+.caption td {
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    /*border: 1px solid #ccc;*/
+}
+
+#caption > caption {
+    font-size: 14px;
+    font-family: "Courier New";
+}
+
+#caption > thead {
+    background-size: 534px 30px;
+    padding: 0;
+}
+
+#caption > thead, #caption > thead > tr, #caption > thead > th {
+    line-height: 30px;
+    height: 30px;
+}
+
+.table_title {
+    background: #7abeed;
+}
+#special > thead > tr > th {
+    background: inherit;
+}
+/*#special > tbody > tr {cursor: pointer;}*/
+
+#special > thead > tr > .th-0 { width: 30px; }
+#special > thead > tr > .th-1 { width: 40px; }
+#special > thead > tr > .th-2 { width: 100px; }
+#special > thead > tr > .th-3 { width: 50px; }
+#special > thead > tr > .th-4 { width: 100px; }
+#special > thead > tr > .th-5 { width: 80px; }
+#special > thead > tr > .th-6 { width: 137px; }
+
+#special > tbody > tr > .td-0 { width:30px; }
+#special > tbody > tr > .td-1 { width:40px; }
+#special > tbody > tr > .td-2 { width:100px; }
+#special > tbody > tr > .td-3 { width:50px; }
+#special > tbody > tr > .td-4 {  width: 100px;  }
+#special > tbody > tr > .td-5 { width:80px; }
+
+#special > tbody > tr > .td-6 > input[type='checkbox'] {
+    display: inline-block;
+    margin-top: 6px;
+    margin-left: 35px;
+}
+
+#special.caption > .scrollBody {
+    height: 150px;
+}
+
+#sp_bc_body {
+    height: 150px;
+}
+
+#special > .table_title > th:last-child > a {
+    color: #2b2b2b;
+}
+

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MBIS广告管理系统&middot;广告投放&middot;暂停广告</title>
+    <!--jquery ui css-->
+    <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+    <!--background img css-->
+    <include file="Public/style" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Ads/css/site.css" />
+    <!--custom css-->
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Ads/css/put.css" />
+</head>
+
+<body>
+<!--Ads module, Put controller-->
+<input type="hidden" id="js_indexcontroller" value="__ROOT__/index.php/Ads/Index/">
+<input type="hidden" id="js_baseurl" value="__ROOT__/index.php/Ads/Put/">
+<input type="hidden" id="js_calendarimg" value="__PUBLIC__/Ads/img/calendar.gif" />
+
+    <div id="center" class="main-wrapper">
+        <include file="Public/header" />
+        <div id="bottom">
+            <div id="left">
+                <ul>
+                    <li class="a">
+                        <a href="{:U('Ads/Index/index')}"><img src="__PUBLIC__/Ads/img/up_a.gif" /></a>
+                    </li>
+                    <li class="b active">
+                        <a href="{:U('Ads/Put/index')}"><img src="__PUBLIC__/Ads/img/down_b.gif" /></a>
+                    </li>
+                    <li class="c">
+                        <a href="{:U('Ads/Report/index')}"><img src="__PUBLIC__/Ads/img/up_c.gif" /></a>
+                    </li>
+                    <li class="d">
+                        <a href="{:U('Ads/Sync/index')}"><img src="__PUBLIC__/Ads/img/up_d.gif" /></a>
+                    </li>
+                    <li class="e">
+                        <a href="{:U('Ads/Set/index')}"><img src="__PUBLIC__/Ads/img/up_e.gif" /></a>
+                    </li>
+                </ul>
+            </div>
+            <div id="right">
+                <div id="childCenter">
+                    <!--tab title * 2-->
+                    <ul id="PlayTabs">
+                        <li class="Playtab1" id="Playtab1"><a href="{:U('Ads/Put/index')}">片头广告</a></li>
+                        <li class="Playtab3 active" id="Playtab3"><a href="{:U('Ads/Put/pause')}">暂停广告</a></li>
+                    </ul>
+                    <!--tab content-->
+                    <div class="tcwrapper">
+                        <!--片头广告-->
+                        <div id="Playtab1Context">
+                            <!--按照 类型 日期 查询-->
+                            <div class="query">
+                                <form action="{:U('')}" method="GET">
+                                    <div class="qb_status">
+                                        <label for="q_status">查看方式：</label>
+                                        <!--Status  投放状态  UINT  否 1-->
+                                        <!--1 - 投放中，表示当日包含在该广告的投放开始日期和截止日期之间(包括当天)
+                                            2 - 已投放，表示当日大于该广告的投放截止日期
+                                            3 - 已备播，表示当日未到该广告的投放开始日期 -->
+                                        <select name="status" id="q_status">
+                                            <option value="0">全部</option>
+                                            <option value="1">投放中</option>
+                                            <option value="2">已过期</option>
+                                            <option value="3">未投放</option>
+                                        </select>
+                                    </div>
+                                    <div class="qb_date">
+                                        <label for="q_date">选择广告日期: </label>
+                                        <input type="text" name="date" id="q_date" readonly="readonly" title="点击日历图标选择日期" />
+                                    </div>
+                                    <div class="form_operate">
+                                        <input type="submit" value="查询" class="but">
+                                        <input id="js_cleardate" type="button" value="取消已选日期" class="but">
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!--片头广告 标题-->
+                            <div class="table-wrapper">
+                                <table id="PausePlayTable">
+                                    <thead class="putad_title">
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>广告名称</th>
+                                        <th>文件名称</th>
+                                        <th>文件类型</th>
+                                        <th>时长</th>
+                                        <th>业务包</th>
+                                        <th>入库时间</th>
+                                        <th>投放时间</th>
+                                        <th>投放状态</th>
+                                        <th>操作</th>
+                                        <th><input type="checkbox" onchange="checkAll(this, 'PutPauseID[]')" title="全选"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="grid">
+
+                                    <volist name="list" id="vo" empty="$empty">
+                                        <tr data-id="{$vo.id}" data-adid="{$vo.adid}" data-packageid="{$vo.packageid}">
+                                            <td>{$offset + $key + 1}</td>
+                                            <td title="{$vo.advertisename}">{$vo.advertisename}</td>
+                                            <td title="{$vo.name}">{$vo.name}</td>
+                                            <td>{$vo.filetype}</td>
+                                            <td>{$vo.time}s</td>
+                                            <td>{$vo.packagename}</td>
+                                            <td>{$vo.addeddate}</td>
+                                            <td>{$vo.startdate} 至 {$vo.enddate}</td>
+                                            <td>{$vo.status}</td>
+                                            <td><a href="javascript:;" onclick="editPausePut(this)">修改</a></td>
+                                            <td><input type="checkbox" name="PutPauseID[]" title="投放片头广告" value="{$vo.id}"></td>
+                                        </tr>
+                                    </volist>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!--分页 & 撤销投放-->
+                            <div class="operate">
+                                {$page}
+                                <div class="form-group">
+                                    <input type="button" value="撤销投放" class="but_out" onclick="cancelPush()">
+                                </div>
+                            </div>
+                            <div id="Playtab3Context" class="hide">
+                                <!--广告投放 / 暂停广告-->
+                            </div>
+                            <!--END #Playtab3Context-->
+                        </div>
+                        <!--END .tcwrapper-->
+                    </div>
+                </div>
+                <!--END #childCenter-->
+            </div>
+            <!--END #right-->
+        </div>
+    </div>
+
+<div id="dialog-1" title="修改暂停广告">
+    <div class="dialog-body">
+        <form method="POST" action="{:U('Ads/Put/editPut')}">
+            <input id="ad_id" type="hidden" name="id" value="" />   <!-- AdPrerolladmedia的ID -->
+            <input type="hidden" name="table" value="Ad_PauseAdMedia">
+            <input id="ad_adid" type="hidden" name="adid" value="" />
+            <div class="form-group">
+                <label for="ad_advertisename">广告名称：</label>
+                <input type="text" id="ad_advertisename" name="advertisename" />
+            </div>
+            <div class="form-group">
+                <label for="ad_name">文件名称：</label>
+                <!--文件名称不可修改-->
+                <input type="text" id="ad_name" name="name" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label for="ad_status">投放状态：</label>
+                <!--投放状态不可修改-->
+                <input type="text" id="ad_status" name="status" disabled="disabled" />
+                <!--<select id="ad_status" name="status"><option value="1">投放中</option><option value="2">已过期</option><option value="3">未投放</option>-->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ad_startdate">起始时间：</label>
+                <input type="text" id="ad_startdate" name="startdate" readonly="readonly" title="点击日历图标输入起始时间" />
+                <div class="help-block"></div>
+            </div>
+            <div class="form-group">
+                <label for="ad_enddate">结束时间：</label>
+                <input type="text" id="ad_enddate" name="enddate" readonly="readonly" title="点击日历图标输入起始时间" />
+                <div class="help-block"></div>
+            </div>
+            <div class="form-group">
+                <label for="ad_packageid">业务包类型：</label>
+                <!--#dialog-1 on create load -->
+                <select id="ad_packageid" name="packageid">
+                    <!--<option value="17">老乡频道</option>-->
+                </select>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--prompt delete-->
+<div id="dialog-2" title="确定对选中广告投放执行删除操作?">
+    <div class="dialog-body">
+        <br /><br />
+        <span class="ui-icon ui-icon-alert"></span><span class="font-14">确定对选中广告投放执行删除操作?</span></div>
+</div>
+
+<div id="dialog-4" title="出错了">
+    <div class="dialog-body"><br /><br /><span class="ui-icon ui-icon-info"></span><span id="js_error" class="font-14"></span></div>
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js"></script>
+<!--header date time & functions-->
+<script type="text/javascript" src="__PUBLIC__/Ads/js/common.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Ads/js/putPause.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cms,MBIS内容管理系统">
+    <title>PushUI &middot; 内容编辑 &middot; 电视节目</title>
+    <!--Bootstrap css-->
+    <css href="__PUBLIC__/bootstrap/css/bootstrap.css" />
+    <!--jquery-ui css-->
+    <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+    <!--customize jquery ui-->
+    <include file="Public/style" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Content/css/index.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Content/css/edit.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Content/css/series.css" />
+</head>
+<body>
+<!--logo datetime home header-->
+<include file="Public/header" />
+<div class="main-wrapper">
+    <!--sidebar-->
+    <div class="sidebar">
+        <ul class="nav nav-stacked">
+            <li role="presentation">
+                <a href="{:U('Index/index')}"><img src="__PUBLIC__/Content/img/down_import.gif" /></a>
+            </li>
+            <!--内容编辑-->
+            <li role="presentation" class="active">
+                <a href="{:U('Edit/index')}"><img src="__PUBLIC__/Content/img/up_edit.gif" /></a>
+            </li>
+            <li role="presentation">
+                <a href="{:U('Search/index')}"><img src="__PUBLIC__/Content/img/down_search.gif" /></a>
+            </li>
+            <li role="presentation">
+                <a href="{:U('Settings/index')}"><img src="__PUBLIC__/Content/img/down_system.gif" /></a>
+            </li>
+        </ul>
+    </div>
+    <!--主体内容-->
+    <div id="childCenter">
+        <div id="editTabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+            <!--标签列表项-->
+            <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+                <li class="ui-state-default ui-corner-top" role="presentation">
+                    <a href="{:U('Edit/index')}">电影</a>
+                </li>
+                <li class="ui-state-default ui-corner-top" role="presentation">
+                    <a href="{:U('Edit/tvplay')}">电视剧</a>
+                </li>
+                <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active" role="presentation">
+                    <a href="{:U('Edit/tvprogram')}">电视节目</a>
+                </li>
+                <li class="ui-state-default ui-corner-top" role="presentation">
+                    <a href="{:U('Edit/video')}">热点视频</a>
+                </li>
+                <li class="ui-state-default ui-corner-top" role="presentation">
+                    <a href="{:U('Edit/opera')}">戏曲</a>
+                </li>
+                <li class="ui-state-default ui-corner-top" role="presentation">
+                    <a href="{:U('Edit/special')}">专题节目</a>
+                </li>
+            </ul>
+            <!--标签内容项-->
+            <!--BEGIN 电视节目标签页-->
+            <div id="editTabs-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+                <!--电视节目左边列表-->
+                <div id="editTabsC-1">
+                    <div class="table editTable">
+                        <div class="editTableTitle">
+                            <ul>
+                                <li class="li-0">&nbsp;</li>
+                                <li class="li-1">NO.</li>
+                                <li class="li-2">文件名称</li>
+                                <li class="li-3">类型</li>
+                                <li class="li-4">大小</li>
+                                <li class="li-5">删除</li>
+                            </ul>
+                        </div>
+                        <div class="editTableContent">
+                            <!--tvprogram-->
+                            <table id="tvprogram-table" class="table-fixed table-edit" border="0">
+                                <tbody>
+                                <foreach name="mediaList" item="vo">
+                                    <tr data-oid="{$vo['oid']}">
+                                        <td class="col-0" title="arrow"><div class="tr_arrow"></div></td>
+                                        <td class="col-1" title="{$key+1}">{$key+1}</td>
+                                        <td class="col-2" title="{$vo['asset_name']}">{$vo['asset_name']}</td>
+                                        <td class="col-3" title="{$mediatype}">{$mediatype}</td>
+                                        <td class="col-4" title="{$vo['size']}">{$vo['size']}</td>
+                                        <td class="col-5" title="delete"><a href="javascript:;" title="删除媒体文件" onclick="delContentClick(this, 3)">删除</a></td>
+                                    </tr>
+                                </foreach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--pagination-->
+                    <div class="panel-footer">
+                        <ul class="pagination">
+                            <li><a href="__URL__/tvprogram.html?p=1">首页</a></li>
+                            <li><a href="__URL__/tvprogram.html?p={$prevpage}">上一页</a></li>
+                            <li><a href="__URL__/tvprogram.html?p={$nextpage}">下一页</a></li>
+                            <li><a href="__URL__/tvprogram.html?p={$totalpage}">尾页</a></li>
+                        </ul>
+                        <div class="pager-stat pager-edit">
+                            第<span id="js-curpage">{$curpage}</span>页/共<span id="js-totalpage">{$totalpage}</span>页
+                            <input type="number" size="3" /><a id="js-jumppage" href="javascript:;">跳转</a>
+                        </div>
+                    </div>
+                </div>
+                <!--电视节目右边详情列表-->
+                <div id="TVShowEpisodeRight">
+                    <input id="js-baseurl" type="hidden" value="__URL__" />
+                    <input id="project_root" type="hidden" value="__ROOT__" />
+
+                    <table class="tab-info">
+                        <tbody>
+                        <tr>
+                            <td><label for="episode-title">所选分集:</label><input type="text" id="episode-title" name="title"></td>
+                            <!--Tv show Episode OID readonly-->
+                            <td><label for="system-name">系统命名:</label><input type="text" id="system-name" value=""></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="episode-tvshow">所属节目集:</label>
+                                <input type="hidden" id="episode-tvshowoid" name="tvshowoid"/>
+                                <input type="text" id="episode-tvshow" />
+                            </td>
+                            <td>
+                                <button type="button" id="js-searchTVShows">查找总节目集</button>
+                                <a id="js-editTVShows" href="__URL__/tvshows">总节目集详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="episode-runtime">时长:</label><input id="episode-runtime" type="number" name="runtime"> 分</td>
+                            <td><label for="episode-actor">嘉宾:</label><input id="episode-actor" type="text" name="actor" ></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <label for="episode-theme">本期主题:</label>
+                                <input id="episode-theme" type="text" name="theme">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <hr>
+                    <ul class="hlist">
+                        <li>
+                            <label for="episode-info">简介:</label>
+                            <textarea id="episode-info" name="introduction" rows="5" cols="50">无</textarea>
+                        </li>
+                        <li>
+                            <label for="js-thumb">缩略图:</label>
+                            <div class="img-wrapper"><img id="js-thumb" class="thumb" src=""></div>
+                        </li>
+                        <li>
+                            <label for="js-poster">海报:</label>
+                            <div class="img-wrapper"><img id="js-poster" class="poster" src=""></div>
+                        </li>
+                        <li>
+                            <label for="jsqrcode">二维码</label>
+                            <div class="img-wrapper"><img id="jsqrcode" class="qrcode" src="" /></div>
+                        </li>
+                    </ul>
+
+                    <!--附件列表 添加附件-->
+                    <table class="attachment">
+                        <tbody>
+                        <!--caption-->
+                        <tr><td>附件</td><td></td></tr>
+                        <!--海报 + 缩略图-->
+                        <tr>
+                            <td>
+                                <!--海报 缩略图 文件列表 thead-->
+                                <table class="appendix-table" border="0" cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                    <tr class="importTableTitle">
+                                        <td colspan="4">
+                                            <ul class="filelisttitle">
+                                                <li class="li-0">&nbsp;</li>
+                                                <li class="li-1">NO.</li>
+                                                <li class="li-2">文件名</li>
+                                                <li class="li-3">大小</li>
+                                                <li class="li-4">类型</li>
+                                                <li class="li-5">操作</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <!--海报 缩略图 文件列表 tbody-->
+                                <div class="AppendixListWrapper">
+                                    <table id="AppendixList" class="table table-fixed">
+                                        <tbody id="js-appendix">
+                                        <!--xhr load movie.js function getAppendixList()-->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                            <td align="center" colspan="2">
+                                <form id="appendix_upload" method="POST" enctype="multipart/form-data" action="__URL__/formUpload" onchange="saveDraft()" >
+                                    <input id="js-attachoid" type="hidden" name="attachoid" />
+                                    <ul class="attach-operate">
+                                        <!--上传文件之前先存草稿-->
+                                        <li><input type="file" name="filename" required /></li>
+                                        <li>
+                                            <label for="attach-type">附件类型: </label>
+                                            <select id="attach-type" name="appendixtypeid">
+                                                <foreach name="appendixtypes" item="vo">
+                                                    <option value="{$vo['id']}">{$vo['appendixtype']}</option>
+                                                </foreach>
+                                            </select>
+                                        </li>
+                                        <li><button id="add-appendix">添加附件</button></li>
+                                    </ul>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <!--备播 + 提交 + 保存草稿-->
+                    <div class="cut">
+                        <label for="js-cut">主文件备播: </label>
+                        <button id="js-cut" onclick="cutMedia()">备播</button>
+                        <span id="js-slicestatus">未备播</span>
+                        <button id="js-submit" onclick="submitEpisode()">提交</button>
+                        <button id="js-save-draft" onclick="saveDraft()">保存草稿</button>
+                        <div id="fb_savedraft"></div>
+                    </div>
+
+                </div>
+            </div>
+            <!--END 电视节目标签页-->
+        </div>
+    </div>
+</div>
+
+<!--查找电视节目 dialog-->
+<div id="searchTVDialog" title="电视节目 / 查找">
+    <div class="dialog-body">
+        <!--按片名查找 电视节目总集-->
+        <div class="form-group">
+            <label for="js-searchname" class="label-loose">片名: </label>
+            <input id="js-searchname" type="text" size="20" />
+            <!--tvprogram.js SearchShowsByCondition()-->
+            <a id="searchTVShowsBut" href="javascript:;" title="search"><span class="ui-icon ui-icon-search"></span>查找</a>
+        </div>
+        <!--电视节目总集列表-->
+        <div class="searchTable">
+            <div class="searchTableTitle">
+                <ul>
+                    <li style="width:24px">&nbsp;</li>
+                    <li style="width:34px">序号</li>
+                    <li style="width:120px">片名</li>
+                    <li style="width:80px">地区</li>
+                    <li style="width:90px">语言</li>
+                    <li style="width:104px">节目类型</li>
+                    <li style="width:87px">播出电视台</li>
+                    <li style="width:66px">导入集数</li>
+                    <li style="width:85px">选择</li>
+                </ul>
+            </div>
+            <div class="searchTableContent">
+                <table id="searchTVShowTable" class="table table-fixed table-series">
+                    <tbody>
+                    <!--xhr load-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 添加电视节目总集 dialog -->
+<div id="addSeriesDialog" title="电视节目 / 添加新电视节目总集">
+    <div class="dialog-body">
+        <form method="post" id="addTVShowsInfo" enctype="multipart/form-data" action="__URL__/newTVShows">
+            <div class="form-group">
+                <label for="shows-title">节 目 名：</label>
+                <input id="shows-title" type="text" name="title" required />
+                <label for="shows-host">主 持 人：</label>
+                <input id="shows-host" type="text" name="host" />
+                <label for="shows-rating">评分: </label>
+                <input id="shows-rating" type="number" name="rating" />
+            </div>
+            <div class="form-group">
+                <label for="shows-sourcefrom">播出电视台：</label>
+                <input id="shows-sourcefrom" type="text" name="sourcefrom" />
+                <label for="shows-tvshowtype">节目类型：</label>
+                <input id="shows-tvshowtype" type="text" name="tvshowtype" />
+            </div>
+            <div class="form-group">
+                <label for="shows-language">语 言：</label>
+                <select id="shows-language" name="languageid">
+                    <option value="0">请选择</option>
+                    <foreach name="langs" item="vo" title="language">
+                        <option value="{$vo['id']}">{$vo['language']}</option>
+                    </foreach>
+                </select>
+                <label for="shows-country">国家地区：</label>
+                <select id="shows-country" name="countryid">
+                    <option value="0">请选择</option>
+                    <foreach name="countries" item="vo">
+                        <option value="{$vo['id']}">{$vo['country']}</option>
+                    </foreach>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="shows-introduction">电视节目简介：</label>
+                <textarea id="shows-introduction" rows="4" cols="80" name="introduction"></textarea>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="DialogRequireTitle" title="电视节目 / 编辑 / 名称为空">
+    <br />
+    <h5><span class="ui-icon ui-icon-alert"></span>必须输入所选分集名称!</h5>
+</div>
+<!--/dialogs-->
+
+<include file="Public/dialogs" />
+
+</body>
+<load href="__PUBLIC__/bootstrap/js/jquery-3.1.1.js" />
+<!--<js href="__PUBLIC__/bootstrap/js/bootstrap.js" />-->
+<js href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js" />
+<!--header date time-->
+<js href="__PUBLIC__/Content/js/index.js" />
+<!--common function-->
+<js href="__PUBLIC__/Common/js/function.js" />
+<!--cookie-->
+<js href="__PUBLIC__/Common/js/cookie.js" />
+<!--内容编辑-->
+<js href="__PUBLIC__/Content/js/edit.js" />
+<!--电视节目-->
+<js href="__PUBLIC__/Content/js/tvprogram.js" />
+</html>

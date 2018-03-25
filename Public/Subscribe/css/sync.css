@@ -1,0 +1,295 @@
+.lcol, .rcol {
+    height: auto;
+}
+
+.ui-tabs .ui-tabs-panel {
+    overflow-x: hidden;
+}
+
+.rcol {
+    width: 560px;
+    padding-left: 10px;
+}
+
+.tab-body {
+    margin-left: -16px;
+    /*background-color: #fefef0;*/
+}
+
+#tabs {
+    height: 610px;
+}
+
+#tabs-1 {
+    font-size: 14px;
+    height: 540px;
+}
+
+.ui-widget-header {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.tableScroll > table {
+    width: 500px;
+}
+
+.scrollHead tr, .scrollBody tr {
+    display: block;
+}
+
+.scrollHead tr {
+    width: 500px;
+}
+
+#sync-1 {
+    width: 500px;
+    border: 2px solid #ccc;
+}
+
+#sync-2 {
+    border: 2px solid #ccc;
+}
+
+#sync-1 tbody.scrollBody, #sync-2 tbody.scrollBody {
+    height: 450px;
+}
+
+#sync-1 tbody tr {
+    height: 30px;
+    line-height: 30px;
+}
+
+thead {
+    color: #2b2b2b;
+    background-color: #7abeed;
+    font-weight: bold;
+}
+
+th, td {
+    font-weight: normal;
+    font-size: 14px;
+    line-height:30px;
+    height: 30px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+td {
+    text-align: center;
+}
+
+#sync-1 thead th.col-0 {width: 40px;}
+#sync-1 thead th.col-1 {width: 120px;}
+#sync-1 thead th.col-2 {width: 60px;}
+#sync-1 thead th.col-3 {width: 70px;}
+#sync-1 thead th.col-4 {width: 80px;}
+#sync-1 thead th.col-5 {width: 110px;}
+
+#sync-1 tbody tr td.col-0 {width: 40px;}
+#sync-1 tbody tr td.col-1 {width: 120px;}
+#sync-1 tbody tr td.col-2 {width: 60px;}
+#sync-1 tbody tr td.col-3 {width: 70px;}
+#sync-1 tbody tr td.col-4 {width: 80px;}
+#sync-1 tbody tr td.col-5 {width: 110px;}
+
+.progress {
+    display: inline-block;
+    width: 130px;
+    overflow-y: hidden;
+}
+
+.progress .ui-progressbar {
+    height: 12px;
+    width: 100px;
+    margin-left: 4px;
+    background: floralwhite;
+}
+
+.ui-dialog-content .progress {
+    width: 200px;
+}
+
+.ui-dialog-content .progress .ui-progressbar {
+    width: 180px;
+}
+
+.ui-dialog-content .progress span {
+    margin-right: 70px;
+}
+
+/*.ui-progressbar .ui-widget-header {  background-color: gold;  }*/
+
+.progress span {
+    display: inline-block;
+    width: 36px;
+    float: right;
+    margin-top: -20px;
+    margin-right: 24px;
+    line-height: 30px;
+}
+
+#sync-2 .scrollHead tr {
+    display: block;
+    width: 560px;
+}
+
+.scrollBody td {
+    display: inline-block;
+}
+
+.tbgrid td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    display: inline-block;
+}
+
+#sync-2 {
+    width: 520px;
+}
+
+#sync-2 tr {
+    display: block;
+    width: 543px;
+}
+
+#sync-2 thead th.col-0 {width: 40px;}
+#sync-2 thead th.col-1 {width: 100px;}
+#sync-2 thead th.col-2 {width: 70px;}
+#sync-2 thead th.col-3 {width: 80px;}
+#sync-2 thead th.col-4 {width: 80px;}
+#sync-2 thead th.col-5 {width: 100px;}
+#sync-2 thead th.col-6 {width: 90px;}
+
+#sync-2 tbody tr td.col-0 {width: 45px;}
+#sync-2 tbody tr td.col-1 {width: 100px;}
+#sync-2 tbody tr td.col-2 {width: 70px;}
+#sync-2 tbody tr td.col-3 {width: 90px;}
+#sync-2 tbody tr td.col-4 {width: 70px;}
+#sync-2 tbody tr td.col-5 {width: 95px;}
+#sync-2 tbody tr td.col-6 {width: 60px;}
+
+.tooltip {
+    width: 400px;
+    padding: 10px 0;
+    float: left;
+}
+
+.tooltip p {
+    padding: 0.2em 0.9em;
+}
+
+.tooltip p strong {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.ui-state-success {
+    background-color: #C9E2B3;
+    border: 1px solid green;
+}
+
+.btnwrapper {
+    width: 120px;
+    float: left;
+    margin-top: 12px;
+    margin-left: 30px;
+}
+
+#fieldset-1, #fieldset-2 {
+    height: 500px;
+    float: left;
+}
+#fieldset-1 {
+    width: 300px;
+}
+#fieldset-2 {
+    width: 700px;
+    margin-left: 30px;
+}
+
+legend {
+    display: block;
+    -webkit-padding-start: 2px;
+    -webkit-padding-end: 2px;
+    text-align: center;
+}
+
+#tab-2 .tab-body {
+    /*background-color: #f1f2d3;*/
+}
+
+.fieldset-body {
+    height:500px;
+    overflow-x: auto;
+    overflow-y: scroll;
+    /*background-color: #f1f2d3;*/
+}
+
+.fieldset-body:last-child {
+    padding: 0 10px;
+}
+
+ul.loglist {
+    background-color: #fefefe;
+    border: 1px solid #ccc;
+}
+
+ul.loglist li {
+    list-style: none;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
+ul.loglist li:nth-child(2n+1) {
+    background-color: #f2f2f2;
+}
+
+ul.loglist li:nth-child(2n) {
+    background-color: inherit;
+}
+
+ul.loglist li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    color: #353535;
+    margin: 0 auto;
+}
+
+ul.loglist li a.active {
+    color: #ffffff;
+    background-color: #007fff !important;
+}
+
+ul.loglist li a:hover {
+    background-color: #CFE2F0;
+}
+
+.tbgrid {
+    border-collapse: collapse;
+}
+
+.ui-progressbar .ui-progressbar-value {
+    margin: 0;
+    height: 100%;
+    border: none;
+}
+.btn {width: 94px;}
+
+.tooltip > .ui-widget > div {
+    display: none;
+}
+
+.tooltip > .ui-widget > div > p > .ui-icon {
+    float: left;
+    margin-right: .3em;
+}
+
+
+.ui-dialog .ui-dialog-title {
+    color: #333;
+}

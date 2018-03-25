@@ -1,0 +1,269 @@
+body {
+    background: rgb(30,55,85) none repeat scroll 0 0;
+    color: #353535;
+    font: 14px/1.5 "tohama", "arial", "sans-serif";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizelegibility;
+    margin: 0;
+}
+
+a {
+    color: #07c;
+    text-decoration: none;
+    cursor: pointer;
+}
+.center {
+    margin: 0 auto;
+    text-align: center;
+}
+
+ul,li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a.selected {background-color: #cfe2f2 !important; }
+
+header {
+    top: 0;
+    width: 1300px;
+    height: 70px;
+    position: relative;
+    background: url('../img/logo_bg.jpg') repeat-x;
+}
+
+#wrapper > header > .logo > .version {
+    position: relative;
+    color: white;
+    font-weight: bold;
+    left: 462px;
+    top: 31px;
+    height: 28px;
+    line-height: 28px;
+    font-size: x-large;
+}
+
+header .home {
+    height: 50px;
+    float: right;
+    margin-right: 20px;
+    margin-top: -19px;
+}
+
+.home > .homeicon > a {
+    display: block;
+    width: 50px;
+    height: 50px;
+}
+
+header > .home > .homeicon > a:hover {
+    color: #3681ba;
+    background: #c4e3f3;
+}
+
+.welcome {
+    height: 50px;
+    line-height: 24px;
+    float: left;
+    color: #f5f5f5;
+    font-size: 16px;
+}
+
+.welcome .user {
+    float: left;
+    padding: 0 10px 0 100px;
+}
+
+.icon-signout {
+    margin-right: 2px;
+    margin-top: -1px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    background: url('../../Home/img/f_icon.png') no-repeat -20px -172px;
+}
+
+.logout {
+    display: inline-block;
+}
+
+.logout:hover{
+    background: none;
+}
+
+.logout:hover > .icon-signout {
+    background: url('../../Home/img/f_icon.png') no-repeat -2px -172px;
+}
+
+.welcome .datetime span {
+    font-family: "NI7SEG";
+    margin-left: 10px;
+}
+
+.welcome .datetime {
+    padding-left: 10px;
+}
+
+.homeicon {
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+}
+
+#wrapper {
+    width: 1300px;
+    height: auto;
+    position: relative;
+    margin: 0 auto;
+    border: 0 solid whitesmoke;
+    -moz-box-shadow: 2px 2px 2px 2px #1e3765;
+    -webkit-box-shadow: 2px 2px 2px 2px #1e3765;
+    box-shadow: 2px 2px 2px 2px #1e3765;
+}
+
+#main-wrapper {
+    width: 1300px;
+    height: 640px;
+    background: aliceblue;
+    position: relative;
+}
+
+#sidebar {
+    position: relative;
+    left: 0;
+    top: 0;
+    float: left;
+    width: 160px;
+    height: 640px;
+    border: none;
+    background-size: 160px 640px;
+}
+
+#main {
+    margin: 0;
+    overflow: visible;
+    width: 1140px;
+    height: 620px;
+    float: left;
+    position: relative;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+}
+
+ul.tab-pages > li {
+    list-style: none;
+    /*background-color: #4cae4c;*/
+    box-sizing: border-box;
+    width: 80px;
+    height: 80px;
+    margin: 20px auto;
+}
+
+ul.tab-pages > li.active {
+    color: #95bcf2;
+    /*background: #fefefe;*/
+}
+
+ul.tab-pages > li > a > img {
+    width: 80px;
+    height: 80px;
+    padding: 2px;
+}
+
+ul.tab-pages > li > a > span {
+    color: #353535;
+    display: inline-block;
+    margin: 0 8px;
+}
+ul.tab-pages > li.active > a > span {
+    color: #2a78e4;
+}
+
+.col-left, .col-right {
+    height: 600px;
+}
+
+.col-left {
+    /*background-color: #4cae4c;*/
+    width: 400px;
+    margin-left: 20px;
+    height: 630px;
+    float: left;
+}
+
+.col-right {
+    /*background-color: #c9e2b3;*/
+    width: 630px;
+    left: 442px;
+    float: left;
+    margin-left: 40px;
+}
+
+.panel-body {
+    background-color: #f2f5f7;
+}
+
+.dialog-body {
+    padding: 10px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.scrollBody > .dumb > .text-center {
+    display: block;
+}
+
+.text-success {
+    color: #3c763d;
+}
+a.text-success:hover,
+a.text-success:focus {
+    color: #2b542c;
+}
+
+.text-info {
+  color: #31708f;
+}
+a.text-info:hover,
+a.text-info:focus {
+  color: #245269;
+}
+.text-danger {
+  color: #a94442;
+}
+a.text-danger:hover,
+a.text-danger:focus {
+  color: #843534;
+}
+.text-primary {
+    color: #337ab7;
+}
+a.text-primary:hover,
+a.text-primary:focus {
+    color: #286090;
+}
+
+.p-20 {
+    padding: 20px;
+}
+
+.p-l-20 {
+    padding-left: 20px;
+}
+
+.p-10 {
+    padding: 10px;
+}
+
+.table-fixed td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}

@@ -1,0 +1,9 @@
+<!--logo + 用户名 + goto home-->
+<div id="header">
+    <div class="version">2.0</div>
+    <a class="tohome" href="__ROOT__/" title="Back to Home Page"><img src="__PUBLIC__/Pushctrl/img/home.png"></a>
+    <div class="welcome">
+        <div class="user"><span>{:session('username')}欢迎你</span></div>
+        <a class="logout" href="{:U('Pushctrl/Login/logout')}" title="logout"><span class="icon-signout"></span></a>
+    </div>
+</div>

@@ -1,0 +1,196 @@
+@charset "utf-8";
+
+.tab-body {
+  height: auto;
+}
+
+.boxes {
+  width: 968px;
+  min-height: 482px;
+  height: auto;
+  border: 2px solid #ccc;
+  box-sizing: content-box;
+}
+
+.box-1, .box-2 {
+  float: left;
+  min-height: 480px;
+  height: auto;
+}
+.box-1 {
+  width: 560px;
+  border-right: 2px solid #ccc;
+}
+.box-2 {
+  width: 400px;
+}
+
+table.scroll {
+  border-collapse: collapse;
+}
+
+#pkgperiod {
+  width: 550px;
+  display: block;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+#pkgperiod tr {
+  height: 30px;
+  line-height: 30px;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+#pkgperiod thead tr {
+  width: 550px;
+  display: block;
+}
+
+#pkgperiod tbody tr {
+  width: 533px;
+  display: block;
+  overflow-x: visible;
+}
+
+#pkgperiod tbody tr:not(.dumb) {
+  cursor: pointer;
+}
+
+#pkgperiod thead {
+  color: #fefefe;
+  background-color: rgba(0, 127, 255, 0.8);
+  font-weight: 400;
+}
+
+#pkgperiod th {
+  font-weight: normal;
+}
+
+#pkgperiod td {
+  text-align: center;
+  font-size: 14px;
+}
+
+#pkgperiod tbody td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+#pkgperiod th.th0 {width: 20px;}
+#pkgperiod th.th1 {width: 50px;}
+#pkgperiod th.th2 {width: 100px;}
+#pkgperiod th.th3 {width: 270px;}
+#pkgperiod th.th4 {width: 110px;  text-align: left;  text-indent: 22px;}
+
+#pkgperiod td.td0 {width: 20px;}
+#pkgperiod td.td1 {width: 50px;}
+#pkgperiod td.td2 {width: 100px;}
+#pkgperiod td.td3 {width: 270px;}
+#pkgperiod td.td4 {width: 60px;}
+
+tbody tr:nth-child(2n) {
+  background: #FFFFFF;
+}
+
+tbody tr:nth-child(2n+1) {
+  /*background: #eff0f1;*/
+  background: #f1f7f7;
+}
+
+tbody tr:hover {
+  background: #cfe2f0;
+}
+
+tbody.scrollBody {
+  overflow-y: scroll;
+  height: 450px;
+}
+
+.box-2 {
+  padding: 20px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.form-group {
+  margin: 20px auto;
+}
+
+.form-group input[type="text"]:focus, .form-group textarea:focus {
+  -webkit-box-shadow: 2px 2px 5px 0 rgba(85, 167, 250, 0.75);
+  -moz-box-shadow: 2px 2px 5px 0 rgba(85, 167, 250,0.75);
+  box-shadow: 2px 2px 5px 0 rgba(85, 167, 250,0.75);
+  border: 1px solid #ccc;
+}
+
+.form-group textarea {
+  padding: 2px;
+}
+
+.box-2 > form > .form-group > label {
+  display: inline-block;
+  width: 70px;
+  float: left;
+  font-stretch: expanded;
+  font-weight: 600;
+  color: #666666;
+}
+
+#period-type:focus {
+  background: transparent;
+}
+
+.form-group a.ui-button {
+  padding: 4px 16px;
+}
+
+.box-2 > form > .form-group:last-child {
+  margin: 0;
+}
+
+.box-2 > form > .form-group:last-child > a.ui-button:first-child {
+  margin-left: 66px;
+}
+
+.box-2 > form > .form-group:last-child > a.ui-button:not(:first-child) {
+  margin-left: 20px;
+}
+
+.ui-dialog-content label[for="desc-1"] {
+  vertical-align: top;
+  display: inline-block;
+  padding-right: 32px;
+}
+
+.dialog .form-group:last-child a:first-child {
+  margin-left: 100px;
+}
+.dialog .form-group:last-child a:last-child {
+  margin-left: 50px;
+}
+
+#tabs-2 label {
+  font-size: 14px;
+}
+
+.path {
+  min-width: 350px;
+  height: 22px;
+  width: auto;
+}
+
+#help-path {
+  margin-left: 100px;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+#tabs-2 {
+  height: 480px;
+}

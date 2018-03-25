@@ -1,0 +1,149 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MBIS权限管理系统</title>
+    <!--css lib: jquery-ui & layer-->
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css">
+    <!-- table stylesheet -->
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Permission/css/css-table.css">
+    <!-- custom module Permission -->
+    <include file="Public/style" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Permission/css/site.css">
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Home/css/login.css">
+</head>
+<body>
+<div id="center">
+    <div id="top_quanxian">
+        <div id="logo">
+            <span class="version">2.0</span>
+            <a id="js_root" class="tohome" href="__ROOT__/" title="Home Page"><div class="home"></div></a>
+            <div class="welcome">
+                <div class="user">
+                    <span id="username">{:session('username')}</span>欢迎你
+                    <a href="{:U('Permission/Login/logout')}" title="logout"><span class="icon-signout"></span></a>
+                </div>
+                <div id="CurrentYear"></div><div id="CurrentTime"></div>
+            </div>
+        </div>
+    </div>
+    <div id="iframe">
+        <!--User permission list-->
+        <table id="travel">
+            <thead>
+            <tr>
+                <th rowspan="2">用户名</th>
+                <th rowspan="2">管理员类型</th>
+                <th colspan="7">权限范围<span class="strong">(*超级管理员权限无法修改)</span></th>
+            </tr>
+            <tr>
+                <th>播发管控</th>
+                <th>内容编辑</th>
+                <th>业务管理</th>
+                <th>广告管理</th>
+                <th>用户管理</th>
+                <th>审核管理</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="js_permission">
+            <!--
+            <tr data-uid="6">
+                <td class="uname">root</td>
+                <td class="super">超级管理员</td>
+                <td class="p_pushcontrol"><input type="checkbox" checked="checked" disabled></td>
+                <td class="p_content"><input type="checkbox" disabled></td>
+                <td class="p_subscribe"><input type="checkbox" disabled></td>
+                <td class="p_advertise"><input type="checkbox" disabled></td>
+                <td class="p_customer"><input type="checkbox" disabled></td>
+                <td class="p_verifier"><input type="checkbox" disabled="true"></td>
+                <td class="operate">
+                    <input type="button" class="getlog" value="查看日志" />
+                    <input type="button" class="edpwd" value="修改密码" />
+                    <input type="button" class="delete" value="删除" disabled />
+                </td>
+            </tr>
+            -->
+        </table>
+        <img id="loading" src="__PUBLIC__/Permission/img/loading.gif">
+        <!--add user operation-->
+        <div class="adduser">
+            <input id="js-add" type="button" class="but_out" value="添加用户">
+        </div>
+    </div>
+</div>
+
+<div id="dialog-1" title="添加新的管理员" class="hide">
+    <form id="form_adduser" action="{:U('Permission/Index/addUser')}" method="post">
+        <div class="form-group">
+            <label for="add_yonghuming">用户名: </label>
+            <input type="text" name="yonghuming" id="add_yonghuming">
+            <span class="text-danger" id="help-1"></span>
+        </div>
+        <div class="form-group">
+            <label for="add_password">密码: </label>
+            <input type="password" name="mima" id="add_password">
+            <span class="text-danger" id="help-2"></span>
+        </div>
+        <div class="form-group">
+            <label for="add_repassword">确认密码: </label>
+            <input type="password" name="remima" id="add_repassword">
+            <span class="text-danger" id="help-3"></span>
+        </div>
+        <div class="form-group">
+            <input type="radio" name="level" value="0" checked="" title="一般管理员">一般管理员
+            <input type="radio" name="level" value="1" title="超级管理员">超级管理员
+            <input type="radio" name="level" value="2" title="审核管理员">审核管理员
+        </div>
+    </form>
+</div>
+
+<div id="dialog-2" title="查看日志" class="hide">
+    <p>System log...</p>
+</div>
+
+<div id="dialog-3" title="修改密码" class="hide">
+    <form id="form_modPwd" method="POST" action="{:U('Permission/Index/modPwd')}">
+        <input type="hidden" value="" name="uid">
+        <div class="form-group">
+            <label for="js_uname">用户名: </label>
+            <input type="text" name="uname" id="js_uname" readonly>
+        </div>
+        <div class="form-group">
+            <label for="oldpwd">原密码: </label>
+            <input type="password" name="pwd" id="oldpwd">
+            <span class="help-block" id="help_1"></span>
+        </div>
+        <div class="form-group">
+            <label for="newpwd">新密码: </label>
+            <input type="password" name="npwd" id="newpwd">
+            <span class="help-block" id="help_2"></span>
+        </div>
+        <div class="form-group">
+            <label for="newpwd">新密码: </label>
+            <input type="password" name="nrepwd" id="renewpwd">
+            <span class="help-block" id="help_3"></span>
+        </div>
+    </form>
+</div>
+<!--confirmation-->
+<div id="dialog-4" title="删除用户?" class="hide">
+    <p><span class="ui-icon ui-icon-alert"></span>确定删除吗？</p>
+</div>
+<div id="dialog-5" title="出错了" class="hide">
+    <p><span class="ui-icon ui-icon-alert"></span><span id="js_error"></span></p>
+</div>
+<div id="dialog-6" title="修改成功" class="hide">
+    <p><span class="ui-icon ui-icon-check"></span><span id="js_success"></span></p>
+</div>
+
+<!--jquery & jquery-ui-->
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js"></script>
+<!--my js func lib-->
+<script type="text/javascript" src="__PUBLIC__/Common/js/function.js"></script>
+<!--for customer page-->
+<script type="text/javascript" src="__PUBLIC__/Permission/js/index.js"></script>
+</body>
+</html>

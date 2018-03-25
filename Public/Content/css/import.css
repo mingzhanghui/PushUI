@@ -1,0 +1,125 @@
+#importTabs {
+    width: 1150px;
+    margin: 25px 0 0 18px;
+}
+
+#importTabs > ul.ui-tabs-nav {
+    height: 29px;
+}
+
+#importTabs > ul.ui-tabs-nav > li {
+    height: 27px;
+    line-height: 27px;
+    padding: 0 10px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+#importTabs-1 {
+    text-align:left;
+    height:500px;
+    background-color: #f2f5f7;
+}
+
+#importLeft {
+    width: 1130px;
+    height: 486px;
+    float: left;
+    text-align: left;
+    border: solid 1px rgb(174,208,234);
+    margin: 0 5px 0 0;
+    background-color: #f2f5f7;
+    border-radius: 6px;
+}
+
+#importFileUrl {
+    width: 516px;
+    height: 470px;
+    border-radius: 6px;
+    text-align: left;
+    border: solid 1px #dddddd;
+    margin: 10px 11px 10px 9px;
+    padding: 1px 10px 0 10px;
+    background-color: #f2f5f7;
+}
+
+#table-today {
+    width: 537px;
+}
+
+#table-today thead,
+#table-today thead tr {
+    width: 537px;
+    height: 24px;
+    line-height: 24px;
+}
+
+#table-today > tbody {
+    width: 537px;
+    height: 390px;
+}
+
+#table-today tbody tr {
+    width: 520px;
+    display: block;
+    height: 27px;
+    line-height: 27px;
+}
+
+#table-today > thead > th, #table-today > tbody > td {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+#table-today > thead > tr > th,
+#table-today > tbody > tr > td {
+    text-align: center;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    height: 24px;
+    line-height: 24px;
+}
+
+#table-today .th0 {  width: 30px;  }
+#table-today .th1 {  width: 30px;  }
+#table-today .th2 {  width: 200px;  }
+#table-today .th3 {  width: 90px;  }
+#table-today .th4 {  width: 80px;  }
+#table-today .th5 {  width: 40px;  }
+
+#table-today .td0 {  width: 30px;  }
+#table-today .td1 {  width: 30px;  }
+#table-today .td2 {  width: 200px;  }
+#table-today .td3 {  width: 80px;  }
+#table-today .td4 {  width: 80px;  }
+#table-today .td5 {  width: 30px;  }
+
+.importTable {
+    height: 320px;
+    margin: 3px;
+}
+
+#table-import {
+    width: 514px;
+    height: 392px;
+    border: 1px solid #aed0ea;
+}
+
+#table-import tr {
+    display: block;
+    width: 513px;
+    height: 26px;
+    cursor: pointer;
+}
+
+#table-import > thead > tr > th,
+#table-import > tbody > tr > td {
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}

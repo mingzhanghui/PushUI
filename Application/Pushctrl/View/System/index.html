@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MBIS播发管理系统 &middot; 系统管理</title>
+  <!--jquery-ui css-->
+  <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+  <!--css img url -->
+  <include file="Public/style" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Pushctrl/css/site.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Pushctrl/css/system.css" />
+</head>
+<body>
+<div id="wrapper">
+  <include file="Public/header" />
+  <div id="content-wrapper">
+    <!--sidebar-->
+    <div id="sidebar">
+      <ul class="tab-pages">
+        <li class="bf"><a href="{:U('Pushctrl/Index/index')}"><img src="__PUBLIC__/Pushctrl/img/down_bf.gif"></a></li>
+        <li class="cx"><a href="{:U('Pushctrl/Query/index')}"><img src="__PUBLIC__/Pushctrl/img/down_cx.gif"></a></li>
+        <li class="xt active"><a href="{:U('Pushctrl/System/index')}"><img src="__PUBLIC__/Pushctrl/img/up_xt.gif"></a></li>
+      </ul>
+    </div>
+    <!--main content-->
+    <div id="childCenter">
+      <div id="main">
+        <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+          <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+            <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+              <a class="tab-title" href="#tabs-2">播发设置</a>
+            </li>
+          </ul>
+          <div id="tabs-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+            <!--ui-server通信结果显示-->
+            <if condition="$ret eq 1">
+              <div class="ui-widget">
+                <div class="ui-state-success ui-corner-all">
+                  <p><span class="ui-icon ui-icon-check"></span>
+                    <strong>成功!</strong>请求同步配置修改成功.</p>
+                </div>
+              </div>
+              <elseif condition="$ret eq 0" />
+              <div class="ui-widget">
+                <div class="ui-state-error ui-corner-all">
+                  <p><span class="ui-icon ui-icon-alert"></span>
+                    <strong>错误:</strong>请求同步配置修改失败!</p>
+                </div>
+              </div>
+              <else />
+              <!--nothing-->
+            </if>
+
+            <form action="{:U()}" method="POST">
+              <div class="form-group">
+                <label for="js_send_ratio">码 率 (Kbps):</label>
+                <input id="js_send_ratio" type="text" size="16" name="send_ratio" value="{$conf.send_ratio}">
+              </div>
+              <div class="form-group">
+                <label for="js_start_time">起始播发时间:</label>
+                <input id="js_start_time" type="text" size="16" name="start_time" value="{$conf.start_time}">
+              </div>
+              <div class="form-group">
+                <label for="js_sync_port">端  口  号:</label>
+                <input id="js_sync_port" type="text" size="16" name="sync_port" value="{$conf.sync_port}">
+              </div>
+              <div class="form-group">
+                <label for="js_ip_addr">IP 地址:</label>
+                <input id="js_ip_addr" type="text" size="16" name="ip_addr" value="{$conf.ip_addr}">
+              </div>
+              <div class="form-group">
+                <label for="js_local_bind">本地绑定地址:</label>
+                <input id="js_local_bind" type="text" size="16" name="local_bind" value="{$conf.local_bind}">
+              </div>
+              <div class="form-group">
+                <label for="js_uPid">Pid:</label>
+                <input id="js_uPid" type="text" size="16" name="uPid" value="{$conf.uPid}">
+              </div>
+              <div class="form-group">
+                <input id="btn_submit" type="submit" value="提交修改" class="ui-button ui-corner-all">
+              </div>
+            </form>
+          </div>
+          <!--end #TABS-2-->
+        </div>
+        <!--END #main-->
+      </div>
+      <!--end #main-->
+    </div>
+    <!--END #childCenter -->
+  </div>
+</div>
+</div>
+</div>
+<!--jquery-->
+<load href="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery-1.7.2.min.js" />
+<js href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js" />
+</body>
+</html>

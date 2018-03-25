@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cms,MBIS内容管理系统">
+    <title>PushUI-2.0&middot;内容编辑&middot;专题节目</title>
+    <!-- Bootstrap css -->
+    <css href="__PUBLIC__/bootstrap/css/bootstrap.css" />
+    <!-- jquery-ui css -->
+    <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+    <!-- customize jquery ui -->
+    <include file="Public/style" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Content/css/index.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Content/css/edit.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Content/css/special.css" />
+    <style>
+        .thumb, .poster {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<!--logo datetime home header-->
+<include file="Public/header" />
+<div class="main-wrapper">
+    <!--sidebar-->
+    <div class="sidebar">
+        <ul class="nav nav-stacked">
+            <li role="presentation">
+                <a href="{:U('Index/index')}"><img src="__PUBLIC__/Content/img/down_import.gif" /></a>
+            </li>
+            <li role="presentation" class="active">
+                <a href="{:U('Edit/index')}"><img src="__PUBLIC__/Content/img/up_edit.gif" /></a>
+            </li>
+            <li role="presentation">
+                <a href="{:U('Search/index')}"><img src="__PUBLIC__/Content/img/down_search.gif" /></a>
+            </li>
+            <li role="presentation">
+                <a href="{:U('Settings/index')}"><img src="__PUBLIC__/Content/img/down_system.gif" /></a>
+            </li>
+        </ul>
+    </div>
+    <!--主体内容-->
+    <div id="childCenter">
+        <!--标签 + 标签内容页-->
+        <div id="editTabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+
+            <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+                <li class="ui-state-default ui-corner-top" role="presentation">
+                    <a href="{:U('Edit/index')}">电影</a></li>
+                <li class="ui-state-default ui-corner-top" role="presentation">
+                    <a href="{:U('Edit/tvplay')}">电视剧</a>
+                </li>
+                <li class="ui-state-default ui-corner-top" role="presentation">
+                    <a href="{:U('Edit/tvprogram')}">电视节目</a>
+                </li>
+                <li class="ui-state-default ui-corner-top" role="presentation">
+                    <a href="{:U('Edit/video')}">热点视频</a>
+                </li>
+                <li class="ui-state-default ui-corner-top" role="presentation">
+                    <a href="{:U('Edit/opera')}">戏曲</a>
+                </li>
+                <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active" role="presentation">
+                    <a href="{:U('Edit/special')}">专题节目</a>
+                </li>
+            </ul>
+
+            <div id="editTabs-6" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+                <!-- 专题节目内容 标签页 -->
+                <div id="editTabsC-1">
+                    <!--专题节目 名称 大小 列表-->
+                    <div class="table editTable">
+                        <div class="editTableTitle">
+                            <ul>
+                                <li class="li-0">&nbsp;</li>
+                                <li class="li-1">NO.</li>
+                                <li class="li-2">文件名称</li>
+                                <li class="li-3">类型</li>
+                                <li class="li-4">大小</li>
+                                <li class="li-5">删除</li>
+                            </ul>
+                        </div>
+                        <div class="editTableContent">
+                            <!--special-->
+                            <table id="special-table" class="table-fixed table-edit" border="0">
+                                <tbody>
+                                <foreach name="mediaList" item="vo">
+                                    <tr data-oid="{$vo['oid']}">
+                                        <td class="col-0" title="arrow"><div class="tr_arrow"></div></td>
+                                        <td class="col-1" title="{$key+1}">{$key+1}</td>
+                                        <td class="col-2" title="{$vo['asset_name']}">{$vo['asset_name']}</td>
+                                        <td class="col-3" title="{$mediatype}">{$mediatype}</td>
+                                        <td class="col-4" title="{$vo['size']}">{$vo['size']}</td>
+                                        <td class="col-5" title="delete">
+                                            <a href="javascript:;" title="删除专题节目" onclick="delContentClick(this, 9)">删除</a>
+                                        </td>
+                                    </tr>
+                                </foreach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--pagination-->
+                    <div class="panel-footer">
+                        <ul class="pagination">
+                            <li><a href="__ACTION__.html?p=1">首页</a></li>
+                            <li><a href="__ACTION__.html?p={$prevpage}">上一页</a></li>
+                            <li><a href="__ACTION__.html?p={$nextpage}">下一页</a></li>
+                            <li><a href="__ACTION__.html?p={$totalpage}">尾页</a></li>
+                        </ul>
+                        <div class="pager-stat pager-edit">
+                            第<span id="js-curpage">{$curpage}</span>页/共<span id="js-totalpage">{$totalpage}</span>页
+                            <input type="number" size="3" /><a id="js-jumppage" href="javascript:;">跳转</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="SpecialRight">
+                    <input id="js-baseurl" type="hidden" value="__URL__" />
+                    <input id="project_root" type="hidden" value="__ROOT__" />
+                    <table class="tab-info">
+                        <tr>
+                            <td><label for="special-episode">所选分集:</label><input id="special-episode" type="text" name="episode" /></td>
+                            <td colspan="2"><label for="system-name">系统命名:</label><input id="system-name" type="text" name="name" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="special-series">所属节目集:</label>
+                                <input id="special-series" type="text" name="title" />
+                                <input id="special-soid" type="hidden" name="soid" />
+                            </td>
+                            <td class="SeriesBtnGrp">
+                                <button id="js-SearchSpecialSeries" class="ui-button">查找总节目集</button>
+                                <a id="js-specialseries" href="{:U('Edit/specialseries')}" class="ui-button">总节目集详情</a>
+                            </td>
+                            <td>
+                                <label for="special-episodeindex">当前集数: </label>
+                                <input id="special-episodeindex" type="number" name="episodeindex" />
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="form-group">
+                        <div><label for="special-introduction">简介:</label></div>
+                        <textarea id="special-introduction" cols="80" rows="5"></textarea>
+                    </div>
+                    <!--自定义属性 + 缩略图 + 海报-->
+                    <div class="form-group">
+                        <!--专题节目单集页 添加自定义属性-->
+                        <div id="attr_fp" class="attr">
+                            <div class="attr-title">
+                                <label>属性信息</label>
+                                <div class="add-attr"><a id="js_AddAttr_fp" href="javascript:;"><span class="glyphicon glyphicon-plus"></span>添加属性</a></div>
+                            </div>
+                            <div class="scroll-table">
+                                <table class="attr-table">
+                                    <tbody id="s_attr_fp">
+                                    <!--xhr load-->
+                                    <!--<tr class="optional"><td><label for="s_attr_1">年级:</label></td><td><input id="s_attr_1" name="s_attr_1" data-attrid="1" type="text"><a href="javascript:;"><span class="badge">&#45;&#45;</span></a></td></tr>-->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="page_img_group" class="img_group">
+
+                            <div class="block">
+                                <label for="jsqrcode">二维码</label>
+                                <div class="qrcode-wrapper"><img id="jsqrcode" class="qrcode" src="" /></div>
+                            </div>
+
+                            <div class="bg">
+                                <label for="eps_thumb">缩略图</label>
+                                <form class="appendix_upload" method="POST" enctype="multipart/form-data" action="__URL__/xhrupload">
+                                    <input type="hidden" class="oid" name="attachoid" value="" />
+                                    <!--缩略图 appendixtype = 1-->
+                                    <input type="hidden" class="attach-type" name="appendixtypeid" value="1" />
+                                    <!--data-id="xxx" 附件ID 用于取消对话框删除附件 -->
+                                    <input id="eps_thumb" type="file" name="filename" data-id="" />
+                                </form>
+                                <div id="js-thumb" class="thumb" title="点击上传缩略图"></div>
+                            </div>
+
+                            <div class="poster-right">
+                                <label for="eps_poster">海报</label>
+                                <form class="appendix_upload" method="POST" enctype="multipart/form-data" action="__URL__/xhrupload">
+                                    <input type="hidden" class="oid" name="attachoid" value=""/>
+                                    <!--海报 appendixtype = 2-->
+                                    <input type="hidden" class="attach-type" name="appendixtypeid" value="2" />
+                                    <input id="eps_poster" type="file" name="filename" data-id="" />
+                                </form>
+                                <div id="js-poster" class="poster" title="点击上传海报"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--备播 保存草稿 提交-->
+                    <div class="cut">
+                        <label for="js-cut">主文件备播: </label>
+                        <button id="js-cut" class="ui-button ui-corner-all ui-widget">备播</button>
+                        <span id="js-slicestatus"><!-- 未备播 --></span>
+                        <button id="js-submit" onclick="submitEpisode()" class="ui-button ui-corner-all ui-widget">提交</button>
+                        <button id="js-save-draft" class="ui-button ui-corner-all ui-widget">保存草稿</button>
+                        <div id="fb_savedraft"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dlg_query_specials" title="专题节目总集 -- 查找">
+    <div class="dialog-body">
+        <!--按片名查找 电视节目总集-->
+        <div class="form-group">
+            <label for="js-searchname" class="label-loose">片名: </label>
+            <div class="input_wrapper">
+                <span class="ui-icon ui-icon-search"></span>
+                <input id="js-searchname" type="text" size="20" placeholder="请输入片名">
+            </div>
+            <!--tvprogram.js SearchShowsByCondition()-->
+            <a id="ssbtn" href="javascript:;" title="search" class="ui-button ui-corner-all ui-widget" role="button">查找</a>
+        </div>
+        <!--电视节目总集列表-->
+        <div class="searchTable">
+            <div class="searchTableTitle">
+                <ul>
+                    <li style="width:24px">&nbsp;</li>
+                    <li style="width:34px">序号</li>
+                    <li style="width:120px">片名</li>
+                    <li style="width:80px">地区</li>
+                    <li style="width:90px">语言</li>
+                    <li style="width:66px">导入集数</li>
+                    <li style="width:85px">选择</li>
+                </ul>
+            </div>
+            <div class="searchTableContent">
+                <table id="searchSpecialsTable" class="table table-fixed table-series">
+                    <tbody id="ss_tbody">
+                    <!-- xhr load -->
+                    <!-- <tr data-soid="S2017032200000000000000000000574" class="selected">
+                      <td class="td-0"><div class="tr_arrow"></div></td>
+                      <td class="td-1">1</td>
+                      <td class="td-2">快乐大本营</td>
+                      <td class="td-3">大陆</td>
+                      <td class="td-4">中语中字</td>
+                      <td class="td-5">10</td>
+                      <td class="td-6"><input type="radio" name="specials" title="radio"></td>
+                    </tr> -->
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BEGIN 单集页面弹出对话框 专题节目--添加新专题节目总集 -->
+<div id="dlg_new_specials" title="专题节目--添加新专题节目总集">
+    <!--<form id="form_new_specials" action="__URL__/newSpecialSeries" enctype="multipart/form-data" target="_frame">-->
+    <input type="hidden" id="js-newsoid" name="soid" />
+    <div class="new_special_left">
+        <div class="form-group">
+            <label for="s_name">节目名: </label>
+            <input id="s_name" type="text" name="name">
+        </div>
+        <div class="form-group">
+            <label for="s_introduction">简介: </label><br />
+            <textarea id="s_introduction" name="introduction" rows="5" cols="40"></textarea>
+        </div>
+        <div class="form-group">
+            <div class="img_group">
+                <div class="s_img_uploader">
+                    <label for="s_thumb">缩略图</label>
+                    <form class="appendix_upload" method="POST" enctype="multipart/form-data" action="__URL__/xhrupload">
+                        <input type="hidden" class="newsoid" name="attachoid" value="" />
+                        <!--缩略图 appendixtype = 1-->
+                        <input type="hidden" class="attach-type" name="appendixtypeid" value="1" />
+                        <!--data-id="xxx" 附件ID 用于取消对话框删除附件 -->
+                        <input id="s_thumb" type="file" name="filename" data-id="" />
+                    </form>
+                    <div class="thumb pic" title="点击上传缩略图"></div>
+                </div>
+                <div class="s_img_uploader">
+                    <label for="s_poster">海报</label>
+                    <form class="appendix_upload" method="POST" enctype="multipart/form-data" action="__URL__/xhrupload">
+                        <input type="hidden" class="newsoid" name="attachoid" value=""/>
+                        <!--海报 appendixtype = 2-->
+                        <input type="hidden" class="attach-type" name="appendixtypeid" value="2" />
+                        <input id="s_poster" type="file" name="filename" data-id="" />
+                    </form>
+                    <div class="poster-sm pic" title="点击上传海报"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="new_special_right">
+        <div class="form-group">
+            <label for="s_countryid">地区:</label>
+            <select id="s_countryid" name="countryid">
+                <option value="0">请选择</option>
+                <foreach name="countries" item="vo">
+                    <option value="{$vo['id']}">{$vo['country']}</option>
+                </foreach>
+            </select>
+            <label for="s_languageid">语言:</label>
+            <select id="s_languageid" name="languageid">
+                <option value="0">请选择</option>
+                <foreach name="langs" item="vo" title="language">
+                    <option value="{$vo['id']}">{$vo['language']}</option>
+                </foreach>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="s_episodes">总集数:</label>
+            <input id="s_episodes" type="number" name="episodes" />
+            <label for="s_genre">类型:</label>
+            <select id="s_genre" name="genreid">
+                <option value="0">请选择</option>
+                <foreach name="genres" item="vo">
+                    <option value="{$vo['id']}">{$vo['genre']}</option>
+                </foreach>
+            </select>
+        </div>
+        <div class="form-group">
+            <!--对话框 添加自定义属性-->
+            <div class="attr">
+                <div class="attr-title">
+                    <label>其他属性信息</label>
+                    <div class="add-attr"><a id="js-AddAttr" href="javascript:;"><span class="glyphicon glyphicon-plus"></span>添加属性</a></div>
+                </div>
+                <div class="scroll-table">
+                    <table class="attr-table">
+                        <tbody id="s_attr">
+                        <!--xhr load-->
+                        <!--<tr class="optional"><td><label for="s_attr_1">年级:</label></td><td><input id="s_attr_1" name="s_attr_1" data-attrid="1" type="text"><a href="javascript:;"><span class="badge">&#45;&#45;</span></a></td></tr>-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--</form>-->
+</div>
+<!--END 专题节目--添加新专题节目总集-->
+
+<div id="dlg_prompt_attr" title="输入属性名称">
+    <div id="form_prompt_attr" data-action="__URL__/newAttr" data-method="get">
+        <div class="form-group">
+            <label for="prompt_attr">属性名称: </label>
+            <input id="prompt_attr" name="name" type="text" />
+        </div>
+    </div>
+</div>
+
+<!--需要先添加总集提示-->
+<div id="dlg_require_series" title="专题节目单集编辑 - 先添加总集">
+    <br />
+    <p><span class="ui-icon ui-icon-alert"></span>还没有选择节目总集!</p>
+</div>
+
+<include file="Public/dialogs" />
+<load href="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js" />
+<js href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js" />
+<!--header date time-->
+<js href="__PUBLIC__/Content/js/index.js" />
+<!--common function-->
+<js href="__PUBLIC__/Common/js/function.js" />
+<!--cookie-->
+<js href="__PUBLIC__/Common/js/cookie.js" />
+<!--内容编辑-->
+<js href="__PUBLIC__/Content/js/edit.js" />
+<!--专题节目-->
+<js href="__PUBLIC__/Content/js/special.js" />
+
+</body>
+</html>

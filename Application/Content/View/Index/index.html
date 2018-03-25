@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Push1.2&middot;内容管理&middot;内容导入</title>
+  <!--Bootstrap css-->
+  <css href="__PUBLIC__/bootstrap/css/bootstrap.css" />
+  <!--jquery-ui css-->
+  <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Content/css/style.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Content/css/index.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Content/css/import.css" />
+</head>
+<body>
+<div class="main-wrapper">
+  <!--logo datetime home header-->
+  <include file="Public/header" />
+  <!--sidebar-->
+  <div class="sidebar">
+    <ul class="nav nav-stacked">
+      <li role="presentation" class="active">
+        <a href="{:U('Index/index')}"><img src="__PUBLIC__/Content/img/up_import.gif" /></a>
+      </li>
+      <li role="presentation">
+        <a href="{:U('Edit/index')}"><img src="__PUBLIC__/Content/img/down_edit.gif" /></a>
+      </li>
+      <li role="presentation">
+        <a href="{:U('Search/index')}"><img src="__PUBLIC__/Content/img/down_search.gif" /></a>
+      </li>
+      <li role="presentation">
+        <a href="{:U('Settings/index')}"><img src="__PUBLIC__/Content/img/down_system.gif" /></a>
+      </li>
+    </ul>
+  </div>
+  <div id="childCenter">
+    <div id="editCenter">
+      <div id="importTabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+          <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+            <a href="importTabs-1">本地文件导入</a>
+          </li>
+        </ul>
+        <div id="importTabs-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+          <div id="importLeft">
+            <div id="importFileUrl" class="list-left panel panel-default">
+              <div class="panel-body">
+                <div class="caption">可导入文件列表: </div>
+                <div class="path">媒体存储目录: <span id="before-import">{$ftppath}</span></div>
+                <!--BEGIN 可导入媒体列表-->
+                <table id="table-import" class="table" border="0" cellspacing="0" cellpadding="0">
+                  <thead>
+                  <tr class="importTableTitle">
+                    <th class="col-0">&nbsp;</th>
+                    <th class="col-1">NO.</th>
+                    <th class="col-2">文件名称</th>
+                    <th class="col-3">大小</th>
+                    <th class="col-4">修改时间</th>
+                    <th class="col-5" title="操作"><input id="js-checkall" type="checkbox" title="全选"></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <foreach name="files" item="vo" >
+                    <tr title="{$vo['name']}">
+                      <td class="col-0" title="arrow"><div class="tr_arrow"></div></td>
+                      <td class="col-1" title="{$offset + $key+1}">{$offset + $key+1}</td>
+                      <td class="col-2" title="{$vo['name']}">{$vo['name']}</td>
+                      <td class="col-3" title="{$vo['size']}">{$vo['size']}</td>
+                      <td class="col-4" title="{$vo['time']}">{$vo['time']}</td>
+                      <td class="col-5" title="操作"><input type="checkbox" name="ftp" value="{$vo['name']}" title="check"></td>
+                    </tr>
+                  </foreach>
+                  </tbody>
+                </table>
+                <!--END 可导入媒体列表-->
+              </div>
+              <div class="panel-footer">
+                <div class="file">
+                  <label for="mediatype">文件类型:</label>
+                  <select title="文件类型" id="mediatype" tabindex="1">
+                    <foreach name="mediatypes" item="media">
+                      <option value="{$media['id']}">{$media['mediatype']}</option>
+                    </foreach>
+                  </select>
+                </div>
+                <input id="js-upload" class="ui-button ui-widget ui-state-default ui-corner-all" type="button"
+                       value="导入" role="button" aria-disabled="false">
+                <!--pagination-->
+                <nav aria-label="...">
+                  <ul class="pager">
+                    <li><a href="__CONTROLLER__/index/?p=1">首页</a></li>
+                    <li><a href="__CONTROLLER__/index/?p={$prevpage}">上一页</a></li>
+                    <li><a href="__CONTROLLER__/index/?p={$nextpage}">下一页</a></li>
+                    <li><a href="__CONTROLLER__/index/?p={$pagecount}">尾页</a></li>
+                  </ul>
+                </nav>
+                <input id="js-urlbase" type="hidden" value="__CONTROLLER__" />
+                <div class="pager-link">
+                  <input id="js-page" type="text" size="3" title="输入页数跳转" />
+                  <a href="javascript:void(0)" id="js-jump" data-url="{:U('Content/Index/index')}">跳转</a>
+                </div>
+                <div class="pager-stat">第<span>{$curpage}</span>页/共<span>{$pagecount}</span>页</div>
+              </div>
+            </div>
+            <!--今日导入列表-->
+            <div id="importRight" class="list-right panel panel-default">
+              <div class="panel-body">
+                <div class="caption">今日导入列表</div>
+                <div class="path">媒体存储目录: <span id="after-import">{$contentpath}</span></div>
+                <div class="importTable">
+                  <table id="table-today" class="table scrollTable">
+                    <thead class="scrollHead importTableTitle">
+                    <tr>
+                      <th class="th0">&nbsp;</th>
+                      <th class="th1">NO</th>
+                      <th class="th2">文件名称</th>
+                      <th class="th3">类型</th>
+                      <th class="th4">大小</th>
+                      <th class="th5">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="scrollBody">
+                    <foreach name="list" item="media" key="k">
+                      <tr>
+                        <td class="td0" title="arrow"><div class="tr_arrow"></div></td>
+                        <td class="td1">{$k+1}</td>
+                        <td class="td2" title="{$media['url']}">{$media['url']}</td>
+                        <td class="td3">{$media['mediatype']}</td>
+                        <td class="td4">{$media['size']}</td>
+                        <td class="td5" data-oid="{$media['oid']}" data-typeid="{$media['mediatypeid']}">
+                          <a href="javascript:" onclick="editMedia(this)">编辑</a>
+                        </td>
+                      </tr>
+                    </foreach>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--BEGIN DIALOG-->
+<div id="requireMedia" title="您未选择媒体!" style="display: none">请您选择要上传的媒体</div>
+
+<div id="Fileformaterror" title="文件格式错误!" style="display: none">请您选择正确的文件格式</div>
+
+<div id="uploadFeedback" title="导入文件" style="display: none"></div>
+
+<div id="loadingInsert" title="正在导入，请稍等" style="display: none;">
+  <img id='loadingInsertGif' src='__PUBLIC__/Content/img/loading.gif'/>
+</div>
+<!--END DIALOG-->
+<!--js lib-->
+<js href="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js" />
+<!--<js href="__PUBLIC__/bootstrap/js/jquery-3.1.1.js" />-->
+<js href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js" />
+<!--js common-->
+<js href="__PUBLIC__/Content/js/index.js" />
+<!--js import for "/PushUI/index.php/Content/Index/index.html" only-->
+<js href="__PUBLIC__/Content/js/import.js" />
+</body>
+</html>

@@ -1,0 +1,194 @@
+<style>
+    #header {
+        background-image: url('__PUBLIC__/Pushctrl/img/logo.jpg');
+    }
+    #sidebar {
+        background-image: url('__PUBLIC__/Pushctrl/img/left_bg.jpg');
+    }
+
+    #childCenter {
+        width:1250px;
+        height:600px;
+        margin: 0;
+        overflow: visible;
+        background-image:url('__PUBLIC__/Pushctrl/img/center_bg.gif');
+        background-repeat:repeat-x;
+    }
+
+    .childrect {
+        margin: 10px 0 5px 10px;
+        width: 930px;
+        height: 80px;
+        background-image: url(/pushui/Public/Pushctrl/img/rect80_bg.gif);
+        background-repeat: no-repeat;
+        background-size: 930px 80px;
+    }
+    .square{ margin:10px 4px 3px 13px;width:303px;height:176px; background-image:url(__PUBLIC__/Pushctrl/img/square_bg.jpg); background-repeat:no-repeat; float:left;}
+
+    .tr_arrow {
+        background-image:  url('__PUBLIC__/Pushctrl/img/tr_bg.gif');
+        background-repeat:no-repeat;
+        width:20px;
+        height:27px;
+        display: inline-block;
+    }
+    .tableTitle {
+        background-image:url(__PUBLIC__/Pushctrl/img/table_title.gif);
+        background-repeat:no-repeat;
+        width:920px;
+        height:35px;
+        text-align:left
+    }
+    .itemPause{background-image:  url(__PUBLIC__/Pushctrl/img/pause.gif) ;margin:1px;}
+    .itemPauseOver{background-image:  url(__PUBLIC__/Pushctrl/img/pauseOver.gif) ; display:none;}
+    .itemDelete{background-image:  url(__PUBLIC__/Pushctrl/img/delete.gif) ;margin:1px;}
+    .itemDeleteOver{background-image:  url(__PUBLIC__/Pushctrl/img/deleteOver.gif) ; display:none;}
+    .itemStop{background-image:  url(__PUBLIC__/Pushctrl/img/stop.gif) ;margin:1px;}
+    .itemStopOver{background-image:  url(__PUBLIC__/Pushctrl/img/stopOver.gif) ; display:none;}
+
+    /* 执行任务功能菜单 */
+    .menuStart{background-image:  url(__PUBLIC__/Pushctrl/img/zxMenu.gif) ; background-position:0px 0px; }
+    .menuStartOver{background-image:  url(__PUBLIC__/Pushctrl/img/zxMenu.gif) ; display:none;background-position:-600px 0px;}
+    .menuPause{background-image:  url(__PUBLIC__/Pushctrl/img/zxMenu.gif) ; background-position:-120px 0px;}
+    .menuPauseOver{background-image:  url(__PUBLIC__/Pushctrl/img/zxMenu.gif) ; display:none; background-position:-720px 0px;}
+    .menuStop{background-image:  url(__PUBLIC__/Pushctrl/img/zxMenu.gif) ; background-position:-240px 0px;}
+    .menuStopOver{background-image:  url(__PUBLIC__/Pushctrl/img/zxMenu.gif) ; display:none;background-position:-840px 0px;}
+    .menuEdit{background-image:  url(__PUBLIC__/Pushctrl/img/zxMenu.gif) ; background-position:-360px 0px;}
+    .menuEditOver{background-image:  url(__PUBLIC__/Pushctrl/img/zxMenu.gif) ; display:none;background-position:-960px 0px;}
+    .menuInsert{background-image:  url(__PUBLIC__/Pushctrl/img/zxMenu.gif) ; background-position:-480px 0px;}
+    .menuInsertOver{background-image:  url(__PUBLIC__/Pushctrl/img/zxMenu.gif) ; display:none;background-position:-1080px 0px;}
+
+    /* 制定任务功能菜单 */
+
+    .menuAdd{background-image:  url(__PUBLIC__/Pushctrl/img/zdMenu.gif) ; background-position:0px 0px; }
+
+    .menuAddOver{background-image:  url(__PUBLIC__/Pushctrl/img/zdMenu.gif) ; display:none;background-position:-600px 0px;}
+
+    .menuDelete{background-image:  url(__PUBLIC__/Pushctrl/img/zdMenu.gif) ; background-position:-120px 0px;}
+
+    .menuDeleteOver{background-image:  url(__PUBLIC__/Pushctrl/img/zdMenu.gif) ; display:none; background-position:-720px 0px;}
+
+    .menuModify{background-image:  url(__PUBLIC__/Pushctrl/img/zdMenu.gif) ; background-position:-240px 0px;}
+
+    .menuModifyOver{background-image:  url(__PUBLIC__/Pushctrl/img/zdMenu.gif) ; display:none;background-position:-840px 0px;}
+
+    .menuMoveUp{background-image:  url(__PUBLIC__/Pushctrl/img/zdMenu.gif) ; background-position:-360px 0px;}
+
+    .menuMoveUpOver{background-image:  url(__PUBLIC__/Pushctrl/img/zdMenu.gif) ; display:none;background-position:-960px 0px;}
+
+    .menuMoveDown{background-image:  url(__PUBLIC__/Pushctrl/img/zdMenu.gif) ; background-position:-480px 0px;}
+
+    .menuMoveDownOver{background-image:  url(__PUBLIC__/Pushctrl/img/zdMenu.gif) ; display:none;background-position:-1080px 0px;}
+
+
+    /* 一组按钮 */
+    .butList { margin:0 auto; list-style-type:none;}
+
+    .butList li { float:left; line-height:30px; width:115px;  text-align:center; margin:5px;  }
+
+    .butList li a{ font-size:14px;background-image:  url(__PUBLIC__/Pushctrl/img/link.gif) ;background-position:0px 0px;display:block; font-weight:bold;}
+
+    .butList li a:link { text-decoration:none; color:#ffffff;}
+
+    .butList li a:visited { text-decoration:none; color:#ffffff;}
+
+    .butList li a:hover { text-decoration:none; color:#ffffff; display:block; background-image:  url(__PUBLIC__/Pushctrl/img/link.gif) ;background-position:-115px 0px;}
+
+    /* 按日期查询 */
+    .move-left {
+        width:20px;
+        height:65px;
+        float:left;
+        cursor:pointer;
+        background-image:url(__PUBLIC__/Pushctrl/img/ori.gif);
+        background-position:0 0;
+        display:block;
+    }
+    .move-left:hover {
+        width: 20px;
+        height: 65px;
+        background-image: url(__PUBLIC__/Pushctrl/img/ori.gif);
+        background-position: -25px 0;
+    }
+    .move-right {
+        width:20px;
+        height:65px;
+        float:left;
+        cursor:pointer;
+        background-image:url(__PUBLIC__/Pushctrl/img/ori.gif);
+        background-position:-50px 0;
+        display:block;
+    }
+    .move-right:hover {
+        width:20px;
+        height:65px;
+        background-image:url(__PUBLIC__/Pushctrl/img/ori.gif);
+        background-position:-75px 0;
+    }
+
+    #dateList{width:890px; height:65px; float:left;overflow:hidden;white-space:nowrap; }
+
+    #dateList ul { margin:0 auto; width:1150px; white-space:nowrap; list-style-type:none; overflow:hidden}
+
+    #dateList ul li { float:left; text-align:center; width:115px;height:65px;}
+
+    .lidate >  a {
+        background-image: url('__PUBLIC__/Pushctrl/img/dateLink.gif');
+        background-position: 0 0;
+        display:block;
+        font-weight:bold;
+        line-height:55px;
+        width:115px;
+        cursor:pointer;
+    }
+
+    .lidate > a:hover, .lidate.cur > a {
+        background-image: url('__PUBLIC__/Pushctrl/img/dateLink.gif');
+        background-position: -115px 0;
+    }
+
+    /* 表格 */
+
+    .searchTable{width:540px; height:180px;margin:10px; }
+
+    #searchVideoTable tr td{border-top: solid 0 #ffffff;border-bottom: solid 0 #c4c4c4}
+
+    /* 表格头部 */
+
+    .searchTableTitle {
+        background-image:url(__PUBLIC__/Pushctrl/img/table_title2.gif);
+        background-repeat:repeat-x;
+        width:540px;
+        height:20px;
+        text-align:left;
+        border-left:solid 0 #aed0ea;
+        border-right:solid 0 #aed0ea;
+    }
+
+    .searchTableTitle ul{ list-style-type:none; margin:0px; padding:0px;  }
+
+    .searchTableTitle ul li{ list-style-type:none; margin:0px; padding:0px;  float:left; color:#ffffff; line-height:20px; font-size:12px; text-align:center; display:block;}
+
+    /* 表格内容 */
+
+    .searchTableContent{width:540px; height:130px; background-color:#212227; color:#ffffff; border-left:solid 1px #4A4B4E; border-right:solid 1px #4A4B4E; border-bottom:solid 1px #4A4B4E; overflow-y:auto;white-space:nowrap;  }
+
+    .tr_arrow2{background-image:  url(__PUBLIC__/Pushctrl/img/tr_bg.gif) ; background-repeat:no-repeat; width:20px; height:27px; display:none; }
+
+    /* 液晶时间 */
+
+    .digitalA { background-image:  url(__PUBLIC__/Pushctrl/img/digital.gif) ; background-repeat:no-repeat; width:21px; height:34px; float:left;background-position:-0px 0px; }
+
+    .digitalB { background-image:  url(__PUBLIC__/Pushctrl/img/digital.gif) ; background-repeat:no-repeat; width:21px; height:34px; float:left;background-position:-0px 0px; }
+
+    /* 自定义进度条 */
+
+    #progressBarBg{background-image:  url(__PUBLIC__/Pushctrl/img/progressBg.gif) ; background-repeat:no-repeat; width:360px; height:18px;  padding-top:8px; }
+
+    #progressBar{ background-image:  url(__PUBLIC__/Pushctrl/img/progressBar.gif) ; background-repeat:no-repeat; width:0; height:3px; }
+
+    .ui-progressbar .ui-progressbar-value { background-image: url('__PUBLIC__/Pushctrl/img/phpThumb_generated_thumbnailpng.png'); }
+
+    .status > div {  background-image: url('__PUBLIC__/Pushctrl/img/square_bg.jpg');  }
+
+</style>

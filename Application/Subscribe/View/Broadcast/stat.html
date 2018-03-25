@@ -1,0 +1,132 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MBIS业务管理2.0 &middot; 播发统计列表</title>
+  <!--jquery-ui css-->
+  <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+  <!--customize jquery-ui css-->
+  <include file="Public/style" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/init.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/common.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/index.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/broadcast.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/turing.css" />
+</head>
+<body>
+<div id="wrapper">
+  <include file="Public/header" />
+  <div id="main-wrapper">
+    <div id="sidebar">
+      <ul class="tab-pages">
+        <li><a href="{:U('Index/index')}"><img src="__PUBLIC__/Subscribe/img/down_a.gif"></a></li>
+        <li><a href="{:U('Subscribe/index')}"><img src="__PUBLIC__/Subscribe/img/down_b.gif"></a></li>
+        <li><a href="{:U('Charge/index')}"><img src="__PUBLIC__/Subscribe/img/charge.svg"></a></li>
+        <li class="active"><a href="{:U('Broadcast/index')}"><img src="__PUBLIC__/Subscribe/img/up_c.gif"></a></li>
+        <li><a href="{:U('Sync/index')}"><img src="__PUBLIC__/Subscribe/img/down_d.gif"></a></li>
+        <li><a href="{:U('Settings/index')}"><img src="__PUBLIC__/Subscribe/img/down_e.gif"></a></li>
+      </ul>
+    </div>
+    <div id="main">
+      <div id="tabs" class="ui-tabs ui-corner-all ui-widget ui-widget-content">
+        <ul role="tablist" class="ui-tabs-nav ui-corner-all ui-helper-reset ui-helper-clearfix ui-widget-header">
+          <li role="tab" tabindex="0" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="false" aria-expanded="false">
+            <a href="{:U('Broadcast/index')}" tabindex="-1" class="ui-tabs-anchor" id="ui-id-1">播发内容列表</a>
+          </li>
+          <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab  ui-tabs-active ui-state-active" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="true" aria-expanded="true">
+            <a href="{:U('Broadcast/stat')}" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">播发统计列表</a>
+          </li>
+          <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false">
+            <a href="{:U('Broadcast/history')}" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">播发历史记录</a>
+          </li>
+          <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-4" aria-labelledby="ui-id-4" aria-selected="false" aria-expanded="false">
+            <a href="{:U('Broadcast/control')}" tabindex="-1" class="ui-tabs-anchor" id="ui-id-4">播发总量控制</a>
+          </li>
+        </ul>
+        <div id="tabs-1" aria-labelledby="ui-id-1" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;"></div>
+        <!--播发统计列表 BEGIN-->
+        <div id="tabs-2" aria-labelledby="ui-id-2" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="false" style="display: block;">
+          <div class="tab-body">
+            <!--查询日期-->
+            <div class="form-group query">
+              <form method="GET" action="{:U()}">
+                <div class="date">
+                  <label for="datepicker-2">查询日期</label>
+                  <input id="datepicker-2" name="date" class="datepicker" type="text" placeholder="yyyy-mm-dd" value="{$date}"/>
+                </div>
+                <div class="widget">
+                  <button type="submit" class="ui-button ui-widget ui-corner-all">查询</button>
+                </div>
+              </form>
+
+            </div>
+            <!--日期游标-->
+            <div class="form-group">
+              <!--<div class="arrow move-left"></div>-->
+              {$moveLeft}
+              <div class="cursor">
+                {$uldate}
+              </div>
+              <!--<div class="arrow move-right"></div>-->
+              {$moveRight}
+            </div>
+            <!--业务包播发统计列表-->
+            <div class="form-group list">
+              <table id="statlist" class="scroll">
+                <thead class="scrollHead">
+                <tr>
+                  <th class="th0"><div class="tr_arrow"></div></th>
+                  <th class="th1">业务包名</th>
+                  <!--<foreach name="datelist" item="vo" key="k" >-->
+                    <!--<th class="th{$k+1}">{$vo}</th>-->
+                  <!--</foreach>-->
+                  <!--<th class="th8">2017-02-12</th>-->
+                </tr>
+                </thead>
+                <tbody class="scrollBody" id="js_list_stat" data-url="{:U('Subscribe/Broadcast/listDateStat')}">
+                <!--
+                <tr>
+                  <td class="td0"><div class="tr_arrow"></div></td>
+                  <td class="td1">总量</td>
+                  <td class="td2">0.00 G</td>
+                  <td class="td3">0.00 G</td>
+                  <td class="td4">0.29 G</td>
+                  <td class="td5">0.29 G</td>
+                  <td class="td6">0.29 G</td>
+                  <td class="td7">0.29 G</td>
+                  <td class="td8">0.00 G</td>
+                </tr>
+                -->
+                </tbody>
+              </table>
+            </div>
+          </div>  <!--END .tab-body-->
+        </div>
+        <!--播发统计列表 END-->
+        <div id="tabs-3" aria-labelledby="ui-id-3" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;"></div>
+        <div id="tabs-4" aria-labelledby="ui-id-4" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<load href="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js" />
+<js href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js" />
+<js href="__PUBLIC__/Subscribe/js/index.js" />
+<script>
+    $(function() {
+        $('#datepicker-2').datepicker({
+            dateFormat: 'yy-mm-dd',
+            showOn: "button",
+            buttonImage: "__PUBLIC__/Subscribe/img/calendar.svg",
+            buttonImageOnly: true,
+            title: "点击选择日期"
+        });
+        $( ".widget input[type=submit], .widget a, .widget button" ).button();
+    });
+</script>
+<script type="text/javascript" src="__PUBLIC__/Subscribe/js/stat.js"></script>
+</body>
+</html>

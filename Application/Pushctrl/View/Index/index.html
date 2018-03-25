@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="播发状态 MBIS播发管理系统2.0 播发进度 系统运行状态 网络运行状态 数据修复状态" />
+    <title>MBIS播发管理系统2.0 &middot; 播发状态</title>
+    <!--jquery-ui css-->
+    <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+    <!--css img url -->
+    <include file="Public/style" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Pushctrl/css/site.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Pushctrl/css/index.css" />
+</head>
+<body>
+<div id="wrapper">
+    <include file="Public/header" />
+    <div id="content-wrapper">
+        <!--侧边选项卡 播发状态 / 查询任务 / 系统管理-->
+        <div id="sidebar">
+            <ul class="tab-pages">
+                <!--播发状态-->
+                <li class="active"><a href="{:U('Pushctrl/Index/index')}"><img src="__PUBLIC__/Pushctrl/img/up_bf.gif"></a></li>
+                <li><a href="{:U('Pushctrl/Query/index')}"><img src="__PUBLIC__/Pushctrl/img/down_cx.gif"></a></li>
+                <li><a href="{:U('Pushctrl/System/index')}"><img src="__PUBLIC__/Pushctrl/img/down_xt.gif"></a></li>
+            </ul>
+        </div>
+        <!--中间和右边的内容-->
+        <div id="childCenter">
+            <!--中间主体内容-->
+            <div id="main">
+                <!--broadcast progress bar & current date time-->
+                <div class="childrect">
+                    <table id="jumbotron">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div id="progressbarValue" data-url="{:U('Pushctrl/Index/getSystemState')}">播发进度：0%</div><br />
+                                <div id="progressBarBg">
+                                    <!--播发总进度 的进度条 $("#progressBar").css("width", 'xx%');-->
+                                    <div id="progressBar"></div>
+                                </div>
+                            </td>
+                            <td><div id="time1"></div><div id="time2"></div></td>
+                            <td>
+                                <div id="currentTime">
+                                    <label class="curtime">当前时间：</label>
+                                    <div class="digitalB" ></div>
+                                    <div class="digitalB" ></div>
+                                    <div class="digitalB" ></div>
+                                    <div class="digitalB" ></div>
+                                    <div class="digitalB" ></div>
+                                    <div class="digitalB" ></div>
+                                    <div class="digitalB" ></div>
+                                    <div class="digitalB" ></div>
+                                </div>
+                                <div id="currentDate"></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--thead-->
+                <div class="tabletitle-wrapper">
+                    <table id='tab_list' class="table">
+                        <thead>
+                        <tr class="tableTitle">
+                            <th class="th-1">&nbsp;</th>
+                            <th class="th-2">No.</th>
+                            <th class="th-3">业务包</th>
+                            <th class="th-4">业务期</th>
+                            <th class="th-5">内容名称</th>
+                            <th class="th-6">类型</th>
+                            <th class="th-7">大小</th>
+                            <th class="th-8">轮次</th>
+                            <th class="th-9">进度</th>
+                            <th class="th-10">选择</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!--播发状态列表 tbody-->
+                <table class="table table-mid clearfix">
+                    <!-- 播发进度条  -->
+                    <tbody id="videoTable" data-url="{:U('Pushctrl/Index/listPush')}">
+                    <!--
+                <tr class="bf_tr_v">
+                    <td class="tr_arrow"></td>
+                    <td>$k+1</td>
+                    <td title="$v.PackageName ">PackageName</td>
+                    <td title="$v.MissionName">MissionName</td>
+                    <td title="$v.Asset_Name">asset name</td>
+                    <td title="$v.MediaTypeName">name</td>
+                    <td title="$v.Size">size</td>
+                    <td title="$v.Ratio/100 %">10/10</td>
+                    <td>
+                        <div>
+                            <span class="progress-value">100%</span>
+                            <div class="tdProItem3 ui-progressbar ui-widget ui-widget-content ui-corner-all"
+                                 role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20">
+                                <div class="ui-progressbar-value ui-widget-header ui-corner-left"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input type='radio' name='OID' value="$v.OID" title="select package" /></td>
+                </tr>
+                -->
+                    </tbody>
+                </table>
+                <!--tfoot-->
+                <div class="tableBottom"></div>
+
+                <!--各种状态-->
+                <div class="status">
+                    <!--系统运行状态-->
+                    <div id="systemState">
+                        <div class="state-header">系统运行状态</div>
+                        <ul>
+                            <li class="item">
+                                <div class="item-title">CPU</div>
+                                <div class="ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                    <!--style="width:  $v.Ratio/100 %; background-color:#47B5DE;"-->
+                                    <div id="pb_cpurate" class="ui-progressbar-value ui-widget-header ui-corner-left"></div>
+                                </div>
+                                <div id="pbv_cpu" class="pbv">0%</div>
+                            </li>
+                            <li class="item">
+                                <div class="item-title">内存</div>
+                                <div class="ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                    <div id="pb_ramrate" class="ui-progressbar-value ui-widget-header ui-corner-left"></div>
+                                </div>
+                                <div id="pbv_ram" class="pbv">0%</div>
+                            </li>
+                            <li class="item">
+                                <div class="item-title">空间</div>
+                                <div class="ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                    <div id="pb_hdiskrate" class="ui-progressbar-value ui-widget-header ui-corner-left"></div>
+                                </div>
+                                <div id="pbv_hdisk" class="pbv">0%</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--网络运行状态-->
+                    <div id="networkState">
+                        <div class="state-header">网络运行状态</div>
+                        <ul>
+                            <li class="item">
+                                <div class="item-title">广播网络</div>
+                                <div id="js_bcn" data-url="{:U('Pushctrl/Index/getNetState')}" data-path="__PUBLIC__/Pushctrl/js/echarts"></div>
+                            </li>
+                            <li class="item">
+                                <div class="item-title">双向网络</div>
+                                <div id="js_ip"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--数据修复状况-->
+                    <div id="dataRepair">
+                        <div class="state-header">数据修复状态</div>
+                        <div id="js_bb" data-url="{:U('Pushctrl/Index/getbbcounter')}" data-path="__PUBLIC__/Pushctrl/js/echarts"></div>
+                    </div>
+                </div>
+            </div>
+            <!--片名 类型 简介-->
+            <include file="Public/aside" />
+        </div>
+    </div>
+    <!-- END #childCenter-->
+</div>
+<!--END #wrapper-->
+<!--jquery-->
+<load href="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js" />
+<!--js lib-->
+<script type="text/javascript" src="__PUBLIC__/Pushctrl/js/echarts/echarts.js"></script>
+<!--my js files-->
+<script src="__PUBLIC__/Common/js/cookie.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Pushctrl/js/common.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Pushctrl/js/broadcast.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+a {
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+.glyphicon {
+    color: #c0c0c0;
+}
+
+#c {
+    background-image: url('../img/bg1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+    padding: 160px 0 30px 0;
+    height: 578px;
+    min-width: 960px;
+}
+
+.top_bg {
+    background-image: url('../img/top.png');
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    padding: 0;
+    height: 140px;
+    width: 900px;
+}
+
+.login {
+    box-shadow: 2px 4px 6px #000;
+    height: 320px;
+    width: 890px;
+    margin: 0 auto;
+    background: rgba(0,0,0,0.28);
+}
+
+#LoginPanel {
+    position: relative;
+    color: #f5f5f5;
+}
+
+#LoginPanel > .panel-body {
+    margin: 40px 100px;
+}
+
+#LoginPanel > .panel-body > .module {
+    margin: 0 20px;
+}
+
+#LoginPanel form {
+    display: block;
+    width: 400px;
+    float: left;
+}
+
+.module {
+    width: 170px;
+    height: 154px;
+    border: 2px solid transparent;
+    float: left;
+}
+
+.module:hover {
+    border: 2px solid #11b5cf;
+}
+
+.permission {
+    background-image: url('../../../Public/Home/img/rz.png');
+}
+
+.content {
+    background-image: url('../../../Public/Home/img/bs.png');
+}
+
+.subscribe {
+    background-image: url('../../../Public/Home/img/dy.png');
+}
+
+.pushcontrol {
+    background-image: url('../../../Public/Home/img/bf_3.png');
+}
+
+.advertise {
+    background-image: url('../../../Public/Home/img/gk.png');
+}
+
+.customer {
+    background-image: url('../../../Public/Home/img/yh.png');
+}
+
+.module > span {
+    display: inline-block;
+    color: #dbefd2;
+    margin: 110px 0 0 60px;
+}
+
+.module:hover > span {
+    color: #FFFFFF;
+}
+
+.h30 {
+    margin-top: 20px;
+    line-height: 45px;
+    text-align: center;
+    color: #d7e3fb;
+}
+
+.center {
+    width: 906px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.has-feedback .form-control {
+    padding-right: 0;
+}
+
+.icon-signout {
+    margin-right: 2px;
+    margin-top: -1px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    background: url('../img/f_icon.png') no-repeat -20px -172px;
+}
+
+.icon-signout:hover {
+    background: url('../img/f_icon.png') no-repeat -2px -172px;
+}
+
+#LoginPanel > .panel-body > form > .row {
+    margin-right: 0;
+}
+
+#LoginPanel > .panel-body > form > .form-group > .form-control {
+    padding: 2px 4px 2px 8px;
+}
+
+#LoginPanel > .panel-footer {
+    background-color: transparent;
+    padding: 0;
+    border: 0;
+}
+
+#LoginPanel > .panel-footer > a {
+    display: inline-block;
+    float: right;
+    margin-top: -20px;
+    line-height: 40px;
+}
+
+.text {
+    color: #f5f5f5;
+    text-decoration: none;
+}
+
+.text:hover {
+    color: #ffffff;
+}
+
+.btn-flat {
+    letter-spacing: .5em;
+}
+
+.checkbox > label > input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+}
+

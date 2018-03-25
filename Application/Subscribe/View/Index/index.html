@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MBIS业务管理 -- 业务管理</title>
+  <!--jquery-ui css-->
+  <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+  <!--customize jquery-ui css-->
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/style.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/common.css" />
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Subscribe/css/index.css" />
+  <style>
+    .imgcontainer {
+      margin: 0 auto;
+      width: 380px;
+    }
+    .imgcontainer > img {
+      width: 164px;
+      height: 164px;
+      margin-right: 20px;
+      display: block;
+      border: 1px solid #ccc;
+      float: left;
+    }
+    .col-right > .panel-body > .btn-groups {
+      display: inline-flex;
+      margin-left: 200px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<input type="hidden" id="js-indexcontroller" value="{:U('Subscribe/Index/index')}" />
+
+<div id="wrapper">
+  <include file="Public/header" />
+  <div id="main-wrapper">
+    <aside id="sidebar">
+      <ul class="tab-pages">
+        <li class="active"><a href="javascript:void(0)"><img src="__PUBLIC__/Subscribe/img/up_a.gif"></a></li>
+        <li><a href="{:U('Subscribe/index')}"><img src="__PUBLIC__/Subscribe/img/down_b.gif"></a></li>
+        <li><a href="{:U('Charge/index')}"><img src="__PUBLIC__/Subscribe/img/charge.svg"></a></li>
+        <li><a href="{:U('Broadcast/index')}"><img src="__PUBLIC__/Subscribe/img/down_c.gif"></a></li>
+        <li><a href="{:U('Sync/index')}"><img src="__PUBLIC__/Subscribe/img/down_d.gif"></a></li>
+        <li><a href="{:U('Settings/index')}"><img src="__PUBLIC__/Subscribe/img/down_e.gif"></a></li>
+      </ul>
+    </aside>
+    <div id="main">
+      <!--业务包列表-->
+      <div class="col-left">
+        <div class="panel-title">
+          <div class="tab">
+            <a href="javascript:;" onclick="resetPackage('js-package-tree')">业务包列表</a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="scroll-list">
+            <div class="scroll-inner">
+              <div class="square"></div><span><a href="javascript:;" onclick="resetPackage('js-package-tree')">业务包列表</a></span>
+              <!--加载业务包树-->
+              <div id="js-package-tree">
+                <!--tree xhr load index.js-->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="btn-groups">
+            <a id="btn-add-pkg" class="btn" href="javascript:;">添加业务包</a>
+            <a id="btn-del-pkg" class="btn" href="javascript:;" onclick="delPackage()">删除业务包</a>
+          </div>
+        </div>
+      </div>
+      <!--业务包修改-->
+      <div class="col-right">
+        <div class="panel-title">
+          <div class="tab">业务包修改</div>
+        </div>
+        <div class="panel-body">
+          <input id="js-packageinfo-url" type="hidden" value="{:U('Subscribe/Index/getPackageInfo')}"/>
+          <form id="js-edit-package" enctype="multipart/form-data">
+            <input id="js-package-id" type="hidden" name="ID" />
+            <table class="pkg">
+              <tr>
+                <td><label for="pkg-name">业务包名称: </label></td>
+                <td><input id="pkg-name" type="text" name="PackageName"/></td>
+                <td><label for="pkg-period">订阅周期: </label></td>
+                <td>
+                  <select id="pkg-period" title="订阅周期" name="UpdateCycleTypeID">
+                    <foreach name="updateCycleTypeList" item="vo" >
+                      <option value="{$vo.id}">{$vo.updatecycletype}</option>
+                    </foreach>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="pkg-tpl">业务包模板: </label></td>
+                <td>
+                  <select id="pkg-tpl" name="PackageTemplateID" title="业务包模板">
+                    <foreach name="packagetpllist" item="vo">
+                      <option value="{$vo.packagetemplateid}">{$vo.description}</option>
+                    </foreach>
+                  </select>
+                </td>
+                <td><label for="pkg-type">业务包类型</label></td>
+                <td>
+                  <select id="pkg-type" name="PackageTypeID" title="业务包类型">
+                    <foreach name="packagetypelist" item="vo">
+                      <option value="{$vo.packagetypeid}">{$vo.description}</option>
+                    </foreach>
+                  </select>
+                </td>
+              </tr>
+            </table>
+            <div class="charge">
+              <div class="free">
+                <label for="pkg-charge">费用类型: </label>
+                <input id="radioFree" type="radio" value="0" name="charge" /> 免费
+              </div>
+              <div class="pay">
+                <input id="radioCharge" type="radio" name="charge" value="1" checked /> 收费
+                <div id="spec" class="pay-spec">
+                  <input id="pkg-charge" type="number" name="Price" size="8" value="0"/> 元
+                  <span class="blur">示例: 12.0</span>
+                  <label for="pkg-pay-period">计费周期</label>
+                  <select id="pkg-pay-period" name="ChargeTypeID">
+                    <option value="0">--</option>
+                    <volist name="chargeTypeList" id="vo">
+                      <option value="{$vo.chargetypeid}">按{$vo.chargetypename}</option>
+                    </volist>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="info">
+              <label for="pkg-info">简介</label><br />
+              <textarea id="pkg-info" name="PackageDescription" cols="68" rows="4" placeholder="无"></textarea>
+            </div>
+
+            <div class="pic">
+              <div class="inputpic">
+                <label for="pkg-pic">业务包图片: </label>
+                <input id="js-imgname" type="text" value="" />
+              </div>
+              <div class="inputfile">
+                <div class="folder-open"><img src="__PUBLIC__/Subscribe/img/folder.svg" /></div>
+                <div class="file"><input id="pkg-pic" type="file" name="pic" title="点击上传业务包图片"/></div>
+              </div>
+              <br />
+              <div class="imgcontainer">
+                <img id="pkg-thumb" class="sample" src="" title="业务包图片"/>
+                <img id="pkg-qrcode" class="qrcode" src="" title="业务包二维码" />
+              </div>
+            </div>
+          </form>
+          <div class="btn-groups">
+            <a class="btn" href="javascript:;" onclick="editPackage()">保存</a>
+            <a class="btn" href="javascript:;" onclick="delPackage()">删除</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!--dialogs BEGIN-->
+<div id="DialogAddPackage" title="添加新的业务包">
+  <form id="js-newpkg" action="" method="post" enctype="multipart/form-data">
+    <!--新建业务包 选中元素 的ID-->
+    <input id="js-id" type="hidden" name="sel_id" value="0" />
+    <!--新建业务包 选中元素 的父级ID-->
+    <input id="js-pid" type="hidden" name="sel_pid" value="0" />
+    <table>
+      <tr>
+        <td><label for="n-name">业务包名称: </label></td>
+        <td><input id="n-name" type="text" name="PackageName" required/></td>
+        <td><label for="n-period">订阅周期: </label></td>
+        <td>
+          <select id="n-period" title="订阅周期" name="UpdateCycleTypeID">
+            <foreach name="updateCycleTypeList" item="vo" >
+              <option value="{$vo.id}">{$vo.updatecycletype}</option>
+            </foreach>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="n-tpl">业务包模板: </label></td>
+        <td>
+          <select id="n-tpl" name="PackageTemplateID" title="业务包模板">
+            <foreach name="packagetpllist" item="vo">
+              <option value="{$vo.packagetemplateid}">{$vo.description}</option>
+            </foreach>
+          </select>
+        </td>
+        <td><label for="n-type">业务包类型</label></td>
+        <td>
+          <select id="n-type" name="PackageTypeID" title="业务包类型">
+            <foreach name="packagetypelist" item="vo">
+              <option value="{$vo.packagetypeid}">{$vo.description}</option>
+            </foreach>
+          </select>
+        </td>
+      </tr>
+    </table>
+    <div class="charge">
+      <div class="free">
+        <label for="n-charge">费用类型: </label>
+        <input id="js_charge_free" type="radio" name="charge" /> 免费
+      </div>
+      <div class="pay">
+        <input type="radio" name="charge" checked/> 收费
+        <div class="pay-spec">
+          <input id="n-charge" name="Price" type="number" size="8" /> 元
+          <span class="blur">示例: 12.0</span>
+          <label for="n-pay-period">计费周期</label>
+          <select id="n-pay-period" name="ChargeTypeID">
+            <volist name="chargeTypeList" id="vo">
+              <option value="{$vo.chargetypeid}">按{$vo.chargetypename}</option>
+            </volist>
+          </select>
+        </div>
+      </div>
+      <script>
+        (function() {
+          var free = document.getElementById("js_charge_free");
+          free.onchange = function() {
+            if (this.checked) {
+              document.getElementById("n-charge").value = 0;
+              document.getElementById("n-pay-period").value = 0;
+            }
+          };
+        })();
+      </script>
+    </div>
+    <!--END charge-->
+    <div class="info">
+      <label for="n-info">简介</label><br />
+      <textarea id="n-info" cols="50" rows="4" placeholder="" name="PackageDescription"></textarea>
+    </div>
+    <br />
+    <div class="pic">
+      <label for="n-pic">业务包图片: </label>
+      <input id="n-pic" type="file" name="pic" style="display: block"/>
+    </div>
+    <br />
+  </form>
+</div>
+<!--END 添加新的业务包 modal-->
+<div id="DialogRequireID" title="没有选择业务包">
+  <p>没有选择业务包!</p>
+</div>
+<div id="DialogEditSuccess" title="业务包保存成功!">
+  <p>业务包保存成功!</p>
+</div>
+<div id="DialogEditFailed" title="业务包保存失败!">
+  <p>业务包保存失败!</p>
+</div>
+<div id="DialogDelPackage" title="确认删除业务包">
+  <p>确定要删除业务包<span id="js-confirm-name"></span></p>
+</div>
+<div id="DialogAddFailed" title="业务包添加失败!">
+  <p><span class="ui-icon ui-icon-alert"></span><span id="js_feedback"></span></p>
+</div>
+
+<load href="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js" />
+<js href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js" />
+<!--cookie-->
+<js href="__PUBLIC__/Common/js/cookie.js" />
+<!--common-->
+<js href="__PUBLIC__/Subscribe/js/index.js" />
+<js href="__PUBLIC__/Subscribe/js/package.js" />
+<js href="__PUBLIC__/Subscribe/js/edit.js" />
+</body>
+</html>

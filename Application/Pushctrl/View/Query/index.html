@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MBIS播发管理系统2.0 &middot; 查询任务</title>
+    <!--jquery-ui css-->
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui-1.8.21.custom.css" />
+    <!--css img url -->
+    <include file="Public/style" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Pushctrl/css/site.css" />
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/Pushctrl/css/query.css" />
+</head>
+<body>
+<div id="wrapper">
+    <include file="Public/header" />
+    <div id="content-wrapper">
+        <!--sidebar-->
+        <div id="sidebar">
+            <ul class="tab-pages">
+                <li class="bf"><a href="{:U('Pushctrl/Index/index')}"><img src="__PUBLIC__/Pushctrl/img/down_bf.gif"></a></li>
+                <li class="cx active"><a href="{:U('Pushctrl/Query/index')}"><img src="__PUBLIC__/Pushctrl/img/up_cx.gif"></a></li>
+                <li class="xt"><a href="{:U('Pushctrl/System/index')}"><img src="__PUBLIC__/Pushctrl/img/down_xt.gif"></a></li>
+            </ul>
+        </div>
+        <!--main content-->
+        <div id="childCenter">
+            <!--中间 日期输入 + 日期游标 + 播发列表 -->
+            <div id="main">
+                <div class="date-input">
+                    <!--date form-->
+                    <div class="form-wrapper">
+                        <form method="GET" action="{:U()}">
+                            <div class="input-wrapper">
+                                <input id="js_date" type="text" name="date" value="{$date}" title="datepicker date input">
+                            </div>
+                            <!--.date-submit {background-image: url('');}-->
+                            <a id="js_submit" class="submit"><img src="__PUBLIC__/Pushctrl/img/search.gif" /></a>
+                        </form>
+                    </div>
+                    <!--日期游标-->
+                    <div class="date-cursor">
+                        {$moveLeft}
+                        {$ul}
+                        {$moveRight}
+                    </div>
+                </div>
+                <!--播发列表-->
+                <div class="broadcast">
+                    <table class="table table-fixed">
+                        <thead class="scrollHead">
+                        <tr class="tableTitle">
+                            <th class="th-0">&nbsp;</th>
+                            <th class="th-1">No.</th>
+                            <th class="th-2">内容名称</th>
+                            <th class="th-3">类型</th>
+                            <th class="th-4">大小</th>
+                            <th class="th-5">轮次</th>
+                            <th class="th-6">播发状态</th>
+                            <th class="th-7">选择</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tasklist" class="scrollBody">
+                        <volist name="tasklist" id="vo" empty="$empty">
+                            <tr data-oid="{$vo.oid}" title="{$vo.asset_name}">
+                                <td><div class="tr_arrow"></div></td>
+                                <td>{$i}</td>
+                                <td>{$vo.asset_name}</td>
+                                <td>{$vo.mediatype}</td>
+                                <td>{$vo.size}</td>
+                                <td>{$vo.round}</td>
+                                <td>{$vo.status}</td>
+                                <td><input type="radio" name="task" title="task" value="{$vo.oid}" /></td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div>
+                <!--END .broadcast-->
+            </div>
+            <!--aside 名称 图片 简介-->
+            <include file="Public/aside" />
+        </div>
+        <!--END #childCenter-->
+    </div>
+    <!--END #content-wrapper-->
+</div>
+<!--END #wrapper-->
+
+<!--jquery-->
+<script src="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery-1.7.2.min.js"></script>
+<js href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui-1.8.21.custom.min.js" />   <!--datepicker-->
+
+<!--<script src="__PUBLIC__/Common/js/cookie.js"></script>-->
+<script type="text/javascript" src="__PUBLIC__/Pushctrl/js/common.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Pushctrl/js/query.js"></script>
+
+</body>
+</html>

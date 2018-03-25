@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MBIS广告管理系统&middot;统计报表&middot;暂停广告</title>
+  <!--jquery ui css-->
+  <css href="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.css" />
+  <!--custom css-->
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Ads/css/site.css" />
+  <!--custom css-->
+  <link type="text/css" rel="stylesheet" href="__PUBLIC__/Ads/css/put.css" />
+  <style>
+    #Playtab1Context > .query > form > div {
+      margin-right: 10px;
+      vertical-align: baseline;
+    }
+  </style>
+</head>
+<body>
+<div id="center" class="main-wrapper">
+  <include file="Public/header" />
+  <div id="bottom">
+    <div id="left">
+      <ul>
+        <li class="a"><a href="{:U('Ads/Index/index')}"><img src="__PUBLIC__/Ads/img/up_a.gif" /></a></li>
+        <li class="b"><a href="{:U('Ads/Put/index')}"><img src="__PUBLIC__/Ads/img/up_b.gif" /></a></li>
+        <!--统计报表-->
+        <li class="c active"><a href="{:U('Ads/Report/index')}"><img src="__PUBLIC__/Ads/img/down_c.gif" /></a></li>
+        <li class="d"><a href="{:U('Ads/Sync/index')}"><img src="__PUBLIC__/Ads/img/up_d.gif" /></a></li>
+        <li class="e"><a href="{:U('Ads/Set/index')}"><img src="__PUBLIC__/Ads/img/up_e.gif" /></a></li>
+      </ul>
+    </div>
+    <div id="right">
+      <div id="childCenter">
+        <!--tab title * 2-->
+        <ul id="PlayTabs">
+          <li class="Playtab1" id="Playtab1"><a href="{:U('Ads/Report/index')}">片头广告</a></li>
+          <li class="Playtab3 active" id="Playtab3"><a href="{:U('Ads/Report/pause')}">暂停广告</a></li>
+        </ul>
+        <!--tab content-->
+        <div class="tcwrapper">
+          <!--暂停广告-->
+          <div id="Playtab1Context">
+            <!--按照 类型 日期 查询-->
+            <div class="query">
+              <form action="{:U('')}" method="GET">
+                <!--日期#1-->
+                <div>
+                  <label for="datepicker-1">开始日期: </label>
+                  <input type="text" id="datepicker-1" name="startdate" value="{:I('get.startdate')}" />
+                </div>
+                <!--日期#2-->
+                <div>
+                  <label for="datepicker-2">截止日期: </label>
+                  <input type="text" id="datepicker-2" name="enddate" value="{:I('get.enddate')}" />
+                </div>
+                <!--buttons-->
+                <div>
+                  <input id="putad_query" type="submit" value="查询" class="but_out" >
+                  <input id="js_cleardate" type="button" value="取消已选日期" class="but_out">
+                </div>
+              </form>
+            </div>
+            <!--片头广告 -->
+            <div class="table-wrapper">
+              <table id="PreRollPlayTable" >
+                <thead class="table_title">
+                <tr>
+                  <th width="50px">序号</th>
+                  <th width="175px">广告名称</th>
+                  <th width="175px">文件名称</th>
+                  <th width="130px">文件类型</th>
+                  <th width="80px">时长</th>
+                  <th width="80px">业务包</th>
+                  <th width="190px">投放开始日期</th>
+                  <th width="190px">投放截止日期</th>
+                </tr>
+                </thead>
+                <tbody class="grid">
+                <volist name="list" id="vo" empty="$empty">
+                  <tr data-id="{$vo.id}" data-adid="{$vo.adid}" data-packageid="{$vo.packageid}">
+                    <td>{$offset + $key + 1}</td>
+                    <td title="{$vo.advertisename}">{$vo.advertisename}</td>
+                    <td title="{$vo.name}">{$vo.name}</td>
+                    <td>{$vo.filetype}</td>
+                    <td>{$vo.time}s</td>
+                    <td>{$vo.packagename}</td>
+                    <td>{$vo.startdate}</td>
+                    <td>{$vo.enddate}</td>
+                  </tr>
+                </volist>
+
+                </tbody>
+              </table>
+            </div>
+            <!--分页 & 撤销投放-->
+            <div class="operate">
+              {$page}
+            </div>
+          </div>
+          <!--END .tcwrapper-->
+        </div>
+      </div>
+      <!--END #childCenter-->
+    </div>
+    <!--END #right-->
+  </div>
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/jquery-ui-1.12.1/jquery-ui.js"></script>
+<!--header date time & functions-->
+<script type="text/javascript" src="__PUBLIC__/Ads/js/common.js"></script>
+<script>
+  $(function() {
+    tablepad($('#PreRollPlayTable'), 8, 10);
+
+    $('#datepicker-1').datepicker({
+      dateFormat: 'yy-mm-dd',
+      showOn: "button",
+      buttonImage: "__PUBLIC__/Ads/img/calendar.gif",
+      buttonImageOnly: true
+    });
+    $('#datepicker-2').datepicker({
+      dateFormat: 'yy-mm-dd',
+      showOn: "button",
+      buttonImage: "__PUBLIC__/Ads/img/calendar.gif",
+      buttonImageOnly: true
+    });
+
+    /**
+     * 取消已选日期
+     */
+    $("#js_cleardate").on("click", function(e) {
+      e.preventDefault();
+      var form = this.parentNode.parentNode;
+      form.reset();
+      $('#datepicker-1').val('');
+      $('#datepicker-2').val('');
+    });
+  });
+</script>
+</body>
+</html>
